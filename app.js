@@ -27,6 +27,7 @@ nunjucks.configure('views', {
 })
 
 app.use(express.static('public'))
+app.set('json spaces', 2)
 
 http.listen(8080, () => {
   console.log('listening on http://localhost:8080')
