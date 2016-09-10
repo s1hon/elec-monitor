@@ -1,0 +1,96 @@
+body {
+  background: #605F5E;
+}
+
+/* banner */
+
+.banner {
+  margin-top: 30px;
+  color: #E2E2E2;
+}
+
+.banner h1 {
+  font-size: 50px;
+}
+
+.realtimegraph {
+  margin-top: 15px;
+  margin-bottom: 30px;
+  height: 501px;
+  background: #7F7F7F;
+}
+
+/* history */
+
+.history .title {
+  font-size: 30px;
+  color: #E2E2E2;
+}
+
+.history .list {
+  background: #D8D8D8;
+  color: #0A2463;
+  height: 45px;
+  display: -webkit-flex;
+  display:         flex;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-justify-content: left;
+          justify-content: left;
+}
+
+.history .list .time {
+  float: left;
+  margin-left: 16px;
+}
+
+.history .list .idicon {
+  margin-left: 80px;
+  margin-right: 14px;
+  float: left;
+  text-align: center;
+}
+
+.history .list .info {
+  float: left;
+}
+
+.history .list .idicon {
+  background: #C6C6C6;
+  height: 21px;
+  width: 75px;
+}
+
+
+/* clickinfo */
+
+.clickinfo {
+  background: #E5E5E5;
+  height: 500px;
+  /*visibility: hidden;*/
+}
+
+.clickinfo .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 50px;
+}
+
+.clickinfo .title {
+  float: left;
+  margin-top:15px;
+  font-size: 30px;
+  color: #0A2463;
+}
+
+.clickinfo .graph {
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  float: left;
+  height: 192px;
+  width: 440px;
+  background: #7F7F7F;
+}
