@@ -8,6 +8,7 @@
   "rules": {
     "semi": [2, "never"],
     "arrow-body-style": ["error", "always"],
-    "no-console": 0
+    "no-console": 0,
+    "array-callback-return": 0,
   }
 }
