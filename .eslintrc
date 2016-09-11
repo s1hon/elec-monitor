@@ -10,5 +10,7 @@
     "arrow-body-style": ["error", "always"],
     "no-console": 0,
     "array-callback-return": 0,
+    "no-shadow": 0,
+    "new-cap": 0,
   }
 }
