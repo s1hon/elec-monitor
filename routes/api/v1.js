@@ -63,6 +63,7 @@ router.get('/rawdata/:dbname', async (req, res) => {
     const rawdata = db.collection('rawdata')
     const dfs = db.collection('dfs')
     const rms = db.collection('rms')
+    const zc = db.collection('zc')
 
     const conditionInfo = await dbLib.getConditionData(condition)
 
@@ -70,7 +71,8 @@ router.get('/rawdata/:dbname', async (req, res) => {
       dbLib.getRawdataRecord(rawdata, conditionInfo.count),
       dbLib.getRawdataRecord(dfs, conditionInfo.count),
       dbLib.getRawdataRecord(rms, conditionInfo.count),
-    ]).then(([rawdata, dfs, rms]) => {
+      dbLib.getRawdataRecord(zc, conditionInfo.count),
+    ]).then(([rawdata, dfs, rms, zc]) => {
       // Success, reurn results.
       res.json({
         status: '200',
@@ -82,6 +84,7 @@ router.get('/rawdata/:dbname', async (req, res) => {
             rawdata: rawdata.length,
             rms: rms.length,
           },
+          zc: zc[0].data,
           rms,
           dfs,
           rawdata,
