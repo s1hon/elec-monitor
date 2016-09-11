@@ -34,11 +34,17 @@ const getdbLists = () => {
   })
 }
 
+
+/**
+ * Get newtest conditiondata
+ * @param  {String} condition
+ * @return {String} conditionInfo conditionDATA[0]
+ */
 const getConditionData = (condition) => {
   return new Promise((resolve, reject) => {
     condition.find({}).sort({ count: -1 }).limit(1).toArray((error, conditionDATA) => {
       if (error) reject('condition', error)
-      resolve(conditionDATA[0].count)
+      resolve(conditionDATA[0])
     })
   })
 }
