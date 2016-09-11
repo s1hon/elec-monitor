@@ -68,10 +68,7 @@ router.get('/rawdata/:dbname', async (req, res) => {
       dbLib.getRawdataRecord(rawdata, conditionInfo.count),
       dbLib.getRawdataRecord(dfs, conditionInfo.count),
       dbLib.getRawdataRecord(rms, conditionInfo.count),
-    ]).then((values) => {
-      const getrawdata = values[0]
-      const getdfs = values[1]
-      const getrms = values[2]
+    ]).then(([rawdata, dfs, rms]) => {
       // Success, reurn results.
       res.json({
         status: '200',
@@ -79,13 +76,13 @@ router.get('/rawdata/:dbname', async (req, res) => {
         data: {
           count: conditionInfo.count,
           length: {
-            dfs: getdfs.length,
-            rawdata: getrawdata.length,
-            rms: getrms.length,
+            dfs: dfs.length,
+            rawdata: rawdata.length,
+            rms: rms.length,
           },
-          rms: getrms,
-          dfs: getdfs,
-          rawdata: getrawdata,
+          rms,
+          dfs,
+          rawdata,
         },
       })
       db.close()
