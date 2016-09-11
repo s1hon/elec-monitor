@@ -2,12 +2,11 @@ const MongoClient = require('mongodb').MongoClient
 
 const url = 'mongodb://120.108.111.174:27017/'
 
-// MongoClient.connect(url, function(err, db) {
-//   console.log("Connected correctly to server")
-//
-//   db.close()
-// })
 
+/**
+ * Get db lists
+ * @return {Array} dbList
+ */
 const getdbLists = () => {
   return new Promise((reslove, reject) => {
     MongoClient.connect(url, (err, db) => {
@@ -44,6 +43,13 @@ const getConditionData = (condition) => {
   })
 }
 
+
+/**
+ * To get Rawdata record
+ * @param  {DB} db
+ * @param  {Int} countID countID from getConditionData
+ * @return {Array} raw  Rawdata
+ */
 const getRawdataRecord = (db, countID) => {
   return new Promise((resolve, reject) => {
     db.find({ count: countID }).toArray((error, raw) => {
