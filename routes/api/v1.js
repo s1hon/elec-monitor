@@ -8,6 +8,7 @@ router.get('/', (req, res) => {
   res.json({ msg: 'ok' })
 })
 
+
 /**
  * [Route] Get db lits
  */
@@ -19,6 +20,7 @@ router.get('/list', async (req, res) => {
     data: dbs,
   })
 })
+
 
 /**
  * [Route] Get rawdata, dfs... datas
@@ -85,6 +87,7 @@ router.get('/rawdata/:dbname', async (req, res) => {
           rawdata,
         },
       })
+
       db.close()
     })
   })
