@@ -6,35 +6,8 @@
 {% endblock %}
 
 {% block body %}
-  <div class="container">
-    <div class="row">
-      <div class="banner col-xl-3">
-      <h1>監控中心</h1>
-      </div>
-    </div>
-    <div class="row">
-      <canvas id="myChart" class="realtimegraph col-xl-12">
-      </canvas>
-    </div>
-    <div class="row">
-      <div class="history col-xl-6">
-        <p class="title">歷史事件</p>
-        <div class="list col-xl-12">
-          <div class="time">2016.08.15  15:32:20</div>
-          <div class="idicon" style="background: #FB6A72; color: #E2E2E2;">Sensor #1</div>
-          <div class="info">異常訊號發生 (查看)</div>
-        </div>
-      </div>
-      <div class="clickinfo col-xl-6">
-        <div class="title col-xl-12">
-          2016.08.15 15:32:20<br>
-          Sensor #1 異常訊號發生
-          <div class="close">X</div>
-        </div>
-        <div class="graph">
-        </div>
-      </div>
-    </div>
+  <div id="app" class="container">
+    <app></app>
   </div>
 
   <script src="/js/index_bundle.js"></script>
