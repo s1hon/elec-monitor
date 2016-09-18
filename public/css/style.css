@@ -21,6 +21,7 @@ body {
 }
 
 /* dblist */
+
 .dblist a {
   width: 70px;
   text-align: center;
@@ -28,6 +29,12 @@ body {
   background: white;
   margin-left: 10px;
   margin-top: 5px;
+}
+
+/* canvas */
+
+.chart p {
+  color: white;
 }
 
 /* history */
