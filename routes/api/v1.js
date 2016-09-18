@@ -13,12 +13,19 @@ router.get('/', (req, res) => {
  * [Route] Get db lits
  */
 router.get('/list', async (req, res) => {
-  const dbs = await dbLib.getdbLists()
-  res.json({
-    status: '200',
-    msg: 'Success',
-    data: dbs,
-  })
+  try {
+    const dbs = await dbLib.getdbLists()
+    res.json({
+      status: '200',
+      msg: 'Success',
+      data: dbs,
+    })
+  } catch (e) {
+    res.json({
+      status: '400',
+      msg: e,
+    })
+  }
 })
 
 
