@@ -79,7 +79,7 @@ const listComponent = Vue.extend({
     fetchData() {
       const xhr = new XMLHttpRequest()
       const self = this
-      xhr.open('GET', 'http://localhost:8080/api/v1/list')
+      xhr.open('GET', '/api/v1/list')
       xhr.onload = () => {
         const res = JSON.parse(xhr.responseText)
         if (res.status === '400') {
@@ -100,7 +100,7 @@ const listComponent = Vue.extend({
     request(e) {
       const xhr = new XMLHttpRequest()
       // const self = this
-      xhr.open('GET', `http://localhost:8080/api/v1/rawdata/${e.target.text}`)
+      xhr.open('GET', `/api/v1/rawdata/${e.target.text}`)
       xhr.onload = () => {
         const res = JSON.parse(xhr.responseText)
         // if (res.status === '400') {
