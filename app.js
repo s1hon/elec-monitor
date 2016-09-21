@@ -26,7 +26,7 @@ nunjucks.configure('views', {
   watch: true,
 })
 
-app.use(express.static('public'))
+app.use('/static', express.static('static'))
 app.set('json spaces', 2)
 
 http.listen(8080, () => {
