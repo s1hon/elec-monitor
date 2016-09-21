@@ -1,5 +1,5 @@
-views/
-static/
+/views/
+/static/
 
 # Logs
 logs
