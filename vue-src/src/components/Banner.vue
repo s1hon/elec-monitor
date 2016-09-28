@@ -3,7 +3,7 @@
     <div class="banner">
 
       <div class="title col-md-3">
-        <p>監控中心</p>
+        <p>雲端電力檢測平台</p>
       </div>
 
       <div class="dblist col-md-9">
@@ -77,13 +77,13 @@ export default {
 
   .title {
     float: left;
-    height: 10vw;
+    // height: 10vw;
 
     p {
       padding-top:1.3vw;
       color: #E2E2E2;
-      font-size: 5.2vw;
-      font-weight: 100;
+      font-size: 2.8vw;
+      font-weight: 200;
       // width: 25vw;
     }
 
@@ -92,17 +92,18 @@ export default {
   .dblist {
     float: left;
     // width: 75vw;
-    height: 10vw;
+    // height: 10vw;
+    padding-top: 1%;
 
     div {
       float: left;
-      width: 10%;
-      height: 50%;
+      width: 8%;
+      height: 20%;
       color: white;
       font-weight: 100;
 
       a {
-        font-size: 1.6vw;
+        font-size: 1.3vw;
       }
       // background: white;
       // flex box
