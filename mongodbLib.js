@@ -58,7 +58,7 @@ const getConditionData = (condition) => {
  */
 const getRawdataRecord = (db, countID) => {
   return new Promise((resolve, reject) => {
-    db.find({ count: countID }).toArray((error, raw) => {
+    db.find({ count: countID }).sort({ rowid: 1 }).toArray((error, raw) => {
       if (error) reject(`countID-${countID}`, error)
       resolve(raw, countID)
     })
