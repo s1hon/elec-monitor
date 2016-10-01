@@ -104,6 +104,10 @@ export default {
 <style lang="scss" scoped>
 
 .headtitle {
+  &:hover {
+    cursor: default;
+  }
+
   background-color: #FE6B6B;
   font-size: 26px;
   color: #FFFFFF;
@@ -117,6 +121,11 @@ export default {
 }
 
 .icon {
+
+  &:hover {
+    cursor: pointer;
+  }
+
   padding-top: 10px;
   padding-bottom: 10px;
 
@@ -141,6 +150,11 @@ export default {
 .dblist {
 
   .title {
+
+    &:hover {
+      cursor: default;
+    }
+
     background-color: #9FA5B3;
     color: #F2F0F1;
     padding: 2px 0 2px 20px;
@@ -148,6 +162,11 @@ export default {
   }
 
   .item {
+
+    &:hover {
+      cursor: pointer;
+    }
+
     float: left;
     width: 33.333%;
     height: 37px;
