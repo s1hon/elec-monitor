@@ -8,7 +8,7 @@
     <div class="svgicon icon-chose">
       <svg width="80%" viewBox="41 131 186 49" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
           <g id="Group" stroke="none" stroke-width="1" fill-rule="evenodd" transform="translate(41.000000, 131.000000)">
-              <text id="即時狀態" font-family="PingFangTC-Regular, PingFang TC" font-size="35" font-weight="normal">
+              <text id="即時狀態" font-size="35" font-weight="normal">
                   <tspan x="48" y="37">即時狀態</tspan>
               </text>
               <polygon id="Path-3" transform="translate(16.765169, 26.559102) rotate(13.000000) translate(-16.765169, -26.559102) " points="19.2974889 6.79958138 5.03615123 26.559102 15.8867869 30.417007 9.18734661 46.3186227 28.4941876 23.3949998 15.8867869 23.3949998"></polygon>
@@ -19,7 +19,7 @@
     <div class="svgicon icon-un-chose">
       <svg width="80%" viewBox="36 219 192 49" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
           <g id="Group-3" stroke="none" stroke-width="1" fill-rule="evenodd" transform="translate(37.000000, 219.000000)">
-              <g id="Group-Copy" transform="translate(51.000000, 0.000000)" font-size="35" font-family="PingFangTC-Regular, PingFang TC" font-weight="normal">
+              <g id="Group-Copy" transform="translate(51.000000, 0.000000)" font-size="35" font-weight="normal">
                   <text id="歷史紀錄">
                       <tspan x="0" y="37">歷史紀錄</tspan>
                   </text>
@@ -117,7 +117,6 @@ export default {
 }
 
 .icon {
-
   padding-top: 10px;
   padding-bottom: 10px;
 

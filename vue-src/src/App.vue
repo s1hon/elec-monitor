@@ -31,6 +31,7 @@ export default {
 <style lang="scss">
 
 body {
+  font-family: 'Noto Sans TC', 'PingFangTC-Regular';
   height: 100vh;
   background: #393F4F;
 }
