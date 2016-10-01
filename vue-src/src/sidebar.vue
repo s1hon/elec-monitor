@@ -38,8 +38,8 @@
     <div class="title">
       Sensor List
     </div>
-    <div class="item" v-for="db in dblist">
-      <a v-on:click="getdbChart($event)">{{ db }}</a>
+    <div id={{db}} class="item" v-for="db in dblist" v-on:click="getdbChart($event)">
+      {{ db }}
     </div>
   </div>
 </template>
@@ -88,7 +88,7 @@ export default {
     request(e) {
       const xhr = new XMLHttpRequest()
       // const self = this
-      xhr.open('GET', `/api/v1/rawdata/${e.target.text}`)
+      xhr.open('GET', `/api/v1/rawdata/${e.target.id}`)
       xhr.onload = () => {
         const res = JSON.parse(xhr.responseText)
         // if (res.status === '400') {
