@@ -68,6 +68,7 @@ router.get('/rawdata/:dbname', async (req, res) => {
     console.log(`[mongodb] Connect Success: ${req.params.dbname}`)
     const condition = db.collection('condition')
     const rawdata = db.collection('rawdata')
+    const sourcerms = db.collection('sourcerms')
     const dfs = db.collection('dfs')
     const rms = db.collection('rms')
     const zc = db.collection('zc')
@@ -75,11 +76,12 @@ router.get('/rawdata/:dbname', async (req, res) => {
     const conditionInfo = await dbLib.getConditionData(condition)
 
     Promise.all([
-      dbLib.getRawdataRecord(rawdata, conditionInfo.count),
-      dbLib.getRawdataRecord(dfs, conditionInfo.count),
-      dbLib.getRawdataRecord(rms, conditionInfo.count),
+      dbLib.getRawdataRecord(rawdata, conditionInfo.count, 450),
+      dbLib.getRawdataRecord(sourcerms, conditionInfo.count, 450),
+      dbLib.getRawdataRecord(dfs, conditionInfo.count, 450),
+      dbLib.getRawdataRecord(rms, conditionInfo.count, 450),
       dbLib.getRawdataRecord(zc, conditionInfo.count),
-    ]).then(([rawdata, dfs, rms, zc]) => {
+    ]).then(([rawdata, sourcerms, dfs, rms, zc]) => {
       // Success, reurn results.
       res.json({
         status: '200',
@@ -88,13 +90,15 @@ router.get('/rawdata/:dbname', async (req, res) => {
           count: conditionInfo.count,
           length: {
             dfs: dfs.length,
+            sourcerms: sourcerms.length,
             rawdata: rawdata.length,
             rms: rms.length,
           },
           zc: zc[0].data,
-          rms,
-          dfs,
           rawdata,
+          sourcerms,
+          dfs,
+          rms,
         },
       })
 

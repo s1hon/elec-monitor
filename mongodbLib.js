@@ -56,9 +56,13 @@ const getConditionData = (condition) => {
  * @param  {Int} countID countID from getConditionData
  * @return {Array} raw  Rawdata
  */
-const getRawdataRecord = (db, countID) => {
+const getRawdataRecord = (db, countID, limit) => {
   return new Promise((resolve, reject) => {
-    db.find({ count: countID }).sort({ rowid: 1 }).toArray((error, raw) => {
+    let command = db.find({ count: countID }, { _id: 0, count: 0 }).sort({ rowid: 1 })
+    if (limit) {
+      command = command.limit(limit)
+    }
+    command.toArray((error, raw) => {
       if (error) reject(`countID-${countID}`, error)
       resolve(raw, countID)
     })

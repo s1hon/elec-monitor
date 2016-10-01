@@ -59,6 +59,28 @@ export default {
           spanGaps: false,
         },
         {
+          label: 'rawdata-rms',
+          fill: false,
+          lineTension: 0.1,
+          backgroundColor: '#FFF55B',
+          borderColor: '#FFF55B',
+          borderCapStyle: 'butt',
+          borderDash: [],
+          borderDashOffset: 0.0,
+          borderJoinStyle: 'miter',
+          pointBorderColor: '#FFF55B',
+          pointBackgroundColor: '#FFF55B',
+          pointBorderWidth: 0,
+          pointHoverRadius: 0,
+          pointHoverBackgroundColor: '#FFF55B',
+          pointHoverBorderColor: '#FFF55B',
+          pointHoverBorderWidth: 0,
+          pointRadius: 1,
+          pointHitRadius: 10,
+          data: nullArray(),
+          spanGaps: false,
+        },
+        {
           label: 'dfs',
           fill: false,
           lineTension: 0.1,
@@ -81,7 +103,7 @@ export default {
           spanGaps: false,
         },
         {
-          label: 'rms',
+          label: 'dfs-rms',
           fill: false,
           lineTension: 0.1,
           backgroundColor: '#87D655',
@@ -148,9 +170,11 @@ export default {
       this.chartDataSetting.datasets[0].data = this.nullArray()
       this.chartDataSetting.datasets[1].data = this.nullArray()
       this.chartDataSetting.datasets[2].data = this.nullArray()
+      this.chartDataSetting.datasets[3].data = this.nullArray()
 
       // TODO let data input this, and dump to Chart
       const rawdata = res.data.rawdata
+      const sourcerms = res.data.sourcerms
       const dfs = res.data.dfs
       const rms = res.data.rms
       const zc = res.data.zc
@@ -167,6 +191,10 @@ export default {
             value: rawdata[0] ? rawdata[0] : 0,
           },
           {
+            name: 'sourcerms',
+            value: sourcerms[0] ? sourcerms[0] : 0,
+          },
+          {
             name: 'dfs',
             value: dfs[0] ? dfs[0] : 0,
           },
@@ -176,6 +204,7 @@ export default {
           },
         ])
         rawdata.splice(0, 1)
+        sourcerms.splice(0, 1)
         dfs.splice(0, 1)
         rms.splice(0, 1)
       }, 20)
@@ -196,14 +225,19 @@ export default {
           this.chartDataSetting.datasets[0].data.push(value.data)
         }
 
-        if (name === 'dfs') {
+        if (name === 'sourcerms') {
           this.chartDataSetting.datasets[1].data.splice(0, 1)
           this.chartDataSetting.datasets[1].data.push(value.data)
         }
 
-        if (name === 'rms') {
+        if (name === 'dfs') {
           this.chartDataSetting.datasets[2].data.splice(0, 1)
           this.chartDataSetting.datasets[2].data.push(value.data)
+        }
+
+        if (name === 'rms') {
+          this.chartDataSetting.datasets[3].data.splice(0, 1)
+          this.chartDataSetting.datasets[3].data.push(value.data)
         }
       })
 
