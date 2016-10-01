@@ -1,11 +1,6 @@
 <template>
-  <div class="row">
-    <canvas id="myChart" class="realtimegraph">
-    </canvas>
-  </div>
-  <p> ZC: {{ dbinfo.zc | JSON }} </p>
-  <p> Length: {{ dbinfo.length | JSON }} </p>
-  <p> Count: {{ dbinfo.count | JSON }} </p>
+  <canvas id="myChart" class="realtimegraph">
+  </canvas>
 </template>
 
 <script>
@@ -16,7 +11,7 @@ export default {
     return {
       dberr: null,
       timer: null,
-      dbinfo: null,
+      // dbinfo: null,
       chartDataSetting: null,
       myLineChart: null,
     }
@@ -25,8 +20,10 @@ export default {
     // 'list-component': listComponent,
   },
   ready() {
+    // Chart Setting
     Chart.defaults.global.tooltips.enabled = 0
     Chart.defaults.global.animation.duration = 0
+
     const nullArray = () => {
       return Array.apply(null, new Array(200)).map(Number.prototype.valueOf, 0)
     }
@@ -43,18 +40,18 @@ export default {
           label: 'rawdata',
           fill: false,
           lineTension: 0.1,
-          backgroundColor: 'rgba(75,192,192,0.4)',
-          borderColor: 'rgba(75,192,192,1)',
+          backgroundColor: '#55AFD6',
+          borderColor: '#55AFD6',
           borderCapStyle: 'butt',
           borderDash: [],
           borderDashOffset: 0.0,
           borderJoinStyle: 'miter',
-          pointBorderColor: 'rgba(75,192,192,1)',
-          pointBackgroundColor: 'rgba(75,192,192,1)',
+          pointBorderColor: '#55AFD6',
+          pointBackgroundColor: '#55AFD6',
           pointBorderWidth: 0,
           pointHoverRadius: 0,
-          pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-          pointHoverBorderColor: 'rgba(75,192,192,1)',
+          pointHoverBackgroundColor: '#55AFD6',
+          pointHoverBorderColor: '#55AFD6',
           pointHoverBorderWidth: 0,
           pointRadius: 1,
           pointHitRadius: 10,
@@ -65,18 +62,18 @@ export default {
           label: 'dfs',
           fill: false,
           lineTension: 0.1,
-          backgroundColor: 'rgba(154,97,93,0.4)',
-          borderColor: 'rgba(192,91,85,1)',
+          backgroundColor: '#FB6A72',
+          borderColor: '#FB6A72',
           borderCapStyle: 'butt',
           borderDash: [],
           borderDashOffset: 0.0,
           borderJoinStyle: 'miter',
-          pointBorderColor: 'rgba(192,91,85,1)',
-          pointBackgroundColor: 'rgba(192,91,85,1)',
+          pointBorderColor: '#FB6A72',
+          pointBackgroundColor: '#FB6A72',
           pointBorderWidth: 0,
           pointHoverRadius: 0,
-          pointHoverBackgroundColor: 'rgba(192,91,85,1)',
-          pointHoverBorderColor: 'rgba(192,91,85,1)',
+          pointHoverBackgroundColor: '#FB6A72',
+          pointHoverBorderColor: '#FB6A72',
           pointHoverBorderWidth: 0,
           pointRadius: 1,
           pointHitRadius: 10,
@@ -87,18 +84,18 @@ export default {
           label: 'rms',
           fill: false,
           lineTension: 0.1,
-          backgroundColor: 'rgba(125,126,94,0.4)',
-          borderColor: 'rgba(191,192,103,1)',
+          backgroundColor: '#87D655',
+          borderColor: '#87D655',
           borderCapStyle: 'butt',
           borderDash: [],
           borderDashOffset: 0.0,
           borderJoinStyle: 'miter',
-          pointBorderColor: 'rgba(191,192,103,1)',
-          pointBackgroundColor: 'rgba(191,192,103,1)',
+          pointBorderColor: '#87D655',
+          pointBackgroundColor: '#87D655',
           pointBorderWidth: 0,
           pointHoverRadius: 0,
-          pointHoverBackgroundColor: 'rgba(191,192,103,1)',
-          pointHoverBorderColor: 'rgba(191,192,103,1)',
+          pointHoverBackgroundColor: '#87D655',
+          pointHoverBorderColor: '#87D655',
           pointHoverBorderWidth: 0,
           pointRadius: 1,
           pointHitRadius: 10,
@@ -112,9 +109,24 @@ export default {
       type: 'line',
       data: this.chartDataSetting,
       options: {
+        legend: {
+          position: 'bottom',
+          display: true,
+          labels: {
+            padding: 20,
+            boxWidth: 12,
+            fontSize: 12,
+            fontColor: '#E2E2E2',
+          },
+        },
         scales: {
           yAxes: [{
+            gridLines: {
+              color: '#5B6378',
+              lineWidth: '1',
+            },
             ticks: {
+              fontColor: '#E2E2E2',
               suggestedMin: -200,
               suggestedMax: 200,
             },
@@ -142,11 +154,11 @@ export default {
       const dfs = res.data.dfs
       const rms = res.data.rms
       const zc = res.data.zc
-      this.dbinfo = {
-        count: res.data.count,
-        zc: res.data.zc,
-        length: JSON.stringify(res.data.length),
-      }
+      // this.dbinfo = {
+      //   count: res.data.count,
+      //   zc: res.data.zc,
+      //   length: JSON.stringify(res.data.length),
+      // }
       clearInterval(this.timer)
       this.timer = setInterval(() => {
         this.pushDataToChart([
@@ -207,11 +219,6 @@ export default {
   // margin-top: 15px;
   // margin-bottom: 30px;
   // height: 501px;
-  background: #7F7F7F;
-}
-
-.chart p {
-  color: white;
 }
 
 </style>

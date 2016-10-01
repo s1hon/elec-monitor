@@ -1,18 +1,24 @@
 <template>
   <div id="app" class="container-fluid">
-    <Banner></Banner>
-    <Chart></Chart>
+    <div class="row">
+      <div class="col-xl-2 sidebar">
+        <sidebar></sidebar>
+      </div>
+      <div class="col-xl-10 context">
+        <context></context>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import Chart from './components/Chart'
-import Banner from './components/Banner'
+import sidebar from './sidebar.vue'
+import context from './context.vue'
 
 export default {
   components: {
-    Banner,
-    Chart,
+    sidebar,
+    context,
   },
   events: {
     drawdbChart(res) {
@@ -26,7 +32,25 @@ export default {
 
 body {
   height: 100vh;
-  background: #605F5E;
+  background: #393F4F;
+}
+
+.sidebar {
+  height: 100vh;
+  background-color: #F2F0F1;
+
+  @media screen and (max-width: 1200px) {
+    height: auto;
+  }
+}
+
+.context {
+  height: 100vh;
+  background-color: #393F4F;
+
+  @media screen and (max-width: 1200px) {
+    height: auto;
+  }
 }
 
 </style>
