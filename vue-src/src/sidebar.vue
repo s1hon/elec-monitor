@@ -108,6 +108,7 @@ export default {
     cursor: default;
   }
 
+  font-weight: 250;
   background-color: #FE6B6B;
   font-size: 26px;
   color: #FFFFFF;
