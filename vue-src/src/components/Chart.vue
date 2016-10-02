@@ -1,6 +1,6 @@
 <template>
-  <canvas id="myChart" class="realtimegraph">
-  </canvas>
+  <p class="err-msg" v-show="dberr">{{ dberr }}</p>
+  <canvas  id="myChart" class="realtimegraph" v-show="!dberr"></canvas>
 </template>
 
 <script>
@@ -163,8 +163,12 @@ export default {
 
   events: {
     drawdbChart(res) {
+      // Reset Chart
+      this.dberr = 0
+      clearInterval(this.timer)
+
       if (res.status === '400') {
-        this.dberr = res.status
+        this.dberr = JSON.stringify(res.msg, 0, 2)
         return
       }
       this.chartDataSetting.datasets[0].data = this.nullArray()
@@ -183,7 +187,6 @@ export default {
       //   zc: res.data.zc,
       //   length: JSON.stringify(res.data.length),
       // }
-      clearInterval(this.timer)
       this.timer = setInterval(() => {
         this.pushDataToChart([
           {
@@ -255,4 +258,7 @@ export default {
   // height: 501px;
 }
 
+.err-msg {
+  color: white;
+}
 </style>
