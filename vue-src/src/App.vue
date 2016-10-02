@@ -22,7 +22,7 @@ export default {
   },
   events: {
     drawdbChart(res) {
-      this.$broadcast('drawdbChart', res)
+      this.$broadcast('drawdbChart', { status: res.status, msg: res.msg, data: res.data })
     },
   },
 }
