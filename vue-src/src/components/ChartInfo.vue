@@ -51,7 +51,7 @@ export default {
       this.sitename = res.sitename
       this.count = res.count
       this.day = moment(res.condition.time).format('YYYY/MM/DD')
-      this.time = moment(res.condition.time).format('hh:mm:ss')
+      this.time = moment(res.condition.time).format('HH:mm:ss')
       this.temp = res.condition.temp
       this.hum = res.condition.hum
       this.lon = res.condition.lon
