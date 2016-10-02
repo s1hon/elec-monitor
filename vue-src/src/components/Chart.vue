@@ -32,6 +32,12 @@ export default {
     const ctx = document.getElementById('myChart')
     ctx.width = window.innerWidth
     ctx.height = window.innerHeight / 100 * 50
+    console.log(window.innerWidth)
+    if (window.innerWidth < 1140 && window.innerWidth > 720) {
+      ctx.height = ctx.height / 50 * 30
+    } else if (window.innerWidth <= 720) {
+      ctx.height = ctx.height / 50 * 20
+    }
 
     this.chartDataSetting = {
       labels: nullArray(),
