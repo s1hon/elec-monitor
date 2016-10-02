@@ -88,6 +88,7 @@ router.get('/rawdata/:dbname', async (req, res) => {
         status: '200',
         msg: 'Success',
         data: {
+          sitename: req.params.dbname,
           count: conditionInfo.count,
           zc: zc[0].data,
           condition: condition[0],
