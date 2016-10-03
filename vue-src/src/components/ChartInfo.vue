@@ -1,31 +1,32 @@
 <template>
+  <div>
+    <div class="row title">
+      <p v-show="!sitename">請選擇要檢視之站點</p>
+      <p v-show="sitename">目標: {{sitename}}   ＃{{count}}</p>
+    </div>
 
-  <div class="row title">
-    <p v-show="!sitename">請選擇要檢視之站點</p>
-    <p v-show="sitename">目標: {{sitename}}   ＃{{count}}</p>
-  </div>
-
-  <div v-show="sitename">
-    <div class="row info-line-1">
-      <div class="date col-xl-3 col-lg-3 col-md-4 col-xs-12">
-        <div class="ti">時間</div>
-        <div class="day">{{day}}</div>
-        <div class="time">{{time}}</div>
-      </div>
-
-      <div class="dos col-xl-3 col-lg-3 col-md-4 col-xs-6">
-        <div class="tmp">溫　度　{{temp}} °C</div>
-        <div class="hum">濕　度　{{hum}}%</div>
-        <div class="lonlot" v-show="lon">經緯度　{{lon}}, {{lat}}</div>
-      </div>
-
-      <div class="status col-xl-4 col-lg-6 col-md-4 col-xs-6">
-        <div class="margin mr-green">
-          <div class="point green"></div>
-          <div class="info">電流穩定</div>
+    <div v-show="sitename">
+      <div class="row info-line-1">
+        <div class="date col-xl-3 col-lg-3 col-md-4 col-xs-12">
+          <div class="ti">時間</div>
+          <div class="day">{{day}}</div>
+          <div class="time">{{time}}</div>
         </div>
-      </div>
 
+        <div class="dos col-xl-3 col-lg-3 col-md-4 col-xs-6">
+          <div class="tmp">溫　度　{{temp}} °C</div>
+          <div class="hum">濕　度　{{hum}}%</div>
+          <div class="lonlot" v-show="lon">經緯度　{{lon}}, {{lat}}</div>
+        </div>
+
+        <div class="status col-xl-4 col-lg-6 col-md-4 col-xs-6">
+          <div class="margin mr-green">
+            <div class="point green"></div>
+            <div class="info">電流穩定</div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 </template>
@@ -46,8 +47,11 @@ export default {
       lat: null,
     }
   },
-  events: {
-    getChartInfo(res) {
+  mounted() {
+    this.$on('getchartinfo', this.getchartinfo)
+  },
+  methods: {
+    getchartinfo(res) {
       this.sitename = res.sitename
       this.count = res.count
       this.day = moment(res.condition.time).format('YYYY/MM/DD')

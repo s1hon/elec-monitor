@@ -1,6 +1,8 @@
 <template>
-  <p class="err-msg" v-show="dberr">{{ dberr }}</p>
-  <canvas  id="myChart" class="realtimegraph" v-show="!dberr"></canvas>
+  <div>
+    <p class="err-msg" v-show="dberr">{{ dberr }}</p>
+    <canvas  id="myChart" class="realtimegraph" v-show="!dberr"></canvas>
+  </div>
 </template>
 
 <script>
@@ -19,7 +21,9 @@ export default {
   components: {
     // 'list-component': listComponent,
   },
-  ready() {
+  mounted() {
+    this.$on('drawdbchart', this.drawdbchart)
+
     // Chart Setting
     Chart.defaults.global.tooltips.enabled = 0
     Chart.defaults.global.animation.duration = 0
@@ -166,9 +170,8 @@ export default {
       },
     })
   },
-
-  events: {
-    drawdbChart(res) {
+  methods: {
+    drawdbchart(res) {
       // Reset Chart
       this.dberr = 0
       clearInterval(this.timer)
@@ -219,8 +222,6 @@ export default {
       }, 20)
       // this.dberr = JSON.stringify(res.data)
     },
-  },
-  methods: {
     nullArray: () => {
       return Array.apply(null, new Array(200)).map(Number.prototype.valueOf, 0)
     },

@@ -1,8 +1,10 @@
 <template>
-  <div class="row chart">
-    <chart></chart>
+  <div>
+    <div class="row chart">
+      <chart ref="chart"></chart>
+    </div>
+    <info ref="info"></info>
   </div>
-  <info></info>
 </template>
 
 <script>
@@ -13,6 +15,18 @@ export default {
   components: {
     chart,
     info,
+  },
+  mounted() {
+    this.$on('drawdbchart', this.drawdbchart)
+    this.$on('getchartinfo', this.getchartinfo)
+  },
+  methods: {
+    drawdbchart(res) {
+      this.$refs.chart.$emit('drawdbchart', res)
+    },
+    getchartinfo(res) {
+      this.$refs.info.$emit('getchartinfo', res)
+    },
   },
 }
 </script>

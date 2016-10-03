@@ -2,10 +2,10 @@
   <div id="app" class="container-fluid">
     <div class="row">
       <div class="col-xl-2 sidebar">
-        <sidebar></sidebar>
+        <sidebar ref="sidebar"></sidebar>
       </div>
       <div class="col-xl-10 context">
-        <context></context>
+        <context ref="context"></context>
       </div>
     </div>
   </div>
@@ -20,14 +20,17 @@ export default {
     sidebar,
     context,
   },
-  events: {
-    drawdbChart(res) {
-      this.$broadcast('drawdbChart', {
+  mounted() {
+    this.$on('getinfo', this.sendinfo)
+  },
+  methods: {
+    sendinfo(res) {
+      this.$refs.context.$emit('drawdbchart', {
         status: res.status,
         msg: res.msg,
         data: res.data,
       })
-      this.$broadcast('getChartInfo', {
+      this.$refs.context.$emit('getchartinfo', {
         status: res.status,
         msg: res.msg,
         sitename: res.data.sitename,
