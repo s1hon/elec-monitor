@@ -46,15 +46,23 @@ export default {
 <style lang="scss">
 
 body {
+
+  &:hover {
+    cursor: default;
+  }
+
   font-family: 'Noto Sans TC', 'PingFangTC-Regular';
   height: 100vh;
   background: #393F4F;
 
   // Disable select
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+  user-select: none;           /* Non-prefixed version, currently
+                                  not supported by any browser */
 }
 
 .sidebar {

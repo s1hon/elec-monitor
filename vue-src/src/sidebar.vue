@@ -106,9 +106,6 @@ export default {
 <style lang="scss" scoped>
 
 .headtitle {
-  &:hover {
-    cursor: default;
-  }
 
   font-weight: 250;
   background-color: #FE6B6B;
@@ -153,10 +150,6 @@ export default {
 .dblist {
 
   .title {
-
-    &:hover {
-      cursor: default;
-    }
 
     background-color: #9FA5B3;
     color: #F2F0F1;
