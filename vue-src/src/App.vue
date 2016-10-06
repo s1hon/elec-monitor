@@ -37,6 +37,7 @@ export default {
         count: res.data.count,
         zc: res.data.zc,
         condition: res.data.condition,
+        fft: res.data.fft,
       })
     },
   },
