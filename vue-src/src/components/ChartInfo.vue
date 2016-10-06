@@ -20,12 +20,16 @@
         </div>
 
         <div class="status col-xl-4 col-lg-6 col-md-4 col-xs-6">
-          <div class="margin mr-green">
-            <div class="point green"></div>
-            <div class="info">電流穩定</div>
-          </div>
+          <div class="tmp">驟升降　正常</div>
+          <div class="hum">濕　度　{{hum}}%</div>
+          <div class="lonlot">THD　　100</div>
         </div>
+      </div>
 
+      <div class="row">
+        <div class="col-xl-12">
+          <canvas  id="myChart" class="realtimegraph"></canvas>
+        </div>
       </div>
     </div>
   </div>
@@ -45,10 +49,13 @@ export default {
       hum: null,
       lon: null,
       lat: null,
+      fft: null,
     }
   },
   mounted() {
     this.$on('getchartinfo', this.getchartinfo)
+
+    
   },
   methods: {
     getchartinfo(res) {
@@ -60,6 +67,7 @@ export default {
       this.hum = res.condition.hum
       this.lon = res.condition.lon
       this.lat = res.condition.lat
+      this.fft = res.fft
     },
   },
 }
@@ -128,7 +136,7 @@ export default {
     }
   }
 
-  .dos {
+  .dos, .status {
     font-size: 25px;
     font-weight: 100;
     // background-color: black;
@@ -142,50 +150,6 @@ export default {
         padding: 5px 15px 0px 5px;
       }
       padding: 0px 0 5px 15px;
-    }
-  }
-
-  .status {
-    height: 180px;
-
-    display: -webkit-flex;
-    display:         flex;
-    -webkit-align-items: center;
-            align-items: center;
-    -webkit-justify-content: center;
-            justify-content: center;
-
-    // background-color: black;
-    div {
-      float: left;
-    }
-    .margin {
-      border-style: solid;
-      padding: 5px;
-    }
-
-    .mr-green {
-      border-color: #56E762;
-    }
-
-    .point {
-      width: 20px;
-      height: 20px;
-      margin: 20px;
-    }
-
-    .green {
-      background-color: #56E762;
-    }
-
-    .info {
-      font-size: 30px;
-      padding-top: 7px;
-      padding-right: 15px;
-      @media screen and (max-width: 576px) {
-        font-size: 20px;
-        padding-top: 15px;
-      }
     }
   }
 

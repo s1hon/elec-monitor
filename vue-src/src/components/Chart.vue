@@ -28,10 +28,6 @@ export default {
     Chart.defaults.global.tooltips.enabled = 0
     Chart.defaults.global.animation.duration = 0
 
-    const nullArray = () => {
-      return Array.apply(null, new Array(200)).map(Number.prototype.valueOf, 0)
-    }
-
     // canavs size setting
     const ctx = document.getElementById('myChart')
     ctx.width = window.innerWidth
@@ -44,7 +40,7 @@ export default {
     }
 
     this.chartDataSetting = {
-      labels: nullArray(),
+      labels: this.nullArray(200),
       datasets: [
         {
           label: 'rawdata',
@@ -65,7 +61,7 @@ export default {
           pointHoverBorderWidth: 0,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: nullArray(),
+          data: this.nullArray(200),
           spanGaps: false,
         },
         {
@@ -87,7 +83,7 @@ export default {
           pointHoverBorderWidth: 0,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: nullArray(),
+          data: this.nullArray(200),
           spanGaps: false,
         },
         {
@@ -109,7 +105,7 @@ export default {
           pointHoverBorderWidth: 0,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: nullArray(),
+          data: this.nullArray(200),
           spanGaps: false,
         },
         {
@@ -131,7 +127,7 @@ export default {
           pointHoverBorderWidth: 0,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: nullArray(),
+          data: this.nullArray(200),
           spanGaps: false,
         },
       ],
@@ -180,10 +176,10 @@ export default {
         this.dberr = JSON.stringify(res.msg, 0, 2)
         return
       }
-      this.chartDataSetting.datasets[0].data = this.nullArray()
-      this.chartDataSetting.datasets[1].data = this.nullArray()
-      this.chartDataSetting.datasets[2].data = this.nullArray()
-      this.chartDataSetting.datasets[3].data = this.nullArray()
+      this.chartDataSetting.datasets[0].data = this.nullArray(200)
+      this.chartDataSetting.datasets[1].data = this.nullArray(200)
+      this.chartDataSetting.datasets[2].data = this.nullArray(200)
+      this.chartDataSetting.datasets[3].data = this.nullArray(200)
 
       // TODO let data input this, and dump to Chart
       const rawdata = res.data.rawdata
@@ -222,8 +218,8 @@ export default {
       }, 20)
       // this.dberr = JSON.stringify(res.data)
     },
-    nullArray: () => {
-      return Array.apply(null, new Array(200)).map(Number.prototype.valueOf, 0)
+    nullArray: (num) => {
+      return Array.apply(null, new Array(num)).map(Number.prototype.valueOf, 0)
     },
     pushDataToChart(array) {
       this.chartDataSetting.labels.splice(0, 1)
