@@ -145,9 +145,9 @@ export default {
           position: 'bottom',
           display: true,
           labels: {
-            padding: 20,
-            boxWidth: 12,
-            fontSize: 12,
+            padding: 30,
+            boxWidth: 20,
+            fontSize: 20,
             fontColor: '#E2E2E2',
           },
         },
