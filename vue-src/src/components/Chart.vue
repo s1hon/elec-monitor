@@ -1,21 +1,25 @@
 <template>
   <div>
     <p class="err-msg" v-show="dberr">{{ dberr }}</p>
-    <canvas  id="myChart" class="realtimegraph" v-show="!dberr"></canvas>
+    <div id="myChart" class="realtimegraph col-xl-12" v-show="!dberr"></div>
   </div>
 </template>
 
 <script>
-import Chart from 'chart.js'
+import echarts from 'echarts'
 
 export default {
   data: () => {
     return {
       dberr: null,
       timer: null,
-      // dbinfo: null,
-      chartDataSetting: null,
-      myLineChart: null,
+      // EChart.js
+      chart: null,
+      // Datas
+      rawdata: null,
+      sourcerms: null,
+      dfs: null,
+      rms: null,
     }
   },
   components: {
@@ -24,146 +28,84 @@ export default {
   mounted() {
     this.$on('drawdbchart', this.drawdbchart)
 
-    // Chart Setting
-    Chart.defaults.global.tooltips.enabled = 0
-    Chart.defaults.global.animation.duration = 0
-
-    // canavs size setting
     const ctx = document.getElementById('myChart')
-    ctx.width = window.innerWidth
-    ctx.height = window.innerHeight / 100 * 50
-    console.log(window.innerWidth)
-    if (window.innerWidth < 1140 && window.innerWidth > 720) {
-      ctx.height = ctx.height / 50 * 30
-    } else if (window.innerWidth <= 720) {
-      ctx.height = ctx.height / 50 * 20
-    }
+    this.chart = echarts.init(ctx)
 
-    this.chartDataSetting = {
-      labels: this.nullArray(200),
-      datasets: [
-        {
-          label: 'rawdata',
-          fill: false,
-          lineTension: 0.1,
-          backgroundColor: '#55AFD6',
-          borderColor: '#55AFD6',
-          borderCapStyle: 'butt',
-          borderDash: [],
-          borderDashOffset: 0.0,
-          borderJoinStyle: 'miter',
-          pointBorderColor: '#55AFD6',
-          pointBackgroundColor: '#55AFD6',
-          pointBorderWidth: 0,
-          pointHoverRadius: 0,
-          pointHoverBackgroundColor: '#55AFD6',
-          pointHoverBorderColor: '#55AFD6',
-          pointHoverBorderWidth: 0,
-          pointRadius: 1,
-          pointHitRadius: 10,
-          data: this.nullArray(200),
-          spanGaps: false,
-        },
-        {
-          label: 'rawdata-rms',
-          fill: false,
-          lineTension: 0.1,
-          backgroundColor: '#FFF55B',
-          borderColor: '#FFF55B',
-          borderCapStyle: 'butt',
-          borderDash: [],
-          borderDashOffset: 0.0,
-          borderJoinStyle: 'miter',
-          pointBorderColor: '#FFF55B',
-          pointBackgroundColor: '#FFF55B',
-          pointBorderWidth: 0,
-          pointHoverRadius: 0,
-          pointHoverBackgroundColor: '#FFF55B',
-          pointHoverBorderColor: '#FFF55B',
-          pointHoverBorderWidth: 0,
-          pointRadius: 1,
-          pointHitRadius: 10,
-          data: this.nullArray(200),
-          spanGaps: false,
-        },
-        {
-          label: 'dfs',
-          fill: false,
-          lineTension: 0.1,
-          backgroundColor: '#FB6A72',
-          borderColor: '#FB6A72',
-          borderCapStyle: 'butt',
-          borderDash: [],
-          borderDashOffset: 0.0,
-          borderJoinStyle: 'miter',
-          pointBorderColor: '#FB6A72',
-          pointBackgroundColor: '#FB6A72',
-          pointBorderWidth: 0,
-          pointHoverRadius: 0,
-          pointHoverBackgroundColor: '#FB6A72',
-          pointHoverBorderColor: '#FB6A72',
-          pointHoverBorderWidth: 0,
-          pointRadius: 1,
-          pointHitRadius: 10,
-          data: this.nullArray(200),
-          spanGaps: false,
-        },
-        {
-          label: 'dfs-rms',
-          fill: false,
-          lineTension: 0.1,
-          backgroundColor: '#87D655',
-          borderColor: '#87D655',
-          borderCapStyle: 'butt',
-          borderDash: [],
-          borderDashOffset: 0.0,
-          borderJoinStyle: 'miter',
-          pointBorderColor: '#87D655',
-          pointBackgroundColor: '#87D655',
-          pointBorderWidth: 0,
-          pointHoverRadius: 0,
-          pointHoverBackgroundColor: '#87D655',
-          pointHoverBorderColor: '#87D655',
-          pointHoverBorderWidth: 0,
-          pointRadius: 1,
-          pointHitRadius: 10,
-          data: this.nullArray(200),
-          spanGaps: false,
-        },
-      ],
-    }
+    // Init Vars
+    this.rawdata = this.nullArray(200)
+    this.sourcerms = this.nullArray(200)
+    this.dfs = this.nullArray(200)
+    this.rms = this.nullArray(200)
 
-    this.myLineChart = new Chart(ctx, {
-      type: 'line',
-      data: this.chartDataSetting,
-      options: {
-        legend: {
-          position: 'bottom',
-          display: true,
-          labels: {
-            padding: 30,
-            boxWidth: 20,
-            fontSize: 20,
-            fontColor: '#E2E2E2',
-          },
-        },
-        scales: {
-          yAxes: [{
-            gridLines: {
-              color: '#5B6378',
-              lineWidth: '1',
-            },
-            ticks: {
-              fontColor: '#E2E2E2',
-              suggestedMin: -200,
-              suggestedMax: 200,
-            },
-          }],
-          xAxes: [{
-            display: false,
-          }],
+    // Draw Chart
+    this.chart.setOption({
+      hoverLayerThreshold: 10,
+      animation: false,
+      grid: {
+        borderColor: '#E2E2E2',
+        left: 50,
+        right: 0,
+        top: 20,
+        bottom: 60,
+      },
+      legend: {
+        bottom: 10,
+        data: ['rawdata', 'rawdata-rms', 'dfs', 'dfs-rms'],
+        textStyle: {
+          color: '#E2E2E2',
         },
       },
+      xAxis: {
+        data: this.nullArray(200),
+        axisLine: {
+          lineStyle: {
+            color: '#E2E2E2',
+          },
+        },
+        axisTick: {
+          show: false,
+        },
+        axisLabel: {
+          show: false,
+        },
+      },
+      yAxis: {
+        max: 200,
+        min: -200,
+        axisLine: {
+          lineStyle: {
+            color: '#E2E2E2',
+          },
+        },
+      },
+      series: [{
+        name: 'rawdata',
+        itemStyle: { normal: { color: '#55AFD6' } },
+        showSymbol: false,
+        type: 'line',
+        data: this.nullArray(200),
+      },
+      {
+        name: 'rawdata-rms',
+        itemStyle: { normal: { color: '#FFF55B' } },
+        showSymbol: false,
+        type: 'line',
+        data: this.nullArray(200),
+      },
+      {
+        name: 'dfs',
+        itemStyle: { normal: { color: '#FB6A72' } },
+        showSymbol: false,
+        type: 'line',
+        data: this.nullArray(200),
+      },
+      {
+        name: 'dfs-rms',
+        itemStyle: { normal: { color: '#87D655' } },
+        showSymbol: false,
+        type: 'line',
+        data: this.nullArray(200),
+      }],
     })
   },
   methods: {
@@ -176,22 +118,37 @@ export default {
         this.dberr = JSON.stringify(res.msg, 0, 2)
         return
       }
-      this.chartDataSetting.datasets[0].data = this.nullArray(200)
-      this.chartDataSetting.datasets[1].data = this.nullArray(200)
-      this.chartDataSetting.datasets[2].data = this.nullArray(200)
-      this.chartDataSetting.datasets[3].data = this.nullArray(200)
 
-      // TODO let data input this, and dump to Chart
+      // Init Vars
+      this.rawdata = this.nullArray(200)
+      this.sourcerms = this.nullArray(200)
+      this.dfs = this.nullArray(200)
+      this.rms = this.nullArray(200)
+
+      this.chart.setOption({
+        series: [{
+          name: 'rawdata',
+          data: this.rawdata,
+        },
+        {
+          name: 'rawdata-rms',
+          data: this.sourcerms,
+        },
+        {
+          name: 'dfs',
+          data: this.dfs,
+        },
+        {
+          name: 'dfs-rms',
+          data: this.rms,
+        }],
+      })
+
       const rawdata = res.data.rawdata
       const sourcerms = res.data.sourcerms
       const dfs = res.data.dfs
       const rms = res.data.rms
       const zc = res.data.zc
-      // this.dbinfo = {
-      //   count: res.data.count,
-      //   zc: res.data.zc,
-      //   length: JSON.stringify(res.data.length),
-      // }
       this.timer = setInterval(() => {
         this.pushDataToChart([
           {
@@ -222,32 +179,45 @@ export default {
       return Array.apply(null, new Array(num)).map(Number.prototype.valueOf, 0)
     },
     pushDataToChart(array) {
-      this.chartDataSetting.labels.splice(0, 1)
-      this.chartDataSetting.labels.push('0')
-
       array.map(({ name, value }) => {
         if (name === 'rawdata') {
-          this.chartDataSetting.datasets[0].data.splice(0, 1)
-          this.chartDataSetting.datasets[0].data.push(value.data)
+          this.rawdata.splice(0, 1)
+          this.rawdata.push(value.data)
         }
 
         if (name === 'sourcerms') {
-          this.chartDataSetting.datasets[1].data.splice(0, 1)
-          this.chartDataSetting.datasets[1].data.push(value.data)
+          this.sourcerms.splice(0, 1)
+          this.sourcerms.push(value.data)
         }
 
         if (name === 'dfs') {
-          this.chartDataSetting.datasets[2].data.splice(0, 1)
-          this.chartDataSetting.datasets[2].data.push(value.data)
+          this.dfs.splice(0, 1)
+          this.dfs.push(value.data)
         }
 
         if (name === 'rms') {
-          this.chartDataSetting.datasets[3].data.splice(0, 1)
-          this.chartDataSetting.datasets[3].data.push(value.data)
+          this.rms.splice(0, 1)
+          this.rms.push(value.data)
         }
       })
-
-      this.myLineChart.update()
+      this.chart.setOption({
+        series: [{
+          name: 'rawdata',
+          data: this.rawdata,
+        },
+        {
+          name: 'rawdata-rms',
+          data: this.sourcerms,
+        },
+        {
+          name: 'dfs',
+          data: this.dfs,
+        },
+        {
+          name: 'dfs-rms',
+          data: this.rms,
+        }],
+      })
     },
   },
 }
@@ -258,7 +228,7 @@ export default {
 .realtimegraph {
   // margin-top: 15px;
   // margin-bottom: 30px;
-  // height: 501px;
+  height: 40vh;
 }
 
 .err-msg {

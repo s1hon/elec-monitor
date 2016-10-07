@@ -20,23 +20,23 @@
         </div>
 
         <div class="status col-xl-4 col-lg-6 col-md-4 col-xs-6">
-          <div class="tmp">驟升降　正常</div>
-          <div class="hum">濕　度　{{hum}}%</div>
-          <div class="lonlot">THD　　100</div>
+          <div class="tmp">驟升降　N/A</div>
+          <div class="tmp">基　頻　60.001 Hz</div>
+          <div class="hum">諧　波　(180, 0.2) (300, 0.1)</div>
+          <div class="lonlot">THD　　22.36%</div>
         </div>
       </div>
 
       <div class="row">
-        <div class="col-xl-12">
-          <canvas  id="myChart" class="realtimegraph"></canvas>
-        </div>
+        <div id="fft" class="realtimegraph"></div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-const moment = require('moment')
+import echarts from 'echarts'
+import moment from 'moment'
 
 export default {
   data: () => {
@@ -49,13 +49,74 @@ export default {
       hum: null,
       lon: null,
       lat: null,
+      // Chart Setting
+      chart: null,
+      // Datas
       fft: null,
     }
   },
   mounted() {
-    this.$on('getchartinfo', this.getchartinfo)
+    const ctx = document.getElementById('fft')
+    this.chart = echarts.init(ctx)
 
-    
+    // Init Vars
+    this.fft = this.nullArray(200)
+
+    // Draw Chart
+    this.chart.setOption({
+      hoverLayerThreshold: 10,
+      animation: false,
+      grid: {
+        show: true,
+        borderColor: '#5B6378',
+        left: 120,
+        right: 120,
+        top: 50,
+        bottom: 30,
+      },
+      // legend: {
+      //   bottom: 20,
+      //   data: ['fft'],
+      //   textStyle: {
+      //     color: '#5B6378',
+      //   },
+      // },
+      xAxis: {
+        data: this.nullArray(200),
+        axisLine: {
+          lineStyle: {
+            color: '#5B6378',
+          },
+        },
+        axisTick: {
+          show: false,
+        },
+        axisLabel: {
+          show: false,
+        },
+      },
+      yAxis: {
+        axisLine: {
+          lineStyle: {
+            color: '#5B6378',
+          },
+        },
+        splitLine: {
+          lineStyle: {
+            color: '#5B6378',
+          },
+        },
+      },
+      series: [{
+        name: 'fft',
+        itemStyle: { normal: { color: '#55AFD6' } },
+        showSymbol: false,
+        type: 'line',
+        data: this.nullArray(200),
+      }],
+    })
+
+    this.$on('getchartinfo', this.getchartinfo)
   },
   methods: {
     getchartinfo(res) {
@@ -67,18 +128,46 @@ export default {
       this.hum = res.condition.hum
       this.lon = res.condition.lon
       this.lat = res.condition.lat
-      this.fft = res.fft
+      this.pushfft(res.fft)
+    },
+    nullArray(num) {
+      return Array.apply(null, new Array(num)).map(Number.prototype.valueOf, 0)
+    },
+    pushfft(fft) {
+      const label = []
+      const data = []
+      fft.map((obj) => {
+        data.push(obj.data)
+        label.push()
+      })
+
+      this.chart.setOption({
+        series: [{
+          name: 'fft',
+          data,
+        }],
+      })
+      // this.chartDataSetting.datasets[0].labels = this.nullArray(data.length)
+      // this.chartDataSetting.datasets[0].data = data
+      // this.myLineChart.update()
     },
   },
 }
 </script>
 
 <style lang="scss" scoped>
+.realtimegraph {
+  // margin-top: 15px;
+  // margin-bottom: 30px;
+  height: 25vh;
+  width: 80vw;
+}
+
 .title {
   color: #E2E2E2;
   background-color: #5B6378;
   font-size: 2.2vh;
-  margin-top: 30px;
+  margin-top: 10px;
   padding: 8px 0 0 20px;
   height: 5vh;
 }
@@ -137,7 +226,7 @@ export default {
   }
 
   .dos, .status {
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 100;
     // background-color: black;
     margin-top: 35px;
