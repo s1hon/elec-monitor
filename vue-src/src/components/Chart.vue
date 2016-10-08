@@ -175,9 +175,7 @@ export default {
       }, 20)
       // this.dberr = JSON.stringify(res.data)
     },
-    nullArray: (num) => {
-      return Array.apply(null, new Array(num)).map(Number.prototype.valueOf, 0)
-    },
+    nullArray: num => Array.apply(null, new Array(num)).map(Number.prototype.valueOf, 0),
     pushDataToChart(array) {
       array.map(({ name, value }) => {
         if (name === 'rawdata') {

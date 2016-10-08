@@ -10,9 +10,9 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
-    "moment": "^2.15.1",
     "echarts": "^3.2.3",
-    "vue": "^2.0.1"
+    "moment": "^2.15.1",
+    "vue": "^2.0.1",
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",

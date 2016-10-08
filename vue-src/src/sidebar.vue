@@ -47,7 +47,6 @@
 
 <script>
 export default {
-
   // Used datas
   data: () => {
     return {
@@ -55,12 +54,10 @@ export default {
       timer: null,
     }
   },
-
   // When created
   created() {
     this.fetchData()
   },
-
   // fetchData, getdbChart, request
   methods: {
     fetchData() {
@@ -77,7 +74,6 @@ export default {
       }
       xhr.send()
     },
-
     getdbChart(e) {
       this.request(e)
       clearInterval(this.timer)
@@ -85,7 +81,6 @@ export default {
         this.request(e)
       }, 9000)
     },
-
     request(e) {
       const xhr = new XMLHttpRequest()
       const self = this
@@ -99,7 +94,6 @@ export default {
       xhr.send()
     },
   },
-
 }
 </script>
 

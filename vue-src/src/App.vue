@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="container-fluid">
+  <div id="app" class="container-fluid" ref="app">
     <div class="row">
       <div class="col-xl-2 sidebar">
         <sidebar ref="sidebar"></sidebar>
@@ -82,6 +82,11 @@ body {
   @media screen and (max-width: 1200px) {
     height: auto;
   }
+}
+
+.stop-scrolling {
+  height: 100%;
+  overflow: hidden;
 }
 
 </style>
