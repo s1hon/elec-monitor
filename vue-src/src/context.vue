@@ -16,18 +16,6 @@ export default {
     chart,
     info,
   },
-  mounted() {
-    this.$on('drawdbchart', this.drawdbchart)
-    this.$on('getchartinfo', this.getchartinfo)
-  },
-  methods: {
-    drawdbchart(res) {
-      this.$refs.chart.$emit('drawdbchart', res)
-    },
-    getchartinfo(res) {
-      this.$refs.info.$emit('getchartinfo', res)
-    },
-  },
 }
 </script>
 

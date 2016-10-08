@@ -48,11 +48,13 @@
 <script>
 export default {
   // Used datas
-  data: () => {
-    return {
-      dblist: null,
-      timer: null,
-    }
+  data: () => ({
+    timer: null,
+  }),
+  computed: {
+    dblist() {
+      return this.$store.state.dblist
+    },
   },
   // When created
   created() {
@@ -67,9 +69,9 @@ export default {
       xhr.onload = () => {
         const res = JSON.parse(xhr.responseText)
         if (res.status === '400') {
-          self.dblist = res.msg
+          this.$store.commit('DBLIST', res.msg)
         } else {
-          self.dblist = res.data
+          this.$store.commit('DBLIST', res.data)
         }
       }
       xhr.send()
@@ -79,7 +81,7 @@ export default {
       clearInterval(this.timer)
       this.timer = setInterval(() => {
         this.request(e)
-      }, 9000)
+      }, 15000)
     },
     request(e) {
       const xhr = new XMLHttpRequest()
@@ -87,9 +89,7 @@ export default {
       xhr.open('GET', `/api/v1/rawdata/${e.target.id}`)
       xhr.onload = () => {
         const res = JSON.parse(xhr.responseText)
-        // if (res.status === '400') {
-        // this.$emit('drawCallToApp', res)
-        self.$parent.$emit('getinfo', res)
+        this.$store.commit('SITEDATA', res)
       }
       xhr.send()
     },

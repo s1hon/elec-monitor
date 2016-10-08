@@ -9,121 +9,139 @@
 import echarts from 'echarts'
 
 export default {
-  data: () => {
-    return {
-      dberr: null,
-      timer: null,
-      // EChart.js
-      chart: null,
-      // Datas
-      rawdata: null,
-      sourcerms: null,
-      dfs: null,
-      rms: null,
-    }
-  },
-  components: {
-    // 'list-component': listComponent,
-  },
+  data: () => ({
+    dberr: null,
+    timer: null,
+    // EChart.js
+    chart: null,
+    // Datas
+    rawdata: () => {
+      return this.nullArray(200)
+    },
+    sourcerms: () => {
+      return this.nullArray(200)
+    },
+    dfs: () => {
+      return this.nullArray(200)
+    },
+    rms: () => {
+      return this.nullArray(200)
+    },
+  }),
   mounted() {
-    this.$on('drawdbchart', this.drawdbchart)
+    this.$store.watch(() => this.$store.getters.timestamp, this.drawdbchart)
 
     const ctx = document.getElementById('myChart')
     this.chart = echarts.init(ctx)
-
-    // Init Vars
-    this.rawdata = this.nullArray(200)
-    this.sourcerms = this.nullArray(200)
-    this.dfs = this.nullArray(200)
-    this.rms = this.nullArray(200)
-
-    // Draw Chart
-    this.chart.setOption({
-      hoverLayerThreshold: 10,
-      animation: false,
-      grid: {
-        borderColor: '#E2E2E2',
-        left: 50,
-        right: 0,
-        top: 20,
-        bottom: 60,
-      },
-      legend: {
-        bottom: 10,
-        data: ['rawdata', 'rawdata-rms', 'dfs', 'dfs-rms'],
-        textStyle: {
-          color: '#E2E2E2',
-        },
-      },
-      xAxis: {
-        data: this.nullArray(200),
-        axisLine: {
-          lineStyle: {
-            color: '#E2E2E2',
-          },
-        },
-        axisTick: {
-          show: false,
-        },
-        axisLabel: {
-          show: false,
-        },
-      },
-      yAxis: {
-        max: 200,
-        min: -200,
-        axisLine: {
-          lineStyle: {
-            color: '#E2E2E2',
-          },
-        },
-      },
-      series: [{
-        name: 'rawdata',
-        itemStyle: { normal: { color: '#55AFD6' } },
-        showSymbol: false,
-        type: 'line',
-        data: this.nullArray(200),
-      },
-      {
-        name: 'rawdata-rms',
-        itemStyle: { normal: { color: '#FFF55B' } },
-        showSymbol: false,
-        type: 'line',
-        data: this.nullArray(200),
-      },
-      {
-        name: 'dfs',
-        itemStyle: { normal: { color: '#FB6A72' } },
-        showSymbol: false,
-        type: 'line',
-        data: this.nullArray(200),
-      },
-      {
-        name: 'dfs-rms',
-        itemStyle: { normal: { color: '#87D655' } },
-        showSymbol: false,
-        type: 'line',
-        data: this.nullArray(200),
-      }],
-    })
+    this.InitVars()
+    this.SetChartOption()
   },
   methods: {
-    drawdbchart(res) {
-      // Reset Chart
-      this.dberr = 0
-      clearInterval(this.timer)
-
-      if (res.status === '400') {
-        this.dberr = JSON.stringify(res.msg, 0, 2)
-        return
-      }
-
-      // Init Vars
+    // Echart.js
+    fixChromeCrash() {
+      // Dispose chart to fix crash
+      this.chart.dispose()
+      this.chart = echarts.init(document.getElementById('myChart'))
+      this.SetChartOption()
+    },
+    SetChartOption() {
+      this.chart.setOption({
+        hoverLayerThreshold: 10,
+        animation: false,
+        grid: {
+          borderColor: '#E2E2E2',
+          left: 50,
+          right: 0,
+          top: 20,
+          bottom: 60,
+        },
+        legend: {
+          bottom: 10,
+          data: ['rawdata', 'rawdata-rms', 'dfs', 'dfs-rms'],
+          textStyle: {
+            color: '#E2E2E2',
+          },
+        },
+        xAxis: {
+          data: this.nullArray(200),
+          axisLine: {
+            lineStyle: {
+              color: '#E2E2E2',
+            },
+          },
+          axisTick: {
+            show: false,
+          },
+          axisLabel: {
+            show: false,
+          },
+        },
+        yAxis: {
+          max: 200,
+          min: -200,
+          axisLine: {
+            lineStyle: {
+              color: '#E2E2E2',
+            },
+          },
+        },
+        series: [{
+          name: 'rawdata',
+          itemStyle: { normal: { color: '#55AFD6' } },
+          showSymbol: false,
+          type: 'line',
+          hoverAnimation: false,
+          legendHoverLink: false,
+          data: this.rawdata,
+        },
+        {
+          name: 'rawdata-rms',
+          itemStyle: { normal: { color: '#FFF55B' } },
+          showSymbol: false,
+          type: 'line',
+          hoverAnimation: false,
+          legendHoverLink: false,
+          data: this.sourcerms,
+        },
+        {
+          name: 'dfs',
+          itemStyle: { normal: { color: '#FB6A72' } },
+          showSymbol: false,
+          type: 'line',
+          hoverAnimation: false,
+          legendHoverLink: false,
+          data: this.dfs,
+        },
+        {
+          name: 'dfs-rms',
+          itemStyle: { normal: { color: '#87D655' } },
+          showSymbol: false,
+          type: 'line',
+          hoverAnimation: false,
+          legendHoverLink: false,
+          data: this.rms,
+        }],
+      })
+    },
+    InitVars() {
       this.rawdata = this.nullArray(200)
       this.sourcerms = this.nullArray(200)
       this.dfs = this.nullArray(200)
       this.rms = this.nullArray(200)
+    },
+    // ChartDraw
+    drawdbchart() {
+      // Reset Chart
+      this.dberr = 0
+      clearInterval(this.timer)
+
+      if (this.$store.state.status === '400') {
+        this.dberr = JSON.stringify(this.$store.state.msg, 0, 2)
+        return
+      }
+
+      // Init Vars
+      this.InitVars()
 
       this.chart.setOption({
         series: [{
@@ -144,11 +162,12 @@ export default {
         }],
       })
 
-      const rawdata = res.data.rawdata
-      const sourcerms = res.data.sourcerms
-      const dfs = res.data.dfs
-      const rms = res.data.rms
-      const zc = res.data.zc
+      const rawdata = this.$store.getters.rawdata
+      const sourcerms = this.$store.getters.sourcerms
+      const dfs = this.$store.getters.dfs
+      const rms = this.$store.getters.rms
+      const zc = this.$store.getters.zc
+
       this.timer = setInterval(() => {
         this.pushDataToChart([
           {

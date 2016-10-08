@@ -20,27 +20,6 @@ export default {
     sidebar,
     context,
   },
-  mounted() {
-    this.$on('getinfo', this.sendinfo)
-  },
-  methods: {
-    sendinfo(res) {
-      this.$refs.context.$emit('drawdbchart', {
-        status: res.status,
-        msg: res.msg,
-        data: res.data,
-      })
-      this.$refs.context.$emit('getchartinfo', {
-        status: res.status,
-        msg: res.msg,
-        sitename: res.data.sitename,
-        count: res.data.count,
-        zc: res.data.zc,
-        condition: res.data.condition,
-        fft: res.data.fft,
-      })
-    },
-  },
 }
 </script>
 

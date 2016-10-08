@@ -36,24 +36,39 @@
 
 <script>
 import echarts from 'echarts'
-import moment from 'moment'
 
 export default {
-  data: () => {
-    return {
-      sitename: null,
-      count: null,
-      day: null,
-      time: null,
-      temp: null,
-      hum: null,
-      lon: null,
-      lat: null,
-      // Chart Setting
-      chart: null,
-      // Datas
-      fft: null,
-    }
+  data: () => ({
+    // Chart Setting
+    chart: null,
+    // Datas
+    fft: null,
+  }),
+  computed: {
+    sitename() {
+      return this.$store.state.sitename
+    },
+    count() {
+      return this.$store.state.count
+    },
+    day() {
+      return this.$store.state.day
+    },
+    time() {
+      return this.$store.state.time
+    },
+    temp() {
+      return this.$store.state.temp
+    },
+    hum() {
+      return this.$store.state.hum
+    },
+    lon() {
+      return this.$store.state.lon
+    },
+    lat() {
+      return this.$store.state.lat
+    },
   },
   mounted() {
     const ctx = document.getElementById('fft')
@@ -65,7 +80,7 @@ export default {
     // Draw Chart
     this.chart.setOption({
       hoverLayerThreshold: 10,
-      animation: false,
+      // animation: false,
       grid: {
         show: true,
         borderColor: '#5B6378',
@@ -116,19 +131,11 @@ export default {
       }],
     })
 
-    this.$on('getchartinfo', this.getchartinfo)
+    this.$store.watch(() => this.$store.getters.timestamp, this.getchartinfo)
   },
   methods: {
-    getchartinfo(res) {
-      this.sitename = res.sitename
-      this.count = res.count
-      this.day = moment(res.condition.time).format('YYYY/MM/DD')
-      this.time = moment(res.condition.time).format('HH:mm:ss')
-      this.temp = res.condition.temp
-      this.hum = res.condition.hum
-      this.lon = res.condition.lon
-      this.lat = res.condition.lat
-      this.pushfft(res.fft)
+    getchartinfo() {
+      this.pushfft(this.$store.getters.fft)
     },
     nullArray(num) {
       return Array.apply(null, new Array(num)).map(Number.prototype.valueOf, 0)
