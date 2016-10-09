@@ -3,12 +3,7 @@
 </template>
 
 <script>
-import realtimestream from './components/RealtimeStream.vue'
-
 export default {
-  components: {
-    realtimestream,
-  },
 }
 </script>
 
