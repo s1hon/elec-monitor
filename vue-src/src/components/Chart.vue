@@ -11,7 +11,6 @@ import echarts from 'echarts'
 export default {
   data: () => ({
     dberr: null,
-    timer: null,
     // EChart.js
     chart: null,
     // Datas
@@ -30,6 +29,7 @@ export default {
   }),
   mounted() {
     this.$store.watch(() => this.$store.getters.timestamp, this.drawdbchart)
+    this.$store.watch(() => this.$route, this.RESET)
 
     const ctx = document.getElementById('myChart')
     this.chart = echarts.init(ctx)
@@ -37,6 +37,10 @@ export default {
     this.SetChartOption()
   },
   methods: {
+    RESET() {
+      this.InitVars()
+      this.$store.commit('RESETDATA')
+    },
     // Echart.js
     fixChromeCrash() {
       // Dispose chart to fix crash
@@ -133,7 +137,7 @@ export default {
     drawdbchart() {
       // Reset Chart
       this.dberr = 0
-      clearInterval(this.timer)
+      clearInterval(this.$store.state.timer.chart)
 
       if (this.$store.state.status === '400') {
         this.dberr = JSON.stringify(this.$store.state.msg, 0, 2)
@@ -168,7 +172,7 @@ export default {
       const rms = this.$store.getters.rms
       const zc = this.$store.getters.zc
 
-      this.timer = setInterval(() => {
+      this.$store.state.timer.chart = setInterval(() => {
         this.pushDataToChart([
           {
             name: 'rawdata',

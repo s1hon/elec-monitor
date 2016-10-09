@@ -6,6 +6,11 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    // timer
+    timer: {
+      sidbar: null,
+      chart: null,
+    },
     // timestamp
     timestamp: null,
     // dblist
@@ -13,8 +18,6 @@ export default new Vuex.Store({
     // res
     status: null,
     msg: null,
-    // siteinfo
-    siteinfo: {},
     // res.data
     sitename: null,
     count: null,
@@ -57,6 +60,32 @@ export default new Vuex.Store({
       state.lon = res.data.condition.lon
       state.lat = res.data.condition.lat
       state.timestamp = Date.now()
+    },
+    RESETDATA(state) {
+      clearInterval(state.timer.chart)
+      clearInterval(state.timer.sidebar)
+
+      // timestamp
+      state.timestamp = null
+      // res
+      state.status = null
+      state.msg = null
+      // res.data
+      state.sitename = null
+      state.count = null
+      state.zc = null
+      // state.rawdata = null
+      // state.sourcerms = null
+      // state.dfs = null
+      // state.rms = null
+      // state.fft = null
+      // res.data.condition
+      state.day = null
+      state.time = null
+      state.temp = null
+      state.hum = null
+      state.lon = null
+      state.lat = null
     },
   },
   getters: {
