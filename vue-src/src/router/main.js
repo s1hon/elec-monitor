@@ -4,7 +4,6 @@ import VueRouter from 'vue-router'
 // Router used vue
 import context from '../context.vue'
 import realtimestream from '../components/RealtimeStream.vue'
-import chart from '../components/Chart.vue'
 import hello from '../components/Hello.vue'
 
 Vue.use(VueRouter)
