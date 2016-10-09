@@ -26,6 +26,7 @@ module.exports = {
     'no-param-reassign': ["error", { "props": false }],
     // 'arrow-body-style': ["error", "as-needed"],
     'arrow-body-style': 0,
+    'quote-props': 0,
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
   }
