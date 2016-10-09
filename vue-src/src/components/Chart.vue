@@ -28,7 +28,7 @@ export default {
     },
   }),
   mounted() {
-    this.$store.watch(() => this.$store.getters.timestamp, this.drawdbchart)
+    this.$store.watch(() => this.$store.getters.timestamp, this.CHECKONLIVEROUTE)
     this.$store.watch(() => this.$route, this.RESET)
 
     const ctx = document.getElementById('myChart')
@@ -37,6 +37,11 @@ export default {
     this.SetChartOption()
   },
   methods: {
+    CHECKONLIVEROUTE() {
+      if (this.$route.path === '/live' && this.$store.state.sitename) {
+        this.drawdbchart()
+      }
+    },
     RESET() {
       this.InitVars()
       this.$store.commit('RESETDATA')
