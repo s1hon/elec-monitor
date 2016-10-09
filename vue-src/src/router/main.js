@@ -16,9 +16,11 @@ export default new VueRouter({
       children: [
         {
           path: '',
-          alias: 'live',
+          redirect: 'live',
+        },
+        {
+          path: 'live',
           component: realtimestream,
-          force: true,
         },
         {
           path: 'history',
