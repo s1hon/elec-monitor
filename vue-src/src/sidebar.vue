@@ -23,8 +23,8 @@
           <svg width="80%" viewBox="36 219 192 49" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <g id="Group-3" stroke="none" stroke-width="1" fill-rule="evenodd" transform="translate(37.000000, 219.000000)">
                   <g id="Group-Copy" transform="translate(51.000000, 0.000000)" font-size="35" font-weight="normal">
-                      <text id="歷史紀錄">
-                          <tspan x="0" y="37">歷史紀錄</tspan>
+                      <text id="報告總覽">
+                          <tspan x="0" y="37">報告總覽</tspan>
                       </text>
                   </g>
                   <g id="Group-2" transform="translate(0.000000, 6.000000)" stroke="#FFFFFF">
