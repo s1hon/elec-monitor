@@ -30,7 +30,7 @@ export default {
         show: true,
         borderColor: '#5B6378',
         left: 0,
-        right: 120,
+        right: 0,
         top: 0,
         bottom: 30,
       },
@@ -117,7 +117,7 @@ export default {
   // margin-top: 15px;
   // margin-bottom: 30px;
   height: 12vh;
-  width: 30vw;
+  width: 20vw;
 }
 
 </style>
