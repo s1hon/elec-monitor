@@ -7,12 +7,12 @@
 
     <div v-show="sitename">
       <div class="row info-line-1">
-        <div class="info col-xl-6">
+        <div class="info col-xl-8">
           <timeclock class="div"></timeclock>
           <scoped1 class="div"></scoped1>
           <scoped2 class="div"></scoped2>
         </div>
-        <div class="info col-xl-6">
+        <div class="info col-xl-4">
           <fftChart></fftChart>
           <powerChart></powerChart>
         </div>
