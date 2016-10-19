@@ -2,7 +2,9 @@
   <div class="status">
     <div class="tmp">驟升降　N/A</div>
     <div class="tmp">基　頻　60.001 Hz</div>
-    <div class="hum">諧　波　(180, 0.2) (300, 0.1)</div>
+    <div class="hum">諧　波(1)　(180, 0.2)</div>
+    <div class="hum">諧　波(2)　(300, 0.1)</div>
+    <div class="hum">諧　波(3)　(300, 0.1)</div>
     <div class="lonlot">THD　　22.36%</div>
   </div>
 </template>

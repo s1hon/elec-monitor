@@ -8,9 +8,12 @@
     <div v-show="sitename">
       <div class="row info-line-1">
         <div class="info col-xl-8">
-          <timeclock></timeclock>
+          <div class="info brk">
+            <timeclock class="status"></timeclock>
+            <scoped1 class="status"></scoped1>
+          </div>
           <scoped2 class="status"></scoped2>
-          <scoped1 class="status"></scoped1>
+          <scoped3 class="status"></scoped3>
         </div>
         <div class="info col-xl-4">
           <fftChart></fftChart>
@@ -27,6 +30,7 @@ import powerChart from './ChartInfo/power-graph.vue'
 import timeclock from './ChartInfo/timeclock.vue'
 import scoped1 from './ChartInfo/status-scoped-1.vue'
 import scoped2 from './ChartInfo/status-scoped-2.vue'
+import scoped3 from './ChartInfo/status-scoped-3.vue'
 
 export default {
   components: {
@@ -35,6 +39,7 @@ export default {
     timeclock,
     scoped1,
     scoped2,
+    scoped3,
   },
   computed: {
     sitename() {
@@ -69,14 +74,19 @@ export default {
   .info {
     float:left;
     margin-top: 20px;
-    div{
-      float: left;
+  }
+
+  .brk {
+    margin-top: -15px;
+    width: 350px;
+    @media screen and (max-width: 940px) {
+      width: auto;
     }
   }
 
   .status {
-    // padding: 30;
-    height: 150px;
+    float: left;
+    min-height: 100px;
     width: 300px;
     margin-top: 10px;
     // padding: 0 0 5px 80px;
