@@ -32,7 +32,7 @@ export default {
         left: 0,
         right: 0,
         top: 0,
-        bottom: 30,
+        bottom: 0,
       },
       // legend: {
       //   bottom: 20,
@@ -109,7 +109,7 @@ export default {
 
 <style lang="scss" scoped>
 .row {
-  padding: 25px 0 0 0;
+  padding: 25px 0 30px 0;
 }
 
 
@@ -117,7 +117,10 @@ export default {
   // margin-top: 15px;
   // margin-bottom: 30px;
   height: 12vh;
-  width: 20vw;
+  width: 290px;
+  @media screen and (max-width: 1200px) {
+    width: 80vw;
+  }
 }
 
 </style>

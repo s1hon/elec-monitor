@@ -25,14 +25,19 @@ export default {
   // background-color: black;
   // margin-top: 35px;
   // padding: 0 0 5px 15px;
-  @media screen and (max-width: 720px) {
-    // float: left;
 
-    div {
-      // float: left;
-      padding: 5px 15px 0px 5px;
-    }
-    padding: 0px 0 5px 15px;
+  // @media screen and (max-width: 720px) {
+  //   // float: left;
+  //
+  //   div {
+  //     // float: left;
+  //     padding: 5px 15px 0px 5px;
+  //   }
+  //   padding: 0px 0 5px 15px;
+  // }
+
+  @media screen and (max-width: 1200px) {
+    margin-top: 35px;
   }
 }
 </style>
