@@ -8,13 +8,9 @@
     <div v-show="sitename">
       <div class="row info-line-1">
         <div class="info col-xl-8">
-          <div class="info">
-            <timeclock class="div"></timeclock>
-            <scoped1 class="div"></scoped1>
-          </div>
-
-          <scoped2 class="div"></scoped2>
-
+          <timeclock></timeclock>
+          <scoped2 class="status"></scoped2>
+          <scoped1 class="status"></scoped1>
         </div>
         <div class="info col-xl-4">
           <fftChart></fftChart>
@@ -75,6 +71,14 @@ export default {
     div{
       float: left;
     }
+  }
+
+  .status {
+    // padding: 30;
+    height: 150px;
+    width: 300px;
+    margin-top: 10px;
+    // padding: 0 0 5px 80px;
   }
 }
 </style>

@@ -27,14 +27,14 @@ export default {
 
 <style lang="scss" scoped>
 .dos {
-  height: 163px;
-  width: 300px;
+  // height: 163px;
+  // width: 300px;
 
   font-size: 20px;
   font-weight: 100;
   // background-color: black;
-  margin-top: 35px;
-  padding: 0 0 5px 80px;
+  // margin-top: 35px;
+  // padding: 0 0 5px 80px;
 
   // @media screen and (max-width: 720px) {
   //   float: left;

@@ -21,7 +21,7 @@ export default {
 
 <style lang="scss" scoped>
   .date {
-    padding: 15px 0 5px 0;
+    padding: 5px 45px 0 0;
     // height: 25vh;
 
     .ti {
