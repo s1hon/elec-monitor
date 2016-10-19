@@ -14,16 +14,16 @@ export default {
     // EChart.js
     chart: null,
     // Datas
-    rawdata: () => {
+    powersignal: () => {
       return this.nullArray(200)
     },
-    sourcerms: () => {
+    powersignalRMS: () => {
       return this.nullArray(200)
     },
-    dfs: () => {
+    fundamental: () => {
       return this.nullArray(200)
     },
-    rms: () => {
+    fundamentalRMS: () => {
       return this.nullArray(200)
     },
   }),
@@ -66,7 +66,7 @@ export default {
         },
         legend: {
           bottom: 10,
-          data: ['rawdata', 'rawdata-rms', 'dfs', 'dfs-rms'],
+          data: ['Power Signal', 'Power Signal (rms)', 'Fundamental', 'Fundamental (rms)'],
           textStyle: {
             color: '#E2E2E2',
           },
@@ -95,48 +95,48 @@ export default {
           },
         },
         series: [{
-          name: 'rawdata',
+          name: 'Power Signal',
           itemStyle: { normal: { color: '#55AFD6' } },
           showSymbol: false,
           type: 'line',
           hoverAnimation: false,
           legendHoverLink: false,
-          data: this.rawdata,
+          data: this.powersignal,
         },
         {
-          name: 'rawdata-rms',
+          name: 'Power Signal (rms)',
           itemStyle: { normal: { color: '#FFF55B' } },
           showSymbol: false,
           type: 'line',
           hoverAnimation: false,
           legendHoverLink: false,
-          data: this.sourcerms,
+          data: this.powersignalRMS,
         },
         {
-          name: 'dfs',
+          name: 'Fundamental',
           itemStyle: { normal: { color: '#FB6A72' } },
           showSymbol: false,
           type: 'line',
           hoverAnimation: false,
           legendHoverLink: false,
-          data: this.dfs,
+          data: this.fundamental,
         },
         {
-          name: 'dfs-rms',
+          name: 'Fundamental (rms)',
           itemStyle: { normal: { color: '#87D655' } },
           showSymbol: false,
           type: 'line',
           hoverAnimation: false,
           legendHoverLink: false,
-          data: this.rms,
+          data: this.fundamentalRMS,
         }],
       })
     },
     InitVars() {
-      this.rawdata = this.nullArray(200)
-      this.sourcerms = this.nullArray(200)
-      this.dfs = this.nullArray(200)
-      this.rms = this.nullArray(200)
+      this.powersignal = this.nullArray(200)
+      this.powersignalRMS = this.nullArray(200)
+      this.fundamental = this.nullArray(200)
+      this.fundamentalRMS = this.nullArray(200)
     },
     // ChartDraw
     drawdbchart() {
@@ -154,94 +154,94 @@ export default {
 
       this.chart.setOption({
         series: [{
-          name: 'rawdata',
-          data: this.rawdata,
+          name: 'Power Signal',
+          data: this.powersignal,
         },
         {
-          name: 'rawdata-rms',
-          data: this.sourcerms,
+          name: 'Power Signal (rms)',
+          data: this.powersignalRMS,
         },
         {
-          name: 'dfs',
-          data: this.dfs,
+          name: 'Fundamental',
+          data: this.fundamental,
         },
         {
-          name: 'dfs-rms',
-          data: this.rms,
+          name: 'Fundamental (rms)',
+          data: this.fundamentalRMS,
         }],
       })
 
-      const rawdata = this.$store.getters.rawdata
-      const sourcerms = this.$store.getters.sourcerms
-      const dfs = this.$store.getters.dfs
-      const rms = this.$store.getters.rms
+      const powersignal = this.$store.getters.powersignal
+      const powersignalRMS = this.$store.getters.powersignalRMS
+      const fundamental = this.$store.getters.fundamental
+      const fundamentalRMS = this.$store.getters.fundamentalRMS
       const zc = this.$store.getters.zc
 
       this.$store.state.timer.chart = setInterval(() => {
         this.pushDataToChart([
           {
-            name: 'rawdata',
-            value: rawdata[0] ? rawdata[0] : 0,
+            name: 'Power Signal',
+            value: powersignal[0] ? powersignal[0] : 0,
           },
           {
-            name: 'sourcerms',
-            value: sourcerms[0] ? sourcerms[0] : 0,
+            name: 'Power Signal (rms)',
+            value: powersignalRMS[0] ? powersignalRMS[0] : 0,
           },
           {
-            name: 'dfs',
-            value: dfs[0] ? dfs[0] : 0,
+            name: 'Fundamental',
+            value: fundamental[0] ? fundamental[0] : 0,
           },
           {
-            name: 'rms',
-            value: rms[0] ? rms[0] : 0,
+            name: 'FUndamental (rms)',
+            value: fundamentalRMS[0] ? fundamentalRMS[0] : 0,
           },
         ])
-        rawdata.splice(0, 1)
-        sourcerms.splice(0, 1)
-        dfs.splice(0, 1)
-        rms.splice(0, 1)
+        powersignal.splice(0, 1)
+        powersignalRMS.splice(0, 1)
+        fundamental.splice(0, 1)
+        fundamentalRMS.splice(0, 1)
       }, 20)
       // this.dberr = JSON.stringify(res.data)
     },
     nullArray: num => Array.apply(null, new Array(num)).map(Number.prototype.valueOf, 0),
     pushDataToChart(array) {
       array.map(({ name, value }) => {
-        if (name === 'rawdata') {
-          this.rawdata.splice(0, 1)
-          this.rawdata.push(value.data)
+        if (name === 'Power Signal') {
+          this.powersignal.splice(0, 1)
+          this.powersignal.push(value.data)
         }
 
-        if (name === 'sourcerms') {
-          this.sourcerms.splice(0, 1)
-          this.sourcerms.push(value.data)
+        if (name === 'Power Signal (rms)') {
+          this.powersignalRMS.splice(0, 1)
+          this.powersignalRMS.push(value.data)
         }
 
-        if (name === 'dfs') {
-          this.dfs.splice(0, 1)
-          this.dfs.push(value.data)
+        if (name === 'Fundamental') {
+          this.fundamental.splice(0, 1)
+          this.fundamental.push(value.data)
         }
 
-        if (name === 'rms') {
-          this.rms.splice(0, 1)
-          this.rms.push(value.data)
+        if (name === 'FUndamental (rms)') {
+          this.fundamentalRMS.splice(0, 1)
+          this.fundamentalRMS.push(value.data)
         }
       })
       this.chart.setOption({
         series: [{
-          name: 'rawdata',
-          data: this.rawdata,
+          name: 'Power Signal',
+          data: this.powersignal,
         },
         {
-          name: 'rawdata-rms',
-          data: this.sourcerms,
+          name: 'Power Signal (rms)',
+          data: this.powersignalRMS,
         },
         {
-          name: 'dfs',
-          data: this.dfs,
+          name: 'Fundamental',
+          data: this.fundamental,
         },
         {
-          name: 'dfs-rms',
-          data: this.rms,
+          name: 'Fundamental (rms)',
+          data: this.fundamentalRMS,
         }],
       })
     },

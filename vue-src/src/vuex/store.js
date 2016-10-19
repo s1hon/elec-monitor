@@ -22,10 +22,10 @@ export default new Vuex.Store({
     sitename: null,
     count: null,
     zc: null,
-    rawdata: null,
-    sourcerms: null,
-    dfs: null,
-    rms: null,
+    powersignal: null,
+    powersignalRMS: null,
+    fundamental: null,
+    fundamentalRMS: null,
     fft: null,
     // res.data.condition
     day: null,
@@ -47,10 +47,10 @@ export default new Vuex.Store({
       state.sitename = res.data.sitename
       state.count = res.data.count
       state.zc = res.data.zc
-      state.rawdata = res.data.rawdata
-      state.sourcerms = res.data.sourcerms
-      state.dfs = res.data.dfs
-      state.rms = res.data.rms
+      state.powersignal = res.data.rawdata
+      state.powersignalRMS = res.data.sourcerms
+      state.fundamental = res.data.dfs
+      state.fundamentalRMS = res.data.rms
       state.fft = res.data.fft
       // res.data.condition
       state.day = moment(res.data.condition.time).format('YYYY/MM/DD')
@@ -74,9 +74,9 @@ export default new Vuex.Store({
       state.sitename = null
       state.count = null
       state.zc = null
-      // state.rawdata = null
-      // state.sourcerms = null
-      // state.dfs = null
+      // state.powersignal = null
+      // state.powersignalRMS = null
+      // state.fundamental = null
       // state.rms = null
       // state.fft = null
       // res.data.condition
@@ -95,17 +95,17 @@ export default new Vuex.Store({
     timestamp: (state) => {
       return state.timestamp
     },
-    rawdata: (state) => {
-      return state.rawdata
+    powersignal: (state) => {
+      return state.powersignal
     },
-    sourcerms: (state) => {
-      return state.sourcerms
+    powersignalRMS: (state) => {
+      return state.powersignalRMS
     },
-    dfs: (state) => {
-      return state.dfs
+    fundamental: (state) => {
+      return state.fundamental
     },
-    rms: (state) => {
-      return state.rms
+    fundamentalRMS: (state) => {
+      return state.fundamentalRMS
     },
     zc: (state) => {
       return state.zc
