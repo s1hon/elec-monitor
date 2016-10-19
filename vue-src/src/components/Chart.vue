@@ -69,6 +69,7 @@ export default {
           data: ['Power Signal', 'Power Signal (rms)', 'Fundamental', 'Fundamental (rms)'],
           textStyle: {
             color: '#E2E2E2',
+            fontSize: 18,
           },
         },
         xAxis: {

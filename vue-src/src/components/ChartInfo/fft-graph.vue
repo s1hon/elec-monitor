@@ -1,5 +1,6 @@
 <template>
   <div class="row">
+    fft
     <div id="fft" class="realtimegraph"></div>
   </div>
 </template>
@@ -28,9 +29,9 @@ export default {
       grid: {
         show: true,
         borderColor: '#5B6378',
-        left: 120,
+        left: 0,
         right: 120,
-        top: 50,
+        top: 0,
         bottom: 30,
       },
       // legend: {
@@ -107,12 +108,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.row {
+  padding: 25px 0 0 0;
+}
+
 
 .realtimegraph {
   // margin-top: 15px;
   // margin-bottom: 30px;
-  height: 20vh;
-  width: 40vw;
+  height: 12vh;
+  width: 30vw;
 }
 
 </style>
