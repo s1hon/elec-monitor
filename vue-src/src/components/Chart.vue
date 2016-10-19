@@ -55,6 +55,7 @@ export default {
     },
     SetChartOption() {
       this.chart.setOption({
+        progressive: 100,
         hoverLayerThreshold: 10,
         animation: false,
         grid: {
