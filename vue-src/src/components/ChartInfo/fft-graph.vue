@@ -119,7 +119,7 @@ export default {
   height: 12vh;
   width: 290px;
   @media screen and (max-width: 1200px) {
-    width: 80vw;
+    width: 90vw;
   }
 }
 </style>

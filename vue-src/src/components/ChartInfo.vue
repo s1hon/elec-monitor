@@ -68,6 +68,7 @@ export default {
 
   .info {
     float:left;
+    margin-top: 20px;
     div{
       float: left;
     }
