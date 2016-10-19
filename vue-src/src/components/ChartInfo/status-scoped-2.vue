@@ -19,9 +19,10 @@ export default {
 
 <style lang="scss" scoped>
 .status {
-  // width: 400px;
   font-size: 20px;
   font-weight: 100;
+
+  // width: 400px;
   // background-color: black;
   // margin-top: 35px;
   // padding: 0 0 5px 15px;
@@ -36,8 +37,8 @@ export default {
   //   padding: 0px 0 5px 15px;
   // }
 
-  @media screen and (max-width: 1200px) {
-    margin-top: 35px;
-  }
+  // @media screen and (max-width: 1200px) {
+  //   margin-top: 35px;
+  // }
 }
 </style>

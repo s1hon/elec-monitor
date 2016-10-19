@@ -27,9 +27,6 @@ export default {
 
 <style lang="scss" scoped>
 .dos {
-  // height: 163px;
-  // width: 300px;
-
   font-size: 20px;
   font-weight: 100;
   // background-color: black;
