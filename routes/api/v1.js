@@ -71,6 +71,8 @@ router.get('/info/:dbname', async (req, res) => {
     const powersignalRMS = db.collection('powersignalRMS')
     const fundamental = db.collection('fundamental')
     const fundamentalRMS = db.collection('fundamentalRMS')
+    const power = db.collection('power')
+    const powerRMS = db.collection('powerRMS')
     const fft = db.collection('fft')
     const zc = db.collection('zc')
 
@@ -82,12 +84,15 @@ router.get('/info/:dbname', async (req, res) => {
       dbLib.getRawdataRecord(powersignalRMS, conditionInfo.count, 450),
       dbLib.getRawdataRecord(fundamental, conditionInfo.count, 450),
       dbLib.getRawdataRecord(fundamentalRMS, conditionInfo.count, 450),
+      dbLib.getRawdataRecord(power, conditionInfo.count, 450),
+      dbLib.getRawdataRecord(powerRMS, conditionInfo.count, 450),
       dbLib.getRawdataRecord(fft, conditionInfo.count),
       dbLib.getRawdataRecord(zc, conditionInfo.count),
     ]).then(([
         condition,
         powersignal, powersignalRMS,
         fundamental, fundamentalRMS,
+        power, powerRMS,
         fft, zc,
       ]) => {
       // Success, reurn results.
@@ -103,6 +108,8 @@ router.get('/info/:dbname', async (req, res) => {
           powersignalRMS,
           fundamental,
           fundamentalRMS,
+          power,
+          powerRMS,
           fft,
         },
       })

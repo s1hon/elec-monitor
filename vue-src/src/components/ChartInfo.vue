@@ -14,6 +14,7 @@
         </div>
         <div class="info col-xl-6">
           <fftChart></fftChart>
+          <powerChart></powerChart>
         </div>
       </div>
     </div>
@@ -22,6 +23,7 @@
 
 <script>
 import fftChart from './ChartInfo/fft-graph.vue'
+import powerChart from './ChartInfo/power-graph.vue'
 import timeclock from './ChartInfo/timeclock.vue'
 import scoped1 from './ChartInfo/status-scoped-1.vue'
 import scoped2 from './ChartInfo/status-scoped-2.vue'
@@ -29,6 +31,7 @@ import scoped2 from './ChartInfo/status-scoped-2.vue'
 export default {
   components: {
     fftChart,
+    powerChart,
     timeclock,
     scoped1,
     scoped2,
