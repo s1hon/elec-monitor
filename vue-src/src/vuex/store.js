@@ -47,10 +47,10 @@ export default new Vuex.Store({
       state.sitename = res.data.sitename
       state.count = res.data.count
       state.zc = res.data.zc
-      state.powersignal = res.data.rawdata
-      state.powersignalRMS = res.data.sourcerms
-      state.fundamental = res.data.dfs
-      state.fundamentalRMS = res.data.rms
+      state.powersignal = res.data.powersignal
+      state.powersignalRMS = res.data.powersignalRMS
+      state.fundamental = res.data.fundamental
+      state.fundamentalRMS = res.data.fundamentalRMS
       state.fft = res.data.fft
       // res.data.condition
       state.day = moment(res.data.condition.time).format('YYYY/MM/DD')
@@ -74,12 +74,6 @@ export default new Vuex.Store({
       state.sitename = null
       state.count = null
       state.zc = null
-      // state.powersignal = null
-      // state.powersignalRMS = null
-      // state.fundamental = null
-      // state.rms = null
-      // state.fft = null
-      // res.data.condition
       state.day = null
       state.time = null
       state.temp = null

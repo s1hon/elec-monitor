@@ -90,7 +90,7 @@ export default {
     request(e) {
       const xhr = new XMLHttpRequest()
       const self = this
-      xhr.open('GET', `/api/v1/rawdata/${e.target.id}`)
+      xhr.open('GET', `/api/v1/info/${e.target.id}`)
       xhr.onload = () => {
         const res = JSON.parse(xhr.responseText)
         this.$store.commit('SITEDATA', res)

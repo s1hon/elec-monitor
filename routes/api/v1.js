@@ -30,10 +30,10 @@ router.get('/list', async (req, res) => {
 
 
 /**
- * [Route] Get rawdata, dfs... datas
+ * [Route] Get powersignal, fundamental... datas
  * @type {String} dbname
  */
-router.get('/rawdata/:dbname', async (req, res) => {
+router.get('/info/:dbname', async (req, res) => {
   // Check dbname if exist.
   try {
     const dbs = await dbLib.getdbLists()
@@ -67,10 +67,10 @@ router.get('/rawdata/:dbname', async (req, res) => {
 
     console.log(`[mongodb] Connect Success: ${req.params.dbname}`)
     const condition = db.collection('condition')
-    const rawdata = db.collection('rawdata')
-    const sourcerms = db.collection('sourcerms')
-    const dfs = db.collection('dfs')
-    const rms = db.collection('rms')
+    const powersignal = db.collection('powersignal')
+    const powersignalRMS = db.collection('powersignalRMS')
+    const fundamental = db.collection('fundamental')
+    const fundamentalRMS = db.collection('fundamentalRMS')
     const fft = db.collection('fft')
     const zc = db.collection('zc')
 
@@ -78,13 +78,18 @@ router.get('/rawdata/:dbname', async (req, res) => {
 
     Promise.all([
       dbLib.getRawdataRecord(condition, conditionInfo.count),
-      dbLib.getRawdataRecord(rawdata, conditionInfo.count, 450),
-      dbLib.getRawdataRecord(sourcerms, conditionInfo.count, 450),
-      dbLib.getRawdataRecord(dfs, conditionInfo.count, 450),
-      dbLib.getRawdataRecord(rms, conditionInfo.count, 450),
+      dbLib.getRawdataRecord(powersignal, conditionInfo.count, 450),
+      dbLib.getRawdataRecord(powersignalRMS, conditionInfo.count, 450),
+      dbLib.getRawdataRecord(fundamental, conditionInfo.count, 450),
+      dbLib.getRawdataRecord(fundamentalRMS, conditionInfo.count, 450),
       dbLib.getRawdataRecord(fft, conditionInfo.count),
       dbLib.getRawdataRecord(zc, conditionInfo.count),
-    ]).then(([condition, rawdata, sourcerms, dfs, rms, fft, zc]) => {
+    ]).then(([
+        condition,
+        powersignal, powersignalRMS,
+        fundamental, fundamentalRMS,
+        fft, zc,
+      ]) => {
       // Success, reurn results.
       res.json({
         status: '200',
@@ -94,10 +99,10 @@ router.get('/rawdata/:dbname', async (req, res) => {
           count: conditionInfo.count,
           zc: zc[0].data,
           condition: condition[0],
-          rawdata,
-          sourcerms,
-          dfs,
-          rms,
+          powersignal,
+          powersignalRMS,
+          fundamental,
+          fundamentalRMS,
           fft,
         },
       })
