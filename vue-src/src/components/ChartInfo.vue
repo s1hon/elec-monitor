@@ -78,7 +78,7 @@ export default {
 
   .brk {
     margin-top: -15px;
-    width: 350px;
+    width: 310px;
     @media screen and (max-width: 940px) {
       width: auto;
     }
@@ -89,7 +89,7 @@ export default {
     min-height: 100px;
     width: 300px;
     margin-top: 10px;
-    // padding: 0 0 5px 80px;
+    margin-right: 30px;
   }
 }
 </style>

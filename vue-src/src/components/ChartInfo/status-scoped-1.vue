@@ -1,8 +1,8 @@
 <template>
   <div class="dos">
-    <div class="tmp">溫　度　{{temp}} °C</div>
-    <div class="hum">濕　度　{{hum}}%</div>
-    <div class="lonlot" v-show="lon">經緯度　{{lon}}, {{lat}}</div>
+    <div class="tmp"><span>溫度</span>{{temp}} °C</div>
+    <div class="hum"><span>濕度</span>{{hum}}%</div>
+    <div class="lonlot" v-show="lon"><span>經緯度</span>{{lon}}, {{lat}}</div>
   </div>
 </template>
 
@@ -29,6 +29,11 @@ export default {
 .dos {
   font-size: 20px;
   font-weight: 100;
+
+  span {
+    float: left;
+    width: 80px;
+  }
   // background-color: black;
   // margin-top: 35px;
   // padding: 0 0 5px 80px;

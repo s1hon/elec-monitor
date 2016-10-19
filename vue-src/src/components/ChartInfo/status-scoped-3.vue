@@ -1,8 +1,8 @@
 <template>
   <div class="status">
-    <div>Power Signal(RMS)　60.001</div>
-    <div>Fundamental(RMS)　60.001</div>
-    <div>Power(RMS)　99.11</div>
+    <div><span>Power Signal(RMS)</span>60.001</div>
+    <div><span>Fundamental(RMS)</span>60.001</div>
+    <div><span>Power(RMS)</span>99.11</div>
   </div>
 </template>
 
@@ -20,5 +20,10 @@ export default {
 .status {
   font-size: 20px;
   font-weight: 100;
+
+  span {
+    float: left;
+    width: 210px;
+  }
 }
 </style>
