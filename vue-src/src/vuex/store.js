@@ -103,16 +103,19 @@ export default new Vuex.Store({
     //   return state.fft
     // },
     swellsag: (state) => { // 驟升降
-      switch (state.swellsag) {
-        case 'swell':
-          return '驟升'
-        case 'sag':
-          return '驟降'
-        case 'non':
-          return 'N/A'
-        default :
-          return 'Err'
+      let swellsagSTRING = ''
+      if (state.swellsag) {
+        if (state.swellsag.match(/swell/g)) {
+          swellsagSTRING += '驟升 '
+        }
+        if (state.swellsag.match(/sag/g)) {
+          swellsagSTRING += '驟降 '
+        }
+        if (state.swellsag.match(/non/g)) {
+          swellsagSTRING = 'N/A'
+        }
       }
+      return swellsagSTRING
     },
     harmonic: (state) => { // 基頻, 諧波
       if (state.harmonic) {
