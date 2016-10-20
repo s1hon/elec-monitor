@@ -1,11 +1,12 @@
 <template>
   <div class="status">
-    <div class="tmp"><span>驟升降</span>N/A</div>
-    <div class="tmp"><span>基頻</span>60.001 Hz</div>
-    <div class="hum"><span>諧波(1)</span>(180, 0.2)</div>
-    <div class="hum"><span>諧波(2)</span>(300, 0.1)</div>
-    <div class="hum"><span>諧波(3)</span>(300, 0.1)</div>
-    <div class="lonlot"><span>THD</span>22.36%</div>
+    <div class="tmp"><span>驟升降</span>{{ swellsag }}</div>
+    <div class="tmp"><span>基頻</span>{{ harmonic.baseband }} Hz</div>
+
+    <div class="hum" v-for="(item, index) in harmonic.harmonic">
+      <span>諧波({{ index + 1 }})</span>{{ item }}
+    </div>
+    <div class="lonlot"><span>THD</span>{{ thd }}%</div>
   </div>
 </template>
 
@@ -15,6 +16,15 @@ export default {
     // sitename() {
     //   return this.$store.state.sitename
     // },
+    harmonic() {
+      return this.$store.getters.harmonic
+    },
+    thd() {
+      return this.$store.getters.thd
+    },
+    swellsag() {
+      return this.$store.getters.swellsag
+    },
   },
 }
 </script>

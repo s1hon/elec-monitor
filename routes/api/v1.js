@@ -75,6 +75,7 @@ router.get('/info/:dbname', async (req, res) => {
     const powerRMS = db.collection('powerRMS')
     const fft = db.collection('fft')
     const zc = db.collection('zc')
+    const events = db.collection('event')
 
     const conditionInfo = await dbLib.getConditionData(condition)
 
@@ -88,12 +89,14 @@ router.get('/info/:dbname', async (req, res) => {
       dbLib.getRawdataRecord(powerRMS, conditionInfo.count, 450),
       dbLib.getRawdataRecord(fft, conditionInfo.count),
       dbLib.getRawdataRecord(zc, conditionInfo.count),
+      dbLib.getRawdataRecord(events, conditionInfo.count),
     ]).then(([
         condition,
         powersignal, powersignalRMS,
         fundamental, fundamentalRMS,
         power, powerRMS,
         fft, zc,
+        events,
       ]) => {
       // Success, reurn results.
       res.json({
@@ -111,6 +114,10 @@ router.get('/info/:dbname', async (req, res) => {
           power,
           powerRMS,
           fft,
+          // events,
+          harmonic: events[0].harmonic,
+          swellsag: events[0].swellsag,
+          thd: events[0].thd,
         },
       })
 
