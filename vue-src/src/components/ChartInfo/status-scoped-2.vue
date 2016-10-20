@@ -13,9 +13,6 @@
 <script>
 export default {
   computed: {
-    // sitename() {
-    //   return this.$store.state.sitename
-    // },
     harmonic() {
       return this.$store.getters.harmonic
     },
@@ -38,23 +35,5 @@ export default {
     float: left;
     width: 210px;
   }
-  // width: 400px;
-  // background-color: black;
-  // margin-top: 35px;
-  // padding: 0 0 5px 15px;
-
-  // @media screen and (max-width: 720px) {
-  //   // float: left;
-  //
-  //   div {
-  //     // float: left;
-  //     padding: 5px 15px 0px 5px;
-  //   }
-  //   padding: 0px 0 5px 15px;
-  // }
-
-  // @media screen and (max-width: 1200px) {
-  //   margin-top: 35px;
-  // }
 }
 </style>
