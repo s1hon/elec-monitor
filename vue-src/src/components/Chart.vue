@@ -28,7 +28,7 @@ export default {
     },
   }),
   mounted() {
-    this.$store.watch(() => this.$store.getters.timestamp, this.CHECKONLIVEROUTE)
+    this.$store.watch(() => this.$store.state.timestamp, this.CHECKONLIVEROUTE)
     this.$store.watch(() => this.$route, this.RESET)
 
     const ctx = document.getElementById('myChart')
@@ -173,11 +173,11 @@ export default {
         }],
       })
 
-      const powersignal = this.$store.getters.powersignal
-      const powersignalRMS = this.$store.getters.powersignalRMS
-      const fundamental = this.$store.getters.fundamental
-      const fundamentalRMS = this.$store.getters.fundamentalRMS
-      const zc = this.$store.getters.zc
+      const powersignal = this.$store.state.powersignal
+      const powersignalRMS = this.$store.state.powersignalRMS
+      const fundamental = this.$store.state.fundamental
+      const fundamentalRMS = this.$store.state.fundamentalRMS
+      const zc = this.$store.state.zc
 
       this.$store.state.timer.chart = setInterval(() => {
         this.pushDataToChart([

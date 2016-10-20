@@ -87,32 +87,9 @@ export default new Vuex.Store({
     },
   },
   getters: {
-    fft: (state) => {
-      return state.fft
-    },
-    timestamp: (state) => {
-      return state.timestamp
-    },
-    powersignal: (state) => {
-      return state.powersignal
-    },
-    powersignalRMS: (state) => {
-      return state.powersignalRMS
-    },
-    fundamental: (state) => {
-      return state.fundamental
-    },
-    fundamentalRMS: (state) => {
-      return state.fundamentalRMS
-    },
-    power: (state) => {
-      return state.power
-    },
-    powerRMS: (state) => {
-      return state.powerRMS
-    },
-    zc: (state) => {
-      return state.zc
+    // fft: (state) => {
+    //   return state.fft
+    // },
     },
   },
 })

@@ -76,11 +76,11 @@ export default {
       }],
     })
 
-    this.$store.watch(() => this.$store.getters.timestamp, this.getchartinfo)
+    this.$store.watch(() => this.$store.state.timestamp, this.getchartinfo)
   },
   methods: {
     getchartinfo() {
-      this.pushfft(this.$store.getters.fft)
+      this.pushfft(this.$store.state.fft)
     },
     nullArray(num) {
       return Array.apply(null, new Array(num)).map(Number.prototype.valueOf, 0)
