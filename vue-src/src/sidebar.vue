@@ -114,9 +114,13 @@ export default {
           justify-content: center;
   a {
     font-weight: 250;
-    font-size: 26px;
+    font-size: 1.7vw;
     color: #FFFFFF;
     padding: 19px 13px 17px 13px;
+
+    @media screen and (max-width: 1200px) {
+      font-size: 28px;
+    }
   }
 
   a:link, a:visited, a:hover, a:active {
