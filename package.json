@@ -17,9 +17,9 @@
   },
   "homepage": "https://github.com/opjlmi/elec-monitor#readme",
   "dependencies": {
-    "express": "^4.14.0",
     "babel-core": "^6.17.0",
     "babel-polyfill": "^6.16.0",
+    "express": "^4.14.0",
     "mongodb": "^2.2.10",
     "nunjucks": "^2.5.2"
   },
