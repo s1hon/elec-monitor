@@ -17,8 +17,11 @@
   },
   "homepage": "https://github.com/opjlmi/elec-monitor#readme",
   "dependencies": {
-    "babel-core": "^6.17.0",
+    "babel-core": "6.18.0",
+    "babel-eslint": "7.1.0",
     "babel-polyfill": "^6.16.0",
+    "babel-preset-stage-2": "6.18.0",
+    "eslint-config-airbnb-base": "9.0.0",
     "express": "^4.14.0",
     "mongodb": "^2.2.10",
     "nunjucks": "^2.5.2"
