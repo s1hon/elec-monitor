@@ -97,31 +97,45 @@ router.get('/info/:dbname', async (req, res) => {
         power, powerRMS,
         fft, zc,
         events,
+    ]) => {
+      // Continue get Average with [powersignal, fundamental, power]
+      Promise.all([
+        dbLib.getAverage(powersignalRMS),
+        dbLib.getAverage(fundamentalRMS),
+        dbLib.getAverage(powerRMS),
+      ]).then(([
+        powersignalAVG,
+        fundamentalAVG,
+        powerAVG,
       ]) => {
-      // Success, reurn results.
-      res.json({
-        status: '200',
-        msg: 'Success',
-        data: {
-          sitename: req.params.dbname,
-          count: conditionInfo.count,
-          zc: zc[0].data,
-          condition: condition[0],
-          powersignal,
-          powersignalRMS,
-          fundamental,
-          fundamentalRMS,
-          power,
-          powerRMS,
-          fft,
-          // events,
-          harmonic: events[0].harmonic,
-          swellsag: events[0].swellsag,
-          thd: events[0].thd,
-        },
-      })
+        // Success, reurn results.
+        res.json({
+          status: '200',
+          msg: 'Success',
+          data: {
+            sitename: req.params.dbname,
+            count: conditionInfo.count,
+            zc: zc[0].data,
+            condition: condition[0],
+            powersignal,
+            powersignalRMS,
+            powersignalAVG,
+            fundamental,
+            fundamentalRMS,
+            fundamentalAVG,
+            power,
+            powerRMS,
+            powerAVG,
+            fft,
+            // events,
+            harmonic: events[0].harmonic,
+            swellsag: events[0].swellsag,
+            thd: events[0].thd,
+          },
+        })
 
-      db.close()
+        db.close()
+      })
     })
   })
 })

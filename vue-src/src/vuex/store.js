@@ -24,10 +24,13 @@ export default new Vuex.Store({
     zc: null,
     powersignal: null,
     powersignalRMS: null,
+    powersignalAVG: null,
     fundamental: null,
     fundamentalRMS: null,
+    fundamentalAVG: null,
     power: null,
     powerRMS: null,
+    powerAVG: null,
     fft: null,
     // res.data.condition
     day: null,
@@ -55,10 +58,13 @@ export default new Vuex.Store({
       state.zc = res.data.zc
       state.powersignal = res.data.powersignal
       state.powersignalRMS = res.data.powersignalRMS
+      state.powersignalAVG = res.data.powersignalAVG
       state.fundamental = res.data.fundamental
       state.fundamentalRMS = res.data.fundamentalRMS
+      state.fundamentalAVG = res.data.fundamentalAVG
       state.power = res.data.power
       state.powerRMS = res.data.powerRMS
+      state.powerAVG = res.data.powerAVG
       state.fft = res.data.fft
       // res.data.condition
       state.day = moment(res.data.condition.time).format('YYYY/MM/DD')

@@ -69,8 +69,32 @@ const getRawdataRecord = (db, countID, limit) => {
   })
 }
 
+
+/**
+ * getAverage with [powersignal, fundamental, power]
+ * @param  {Array} data
+ * @return {Float} average
+ */
+const getAverage = (data) => {
+  return new Promise((resolve) => {
+    if (data.length === 0) {
+      resolve(0)
+    }
+    if (data.length > 1) {
+      data.reduce((previousValue, currentValue, index, array) => {
+        if (index === array.length - 1) {
+          const total = parseFloat(previousValue.data, 10) + parseFloat(currentValue.data, 10)
+          resolve((total / array.length).toFixed(2))
+        }
+        return { data: parseFloat(previousValue.data, 10) + parseFloat(currentValue.data, 10) }
+      })
+    }
+  })
+}
+
 module.exports = {
   getdbLists,
   getConditionData,
   getRawdataRecord,
+  getAverage,
 }
