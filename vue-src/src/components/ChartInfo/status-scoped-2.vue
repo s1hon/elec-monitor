@@ -15,7 +15,7 @@
 export default {
   computed: {
     zc() {
-      return this.$store.state.zc.toFixed(2)
+      return this.$store.state.zc
     },
     harmonic() {
       return this.$store.getters.harmonic

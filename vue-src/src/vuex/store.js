@@ -55,7 +55,7 @@ export default new Vuex.Store({
       // res.data
       state.sitename = res.data.sitename
       state.count = res.data.count
-      state.zc = res.data.zc
+      state.zc = res.data.zc.toFixed(2)
       state.powersignal = res.data.powersignal
       state.powersignalRMS = res.data.powersignalRMS
       state.powersignalAVG = res.data.powersignalAVG
@@ -133,7 +133,7 @@ export default new Vuex.Store({
         for (let i = 0; i < harmonics.length; i += 1) {
           harmonicTMP.push(harmonics[i])
           if (i % 2 === 1 && i > 0) {
-            harmonic.push(`( ${harmonicTMP[0].toFixed(2)}, ${(harmonicTMP[1] * 100).toFixed(2)}% )`)
+            harmonic.push(`( ${harmonicTMP[0].toFixed(2)}, ${(harmonicTMP[1].toFixed(2) * 100).toFixed(2)}% )`)
             harmonicTMP = []
           }
         }
