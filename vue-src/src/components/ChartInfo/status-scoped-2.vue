@@ -1,6 +1,7 @@
 <template>
   <div class="status">
     <div class="tmp"><span>驟升降</span>{{ swellsag }}</div>
+    <div class="tmp"><span>基頻(ZC)</span>{{ zc }} Hz</div>
     <div class="tmp"><span>基頻</span>{{ harmonic.baseband }} Hz</div>
 
     <div class="hum" v-for="(item, index) in harmonic.harmonic">
@@ -13,6 +14,9 @@
 <script>
 export default {
   computed: {
+    zc() {
+      return this.$store.state.zc.toFixed(2)
+    },
     harmonic() {
       return this.$store.getters.harmonic
     },
