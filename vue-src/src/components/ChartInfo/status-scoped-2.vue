@@ -3,11 +3,10 @@
     <div class="tmp"><span>驟升降</span>{{ swellsag }}</div>
     <div class="tmp"><span>基頻(ZC)</span>{{ zc }} Hz</div>
     <div class="tmp"><span>基頻</span>{{ harmonic.baseband }} Hz</div>
-
+    <div class="lonlot"><span>THD</span>{{ thd }}%</div>
     <div class="hum" v-for="(item, index) in harmonic.harmonic">
       <span>諧波({{ index + 1 }})</span>{{ item }}
     </div>
-    <div class="lonlot"><span>THD</span>{{ thd }}%</div>
   </div>
 </template>
 
@@ -34,6 +33,10 @@ export default {
 .status {
   font-size: 20px;
   font-weight: 100;
+
+  div {
+    clear: left;
+  }
 
   span {
     float: left;

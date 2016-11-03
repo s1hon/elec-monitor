@@ -12,8 +12,10 @@
             <timeclock class="status"></timeclock>
             <scoped1 class="status"></scoped1>
           </div>
-          <scoped2 class="status"></scoped2>
-          <scoped3 class="status"></scoped3>
+          <div class="info">
+            <scoped3 class="status"></scoped3>
+            <scoped2 class="status"></scoped2>
+          </div>
         </div>
         <div class="info col-xl-4">
           <fftChart></fftChart>
@@ -87,7 +89,7 @@ export default {
   .status {
     float: left;
     min-height: 100px;
-    width: 300px;
+    min-width: 300px;
     margin-top: 10px;
     margin-right: 30px;
   }
