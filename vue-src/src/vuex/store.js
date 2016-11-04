@@ -18,6 +18,7 @@ export default new Vuex.Store({
     // res
     status: null,
     msg: null,
+
     // res.data
     sitename: null,
     count: null,
@@ -32,6 +33,7 @@ export default new Vuex.Store({
     powerRMS: null,
     powerAVG: null,
     fft: null,
+
     // res.data.condition
     day: null,
     time: null,
@@ -39,10 +41,66 @@ export default new Vuex.Store({
     hum: null,
     lon: null,
     lat: null,
+
     // res.data.event
     harmonic: null,
     swellsag: null,
     thd: null,
+
+    // calendar
+    calendar: {
+      show: false,
+      x: 0,
+      y: 0,
+      picker: '',
+      type: 'date',
+      value: '',
+      begin: '',
+      end: '',
+      sep: '/',
+      weeks: [],
+      months: [],
+      range: false,
+      items: {
+        fromDate: {
+          type: 'date',
+          value: '',
+          sep: '-',
+        },
+        toDate: {
+          type: 'date',
+          value: '',
+          sep: '-',
+        },
+
+        // // 单选模式
+        // picker1: {
+        //   type: 'date',
+        //   begin: '2016-08-20',
+        //   end: '2016-08-25',
+        //   value: '2016-08-21',
+        //   sep: '-',
+        // },
+        // // 2个日期模式
+        // picker2: {
+        //   type: 'date',
+        //   value: '',
+        //   range: true,
+        //   sep: '.',
+        // },
+        // // 日期时间模式
+        // picker3: {
+        //   type: 'datetime',
+        //   value: '',
+        //   sep: '-',
+        // },
+        // // 日期时间模式
+        // picker4: {
+        //   type: 'time',
+        //   value: '',
+        // },
+      },
+    },
   },
   mutations: {
     DBLIST(state, dblist) {
