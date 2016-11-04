@@ -4,7 +4,7 @@ import VueRouter from 'vue-router'
 // Router used vue
 import context from '../context.vue'
 import realtimestream from '../components/RealtimeStream.vue'
-import hello from '../components/Hello.vue'
+import report from '../components/Report.vue'
 
 Vue.use(VueRouter)
 export default new VueRouter({
@@ -23,7 +23,7 @@ export default new VueRouter({
         },
         {
           path: 'history',
-          component: hello,
+          component: report,
         },
       ],
     },
