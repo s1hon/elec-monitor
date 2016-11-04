@@ -176,7 +176,7 @@
         </span>
         <div class="text center">
           <input type="text" v-model="year" :value="year" @change="render(year,month)" min="1970" max="2100" maxlength="4">
-           /
+           /&nbsp;&nbsp;&nbsp;
           {{monthString}}
         </div>
       </div>
