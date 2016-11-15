@@ -69,9 +69,18 @@ export default {
       },
       series: [{
         name: 'power',
-        itemStyle: { normal: { color: '#9FA5B3' } },
+        itemStyle: {
+          normal: {
+            color: '#9FA5B3',
+          },
+        },
         showSymbol: false,
         type: 'line',
+        areaStyle: {
+          normal: {
+            color: '#5C6271',
+          },
+        },
         data: this.nullArray(200),
       }],
     })
