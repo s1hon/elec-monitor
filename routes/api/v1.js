@@ -141,4 +141,12 @@ router.get('/info/:dbname', async (req, res) => {
   })
 })
 
+router.get('/search/:dbname', async (req, res) => {
+  res.json({
+    // ${req.params.dbname}
+    // req.query => get
+    query: req.query,
+  })
+})
+
 module.exports = router
