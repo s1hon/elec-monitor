@@ -26,15 +26,21 @@ export default {
     fundamentalRMS: () => {
       return this.nullArray(200)
     },
+    watch1: null,
+    watch2: null,
   }),
   mounted() {
-    this.$store.watch(() => this.$store.state.timestamp, this.CHECKONLIVEROUTE)
-    this.$store.watch(() => this.$route, this.RESET)
+    this.watch1 = this.$store.watch(() => this.$store.state.timestamp, this.CHECKONLIVEROUTE)
+    this.watch2 = this.$store.watch(() => this.$route, this.RESET)
 
     const ctx = document.getElementById('myChart')
     this.chart = echarts.init(ctx)
     this.InitVars()
     this.SetChartOption()
+  },
+  beforeDestroy() {
+    this.watch1()
+    this.watch2()
   },
   methods: {
     CHECKONLIVEROUTE() {

@@ -149,23 +149,38 @@ export default new Vuex.Store({
 
       // timestamp
       state.timestamp = null
+
       // res
       state.status = null
       state.msg = null
+
       // res.data
       state.sitename = null
       state.count = null
       state.zc = null
+      state.powersignal = null
+      state.powersignalRMS = null
+      state.powersignalAVG = null
+      state.fundamental = null
+      state.fundamentalRMS = null
+      state.fundamentalAVG = null
+      state.power = null
+      state.powerRMS = null
+      state.powerAVG = null
+      state.fft = null
+
+      // res.data.condition
       state.day = null
       state.time = null
       state.temp = null
       state.hum = null
       state.lon = null
       state.lat = null
-      // event
+
+      // res.data.event
+      state.harmonic = null
       state.swellsag = null
       state.swellsagV = null
-      state.harmonic = null
       state.thd = null
     },
   },

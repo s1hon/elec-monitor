@@ -14,6 +14,7 @@ export default {
     chart: null,
     // Datas
     power: null,
+    watch: null,
   }),
   mounted() {
     const ctx = document.getElementById('power')
@@ -99,7 +100,10 @@ export default {
       ],
     })
 
-    this.$store.watch(() => this.$store.state.timestamp, this.getchartinfo)
+    this.watch = this.$store.watch(() => this.$store.state.timestamp, this.getchartinfo)
+  },
+  beforeDestroy() {
+    this.watch()
   },
   methods: {
     getchartinfo() {

@@ -63,6 +63,11 @@ export default {
   // When created
   created() {
     this.fetchData()
+    this.$store.watch(() => this.$route.path, () => {
+      this.$store.commit('RESETDATA')
+    })
+  },
+  mounted() {
   },
   // fetchData, getdbChart, request
   methods: {
