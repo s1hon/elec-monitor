@@ -1,5 +1,5 @@
 <template>
-  <div class="cal">
+  <div class="cal" v-if="this.$store.state.sitename">
     <span>起始時間：<input class="input" size="10" type="text" @click.stop="open($event,'fromDate')" v-model="$store.state.calendar.items.fromDate.value"></span>
     <span>結束時間：<input class="input" size="10" type="text" @click.stop="open($event,'toDate')" v-model="$store.state.calendar.items.toDate.value"></span>
 
