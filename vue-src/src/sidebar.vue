@@ -85,11 +85,14 @@ export default {
       xhr.send()
     },
     getdbChart(e) {
-      this.request(e)
-      clearInterval(this.$store.state.timer.sidebar)
-      this.$store.state.timer.sidebar = setInterval(() => {
+      this.$store.state.sitename = e.target.id
+      if (this.$route.path === '/live') {
         this.request(e)
-      }, 15000)
+        clearInterval(this.$store.state.timer.sidebar)
+        this.$store.state.timer.sidebar = setInterval(() => {
+          this.request(e)
+        }, 15000)
+      }
     },
     request(e) {
       const xhr = new XMLHttpRequest()
