@@ -20,8 +20,7 @@
     </calendar>
 
     <div>
-      {{ start }} <br>
-      {{ end }} <br>
+      {{ this.$store.state.sitename }} <br>
       {{ msg }} <br>
     </div>
   </div>
@@ -50,14 +49,14 @@ export default {
   watch: {
     '$store.state.calendar.value': function (value) {
       const picker = this.$store.state.calendar.picker
-      this.$store.state.calendar.items[picker].value = value
+      const calItems = this.$store.state.calendar.items
+      calItems[picker].value = value
 
       // if fish toDATE chose, and send ajax to server
-      if (this.$store.state.calendar.items.fromDate.value !== '' &&
-      this.$store.state.calendar.items.toDate.value !== '') {
-        this.start = moment(this.$store.state.calendar.items.fromDate.value).valueOf()
-        this.end = moment(this.$store.state.calendar.items.toDate.value).valueOf()
-        // request(this.start, this.end)
+      if (calItems.fromDate.value !== '' && calItems.toDate.value !== '') {
+        this.start = moment(calItems.fromDate.value).valueOf()
+        this.end = moment(calItems.toDate.value).valueOf()
+        this.request(this.start, this.end)
       }
     },
   },
