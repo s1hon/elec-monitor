@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    power
+    Power-RMS
     <div id="power" class="realtimegraph"></div>
   </div>
 </template>
@@ -67,34 +67,49 @@ export default {
           },
         },
       },
-      series: [{
-        name: 'power',
-        itemStyle: {
-          normal: {
-            color: '#9FA5B3',
+      // #9FA5B3
+      series: [
+        {
+          name: 'power',
+          itemStyle: {
+            normal: {
+              color: '#4D5363',
+            },
           },
-        },
-        showSymbol: false,
-        type: 'line',
-        areaStyle: {
-          normal: {
-            color: '#5C6271',
+          showSymbol: false,
+          type: 'line',
+          areaStyle: {
+            normal: {
+              color: '#4D5363',
+            },
           },
+          data: this.nullArray(200),
         },
-        data: this.nullArray(200),
-      }],
+        {
+          name: 'powerrms',
+          itemStyle: {
+            normal: {
+              color: '#9FA5B3',
+            },
+          },
+          showSymbol: false,
+          type: 'line',
+          data: this.nullArray(200),
+        },
+      ],
     })
 
     this.$store.watch(() => this.$store.state.timestamp, this.getchartinfo)
   },
   methods: {
     getchartinfo() {
-      this.pushpower(this.$store.state.power)
+      this.pushData(this.$store.state.power, 'power')
+      this.pushData(this.$store.state.powerRMS, 'powerrms')
     },
     nullArray(num) {
       return Array.apply(null, new Array(num)).map(Number.prototype.valueOf, 0)
     },
-    pushpower(power) {
+    pushData(power, chartname) {
       const label = []
       const data = []
       power.map((obj) => {
@@ -104,7 +119,7 @@ export default {
 
       this.chart.setOption({
         series: [{
-          name: 'power',
+          name: chartname,
           data,
         }],
       })
