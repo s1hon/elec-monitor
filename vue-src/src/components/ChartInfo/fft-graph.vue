@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    fft
+    FFT
     <div id="fft" class="realtimegraph"></div>
   </div>
 </template>
@@ -80,7 +80,7 @@ export default {
   },
   methods: {
     getchartinfo() {
-      this.pushfft(this.$store.state.fft)
+      this.pushfft(this.$store.getters.fftgraph)
     },
     nullArray(num) {
       return Array.apply(null, new Array(num)).map(Number.prototype.valueOf, 0)

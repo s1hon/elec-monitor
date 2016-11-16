@@ -206,5 +206,10 @@ export default new Vuex.Store({
     thd: (state) => {
       return state.thd.toFixed(2)
     },
+    fftgraph: (state) => {
+      const halfLength = Math.ceil(state.fft.length / 2)
+      const rightSide = state.fft.splice(halfLength, state.fft.length)
+      return rightSide
+    },
   },
 })
