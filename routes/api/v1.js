@@ -130,6 +130,7 @@ router.get('/info/:dbname', async (req, res) => {
             // events,
             harmonic: events[0].harmonic,
             swellsag: events[0].swellsag,
+            swellsagV: events[0].swellsagV,
             thd: events[0].thd,
           },
         })

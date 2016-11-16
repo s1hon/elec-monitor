@@ -45,6 +45,7 @@ export default new Vuex.Store({
     // res.data.event
     harmonic: null,
     swellsag: null,
+    swellsagV: null,
     thd: null,
 
     // calendar
@@ -134,6 +135,11 @@ export default new Vuex.Store({
       state.timestamp = Date.now()
       // res.data.event
       state.swellsag = res.data.swellsag // 驟升降
+      if (res.data.swellsagV !== 0) {
+        state.swellsagV = res.data.swellsagV.toFixed(2) // 驟升降
+      } else {
+        state.swellsagV = res.data.swellsagV // 驟升降
+      }
       state.harmonic = res.data.harmonic // 基頻, 諧波
       state.thd = res.data.thd
     },
@@ -158,6 +164,7 @@ export default new Vuex.Store({
       state.lat = null
       // event
       state.swellsag = null
+      state.swellsagV = null
       state.harmonic = null
       state.thd = null
     },

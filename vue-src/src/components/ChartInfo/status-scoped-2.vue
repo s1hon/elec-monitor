@@ -1,6 +1,6 @@
 <template>
   <div class="status">
-    <div class="tmp"><span>驟升降</span>{{ swellsag }}</div>
+    <div class="tmp"><span>電壓變異</span>{{ swellsagV }}%</div>
     <div class="tmp"><span>基頻(ZC)</span>{{ zc }} Hz</div>
     <div class="tmp"><span>基頻</span>{{ harmonic.baseband }} Hz</div>
     <div class="lonlot"><span>THD</span>{{ thd }}%</div>
@@ -24,6 +24,9 @@ export default {
     },
     swellsag() {
       return this.$store.getters.swellsag
+    },
+    swellsagV() {
+      return this.$store.state.swellsagV
     },
   },
 }
