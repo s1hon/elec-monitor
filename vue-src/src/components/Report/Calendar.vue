@@ -86,6 +86,18 @@ export default {
       this.$store.state.calendar.x = e.target.offsetLeft
       this.$store.state.calendar.y = e.target.offsetTop + e.target.offsetHeight + 8
     },
+    request(start, end) {
+      this.msg = 'hello'
+      const xhr = new XMLHttpRequest()
+      const self = this
+      xhr.open('GET', `/api/v1/search/${this.$store.state.sitename}?g=harmonic,thd&start=${this.start}&end=${this.end}`)
+      xhr.onload = () => {
+        const res = JSON.parse(xhr.responseText)
+        this.$store.commit('REQUEST', { path: this.$route.path, res })
+        this.msg = res
+      }
+      xhr.send()
+    },
   },
 }
 </script>
