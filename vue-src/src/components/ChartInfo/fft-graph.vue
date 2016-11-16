@@ -29,10 +29,10 @@ export default {
       grid: {
         show: true,
         borderColor: '#5B6378',
-        left: 0,
-        right: 0,
-        top: 0,
-        bottom: 0,
+        left: 30,
+        right: 15,
+        top: 10,
+        bottom: 20,
       },
       // legend: {
       //   bottom: 20,
@@ -116,7 +116,7 @@ export default {
 .realtimegraph {
   // margin-top: 15px;
   // margin-bottom: 30px;
-  height: 12vh;
+  height: 13vh;
   width: 290px;
   @media screen and (max-width: 1200px) {
     width: 90vw;
