@@ -80,41 +80,45 @@ export default new Vuex.Store({
     DBLIST(state, dblist) {
       state.dblist = dblist
     },
-    SITEDATA(state, res) {
-      // res
-      state.status = res.status
-      state.msg = res.msg
-      // res.data
-      state.sitename = res.data.sitename
-      state.count = res.data.count
-      state.zc = res.data.zc.toFixed(2)
-      state.powersignal = res.data.powersignal
-      state.powersignalRMS = res.data.powersignalRMS
-      state.powersignalAVG = res.data.powersignalAVG
-      state.fundamental = res.data.fundamental
-      state.fundamentalRMS = res.data.fundamentalRMS
-      state.fundamentalAVG = res.data.fundamentalAVG
-      state.power = res.data.power
-      state.powerRMS = res.data.powerRMS
-      state.powerAVG = res.data.powerAVG
-      state.fft = res.data.fft
-      // res.data.condition
-      state.day = moment(res.data.condition.time).format('YYYY/MM/DD')
-      state.time = moment(res.data.condition.time).format('HH:mm:ss')
-      state.temp = res.data.condition.temp
-      state.hum = res.data.condition.hum
-      state.lon = res.data.condition.lon
-      state.lat = res.data.condition.lat
-      state.timestamp = Date.now()
-      // res.data.event
-      state.swellsag = res.data.swellsag // 驟升降
-      if (res.data.swellsagV !== 0) {
-        state.swellsagV = res.data.swellsagV.toFixed(2) // 驟升降
-      } else {
-        state.swellsagV = res.data.swellsagV // 驟升降
+    REQUEST(state, playload) {
+      const res = playload.res
+
+      if (playload.path === '/live') {
+        // res
+        state.status = res.status
+        state.msg = res.msg
+        // res.data
+        state.sitename = res.data.sitename
+        state.count = res.data.count
+        state.zc = res.data.zc.toFixed(2)
+        state.powersignal = res.data.powersignal
+        state.powersignalRMS = res.data.powersignalRMS
+        state.powersignalAVG = res.data.powersignalAVG
+        state.fundamental = res.data.fundamental
+        state.fundamentalRMS = res.data.fundamentalRMS
+        state.fundamentalAVG = res.data.fundamentalAVG
+        state.power = res.data.power
+        state.powerRMS = res.data.powerRMS
+        state.powerAVG = res.data.powerAVG
+        state.fft = res.data.fft
+        // res.data.condition
+        state.day = moment(res.data.condition.time).format('YYYY/MM/DD')
+        state.time = moment(res.data.condition.time).format('HH:mm:ss')
+        state.temp = res.data.condition.temp
+        state.hum = res.data.condition.hum
+        state.lon = res.data.condition.lon
+        state.lat = res.data.condition.lat
+        state.timestamp = Date.now()
+        // res.data.event
+        state.swellsag = res.data.swellsag // 驟升降
+        if (res.data.swellsagV !== 0) {
+          state.swellsagV = res.data.swellsagV.toFixed(2) // 驟升降
+        } else {
+          state.swellsagV = res.data.swellsagV // 驟升降
+        }
+        state.harmonic = res.data.harmonic // 基頻, 諧波
+        state.thd = res.data.thd
       }
-      state.harmonic = res.data.harmonic // 基頻, 諧波
-      state.thd = res.data.thd
     },
     RESETDATA(state) {
       clearInterval(state.timer.chart)

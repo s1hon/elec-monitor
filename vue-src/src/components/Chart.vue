@@ -50,7 +50,6 @@ export default {
     },
     RESET() {
       this.InitVars()
-      this.$store.commit('RESETDATA')
     },
     // Echart.js
     fixChromeCrash() {

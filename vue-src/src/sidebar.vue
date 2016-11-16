@@ -97,7 +97,7 @@ export default {
       xhr.open('GET', `/api/v1/info/${e.target.id}`)
       xhr.onload = () => {
         const res = JSON.parse(xhr.responseText)
-        this.$store.commit('SITEDATA', res)
+        this.$store.commit('REQUEST', { path: this.$route.path, res })
       }
       xhr.send()
     },
