@@ -1,15 +1,15 @@
 <template>
   <div class="row">
-    <cal></cal>
+    <calendar></calendar>
   </div>
 </template>
 
 <script>
-import cal from './Calendar.vue'
+import calendar from './Report/Calendar.vue'
 
 export default {
   components: {
-    cal,
+    calendar,
   },
 }
 </script>
