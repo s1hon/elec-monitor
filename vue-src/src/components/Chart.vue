@@ -49,6 +49,7 @@ export default {
       }
     },
     RESET() {
+      this.chart.dispose()
       this.InitVars()
     },
     // Echart.js
