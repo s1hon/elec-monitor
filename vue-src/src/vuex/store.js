@@ -64,42 +64,15 @@ export default new Vuex.Store({
       range: false,
       items: {
         fromDate: {
-          type: 'date',
+          type: 'datetime',
           value: '',
           sep: '-',
         },
         toDate: {
-          type: 'date',
+          type: 'datetime',
           value: '',
           sep: '-',
         },
-
-        // // 单选模式
-        // picker1: {
-        //   type: 'date',
-        //   begin: '2016-08-20',
-        //   end: '2016-08-25',
-        //   value: '2016-08-21',
-        //   sep: '-',
-        // },
-        // // 2个日期模式
-        // picker2: {
-        //   type: 'date',
-        //   value: '',
-        //   range: true,
-        //   sep: '.',
-        // },
-        // // 日期时间模式
-        // picker3: {
-        //   type: 'datetime',
-        //   value: '',
-        //   sep: '-',
-        // },
-        // // 日期时间模式
-        // picker4: {
-        //   type: 'time',
-        //   value: '',
-        // },
       },
     },
   },

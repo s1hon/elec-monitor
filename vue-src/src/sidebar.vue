@@ -69,7 +69,6 @@ export default {
   },
   mounted() {
   },
-  // fetchData, getdbChart, request
   methods: {
     fetchData() {
       const xhr = new XMLHttpRequest()
