@@ -52,7 +52,7 @@ export default {
           show: false,
         },
         axisLabel: {
-          show: false,
+          show: true,
         },
       },
       yAxis: {
@@ -85,12 +85,18 @@ export default {
     nullArray(num) {
       return Array.apply(null, new Array(num)).map(Number.prototype.valueOf, 0)
     },
+    fftLabelArray(data) {
+      const arraySite = new Array(128)
+      arraySite[0] = 0
+      for (let i = 0; i <= 1500; i += 300) {
+        arraySite[((data.length / 1500) * i).toFixed(0) - 1] = i
+      }
+      return arraySite
+    },
     pushfft(fft) {
-      const label = []
       const data = []
       fft.map((obj) => {
         data.push(obj.data)
-        label.push()
       })
 
       this.chart.setOption({
@@ -98,6 +104,13 @@ export default {
           name: 'fft',
           data,
         }],
+        xAxis: {
+          data: this.fftLabelArray(data),
+          axisLabel: {
+            show: true,
+            interval: 0,
+          },
+        },
       })
       // this.chartDataSetting.datasets[0].labels = this.nullArray(data.length)
       // this.chartDataSetting.datasets[0].data = data
