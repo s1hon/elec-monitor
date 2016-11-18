@@ -73,6 +73,13 @@ export default {
         id: 'site002',
       },
     })
+    this.$store.watch(() => this.$route.path, () => {
+      this.getdbChart({
+        target: {
+          id: 'site002',
+        },
+      })
+    })
   },
   methods: {
     fetchData() {
@@ -97,6 +104,9 @@ export default {
         this.$store.state.timer.sidebar = setInterval(() => {
           this.request(e)
         }, 15000)
+      }
+      if (this.$route.path === '/search') {
+        // null
       }
     },
     request(e) {
