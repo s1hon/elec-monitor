@@ -68,6 +68,11 @@ export default {
     })
   },
   mounted() {
+    this.getdbChart({
+      target: {
+        id: 'site002',
+      },
+    })
   },
   methods: {
     fetchData() {
