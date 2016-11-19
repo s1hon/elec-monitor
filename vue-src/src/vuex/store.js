@@ -51,6 +51,10 @@ export default new Vuex.Store({
       thd: null,
     },
 
+    search: {
+
+    },
+
     // calendar
     calendar: {
       show: false,

@@ -1,5 +1,5 @@
 <template>
-  <div class="cal" v-if="this.$store.state.sitename">
+  <div class="cal">
     <span>起始時間：<input class="input" size="10" type="text" @click.stop="open($event,'fromDate')" v-model="$store.state.calendar.items.fromDate.value"></span>
     <span>結束時間：<input class="input" size="10" type="text" @click.stop="open($event,'toDate')" v-model="$store.state.calendar.items.toDate.value"></span>
 
@@ -20,7 +20,6 @@
     </calendar>
 
     <div>
-      {{ this.$store.state.sitename }} <br>
       {{ msg }} <br>
     </div>
   </div>
@@ -86,7 +85,7 @@ export default {
       this.$store.state.calendar.y = e.target.offsetTop + e.target.offsetHeight + 8
     },
     request(start, end) {
-      this.msg = 'hello'
+      this.msg = ''
       const xhr = new XMLHttpRequest()
       const self = this
       xhr.open('GET', `/api/v1/search/${this.$store.state.sitename}?g=harmonic,thd&start=${this.start}&end=${this.end}`)
@@ -107,7 +106,7 @@ export default {
   padding-top: 30px;
 
   span {
-    padding-left: 30px;
+    padding-right: 30px;
   }
 }
 </style>
