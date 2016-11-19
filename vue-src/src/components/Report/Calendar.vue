@@ -20,7 +20,7 @@
     </calendar>
 
     <div>
-      {{ msg }} <br>
+      {{ this.$store.state.history.msg }} <br>
     </div>
   </div>
 </template>
@@ -33,9 +33,9 @@ export default {
   components: {
     calendar,
   },
-  created() {
-    this.$store.state.calendar.begin = '2016/11/17'
-    this.$store.state.calendar.end = '2016/11/20'
+  mounted() {
+    // this.$store.state.calendar.begin = '2016/11/17'
+    // this.$store.state.calendar.end = '2016/11/20'
   },
   data() {
     return {
@@ -49,6 +49,9 @@ export default {
     '$store.state.calendar.value': function (value) {
       const picker = this.$store.state.calendar.picker
       const calItems = this.$store.state.calendar.items
+      if (calItems[picker].value === value) {
+        return
+      }
       calItems[picker].value = value
 
       // if fish toDATE chose, and send ajax to server
@@ -85,16 +88,19 @@ export default {
       this.$store.state.calendar.y = e.target.offsetTop + e.target.offsetHeight + 8
     },
     request(start, end) {
-      this.msg = ''
-      const xhr = new XMLHttpRequest()
-      const self = this
-      xhr.open('GET', `/api/v1/search/${this.$store.state.live.sitename}?g=harmonic,thd&start=${this.start}&end=${this.end}`)
-      xhr.onload = () => {
-        const res = JSON.parse(xhr.responseText)
-        this.$store.commit('REQUEST', { path: this.$route.path, res })
-        this.msg = res
+      this.$store.state.history.msg = `Searching...${moment(start).format()}~${moment(end).format()}`
+      if (this.$store.state.calendar.xhr) {
+        this.$store.state.calendar.xhr.abort()
       }
-      xhr.send()
+      this.$store.state.calendar.xhr = new XMLHttpRequest()
+      const self = this
+      this.$store.state.calendar.xhr.open('GET', `/api/v1/search/${this.$store.state.live.sitename}?g=harmonic,thd&start=${this.start}&end=${this.end}`)
+      this.$store.state.calendar.xhr.onload = () => {
+        const res = JSON.parse(this.$store.state.calendar.xhr.responseText)
+        // this.$store.commit('REQUEST', { path: this.$route.path, res })
+        this.$store.state.history.msg = res
+      }
+      this.$store.state.calendar.xhr.send()
     },
   },
 }

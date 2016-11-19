@@ -51,8 +51,8 @@ export default new Vuex.Store({
       thd: null,
     },
 
-    search: {
-
+    history: {
+      msg: null,
     },
 
     // calendar
@@ -81,6 +81,7 @@ export default new Vuex.Store({
           sep: '-',
         },
       },
+      xhr: null,
     },
 
   },
@@ -171,6 +172,9 @@ export default new Vuex.Store({
       // calendar
       state.calendar.items.fromDate.value = null
       state.calendar.items.toDate.value = null
+
+      // history
+      state.history.msg = null
     },
   },
   getters: {
