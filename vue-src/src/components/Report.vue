@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 import calendar from './Report/Calendar.vue'
 
 export default {
