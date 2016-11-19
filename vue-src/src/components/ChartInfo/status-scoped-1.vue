@@ -10,16 +10,16 @@
 export default {
   computed: {
     temp() {
-      return this.$store.state.temp
+      return this.$store.state.live.temp
     },
     hum() {
-      return this.$store.state.hum
+      return this.$store.state.live.hum
     },
     lon() {
-      return this.$store.state.lon
+      return this.$store.state.live.lon
     },
     lat() {
-      return this.$store.state.lat
+      return this.$store.state.live.lat
     },
   },
 }
