@@ -124,10 +124,36 @@ router.get('/info/:dbname', async (req, res) => {
 })
 
 router.get('/search/:dbname', async (req, res) => {
-  res.json({
-    // ${req.params.dbname}
-    // req.query => get
-    query: req.query,
+  const dbname = req.params.dbname
+  const { g, start, end } = req.query
+
+  // If there are any params undefined.
+  if (!(dbname && g && start && end)) {
+    res.status(400).json({
+      msg: {
+        name: 'Params error',
+        message: 'Please input the right params.',
+      },
+    })
+    return
+  }
+
+  await apiLib.CHECKDBEXIST(req, res)
+
+  const url = `mongodb://120.108.111.174:27017/${req.params.dbname}`
+  MongoClient.connect(url, async (err, db) => {
+    if (err) {
+      res.status(400).json({
+        msg: err,
+      })
+      return
+    }
+
+    console.log(`[mongodb] Connect Success: ${req.params.dbname}`)
+    const length = await apiLib.FINDTIMECOUNTID(db, start, end)
+    res.json({
+      length,
+    })
   })
 })
 
