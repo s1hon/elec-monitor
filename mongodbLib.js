@@ -8,7 +8,7 @@ const url = 'mongodb://120.108.111.174:27017/'
  * @return {Array} dbList
  */
 const getdbLists = () => {
-  return new Promise((reslove, reject) => {
+  return new Promise((resolve, reject) => {
     MongoClient.connect(url, (err, db) => {
       if (err) {
         reject(err)
@@ -27,7 +27,7 @@ const getdbLists = () => {
           }
         })
         dbList = dbList.sort()
-        reslove(dbList)
+        resolve(dbList)
         db.close()
       })
     })
