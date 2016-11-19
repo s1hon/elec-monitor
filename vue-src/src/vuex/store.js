@@ -167,6 +167,10 @@ export default new Vuex.Store({
       state.live.swellsag = null
       state.live.swellsagV = null
       state.live.thd = null
+
+      // calendar
+      state.calendar.items.fromDate.value = null
+      state.calendar.items.toDate.value = null
     },
   },
   getters: {
