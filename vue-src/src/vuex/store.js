@@ -6,6 +6,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    sitename: null,
 
     live: {
       // timer
@@ -22,7 +23,6 @@ export default new Vuex.Store({
       msg: null,
 
       // res.data
-      sitename: null,
       count: null,
       zc: null,
       powersignal: null,
@@ -97,7 +97,7 @@ export default new Vuex.Store({
         state.live.status = res.status
         state.live.msg = res.msg
         // res.data
-        state.live.sitename = res.data.sitename
+        state.sitename = res.data.sitename
         state.live.count = res.data.count
         state.live.zc = res.data.zc.toFixed(2)
         state.live.powersignal = res.data.powersignal
@@ -141,7 +141,7 @@ export default new Vuex.Store({
       state.live.msg = null
 
       // res.data
-      state.live.sitename = null
+      state.sitename = null
       state.live.count = null
       state.live.zc = null
       state.live.powersignal = null

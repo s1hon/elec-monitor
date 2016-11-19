@@ -1,11 +1,11 @@
 <template>
   <div class="row">
-    <div class="fail" v-if="!this.$store.state.live.sitename">
+    <div class="fail" v-if="!this.$store.state.sitename">
       請先選擇站點
     </div>
-    <div class="exist" v-if="this.$store.state.live.sitename">
+    <div class="exist" v-if="this.$store.state.sitename">
       <div class="title">
-        {{ this.$store.state.live.sitename }} 報告總覽
+        {{ this.$store.state.sitename }} 報告總覽
       </div>
       <calendar></calendar>
     </div>
@@ -27,10 +27,10 @@ export default {
   },
   mounted() {
     this.$store.commit('RESETDATA')
-    this.$store.state.live.sitename = 'site002'
+    this.$store.state.sitename = 'site002'
   },
   watch: {
-    '$store.state.live.sitenmae': function (sitename) {
+    '$store.state.sitename': function (sitename) {
       this.setTimeRange(sitename)
     },
   },

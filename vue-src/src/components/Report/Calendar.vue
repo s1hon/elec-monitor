@@ -94,7 +94,7 @@ export default {
       }
       this.$store.state.calendar.xhr = new XMLHttpRequest()
       const self = this
-      this.$store.state.calendar.xhr.open('GET', `/api/v1/search/${this.$store.state.live.sitename}?g=harmonic,thd&start=${this.start}&end=${this.end}`)
+      this.$store.state.calendar.xhr.open('GET', `/api/v1/search/${this.$store.state.sitename}?g=harmonic,thd&start=${this.start}&end=${this.end}`)
       this.$store.state.calendar.xhr.onload = () => {
         const res = JSON.parse(this.$store.state.calendar.xhr.responseText)
         // this.$store.commit('REQUEST', { path: this.$route.path, res })

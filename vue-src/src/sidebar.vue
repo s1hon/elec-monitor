@@ -69,7 +69,7 @@ export default {
     this.$store.watch(() => this.$route.path, () => {
       this.$store.commit('RESETDATA')
       setTimeout(() => {
-        this.$store.state.live.sitename = 'site002'
+        this.$store.state.sitename = 'site002'
       }, 500)
     })
   },
@@ -89,7 +89,7 @@ export default {
       xhr.send()
     },
     getdbChart(e) {
-      this.$store.state.live.sitename = e.target.id
+      this.$store.state.sitename = e.target.id
     },
   },
 }

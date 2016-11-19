@@ -44,7 +44,7 @@ export default {
   },
   methods: {
     CHECKONLIVEROUTE() {
-      if (this.$route.path === '/live' && this.$store.state.live.sitename) {
+      if (this.$route.path === '/live' && this.$store.state.sitename) {
         this.drawdbchart()
       }
     },

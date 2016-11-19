@@ -22,10 +22,10 @@ export default {
   },
   mounted() {
     this.$store.commit('RESETDATA')
-    this.$store.state.live.sitename = 'site002'
+    this.$store.state.sitename = 'site002'
   },
   watch: {
-    '$store.state.live.sitename': function (sitename) {
+    '$store.state.sitename': function (sitename) {
       this.request(sitename)
       clearInterval(this.$store.state.live.timer.sidebar)
       this.$store.state.live.timer.sidebar = setInterval(() => {
