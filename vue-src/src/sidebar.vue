@@ -69,9 +69,10 @@ export default {
   mounted() {
     // Default site
     this.$store.watch(() => this.$route.path, () => {
+      this.$store.commit('RESETDATA')
       setTimeout(() => {
         this.$store.state.live.sitename = 'site002'
-      }, 3000)
+      }, 500)
     })
   },
   methods: {

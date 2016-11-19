@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import chart from './Chart.vue'
-import info from './ChartInfo.vue'
+import chart from './RealtimeStream/Chart.vue'
+import info from './RealtimeStream/ChartInfo.vue'
 
 export default {
   components: {

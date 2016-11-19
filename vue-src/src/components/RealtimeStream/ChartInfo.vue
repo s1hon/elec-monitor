@@ -27,12 +27,12 @@
 </template>
 
 <script>
-import fftChart from './ChartInfo/fft-graph.vue'
-import powerChart from './ChartInfo/power-graph.vue'
-import timeclock from './ChartInfo/timeclock.vue'
-import scoped1 from './ChartInfo/status-scoped-1.vue'
-import scoped2 from './ChartInfo/status-scoped-2.vue'
-import scoped3 from './ChartInfo/status-scoped-3.vue'
+import fftChart from './modules/fft-graph.vue'
+import powerChart from './modules/power-graph.vue'
+import timeclock from './modules/timeclock.vue'
+import scoped1 from './modules/status-scoped-1.vue'
+import scoped2 from './modules/status-scoped-2.vue'
+import scoped3 from './modules/status-scoped-3.vue'
 
 export default {
   components: {
