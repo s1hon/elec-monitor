@@ -57,7 +57,7 @@ export default {
   }),
   computed: {
     dblist() {
-      return this.$store.state.live.dblist
+      return this.$store.state.dblist
     },
   },
   // When created
@@ -97,11 +97,11 @@ export default {
       xhr.send()
     },
     getdbChart(e) {
-      this.$store.state.live.sitename = e.target.id
+      this.$store.state.sitename = e.target.id
       if (this.$route.path === '/live') {
         this.request(e)
-        clearInterval(this.$store.state.live.timer.sidebar)
-        this.$store.state.live.timer.sidebar = setInterval(() => {
+        clearInterval(this.$store.state.timer.sidebar)
+        this.$store.state.timer.sidebar = setInterval(() => {
           this.request(e)
         }, 15000)
       }

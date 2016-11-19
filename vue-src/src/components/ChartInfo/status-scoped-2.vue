@@ -14,7 +14,7 @@
 export default {
   computed: {
     zc() {
-      return this.$store.state.live.zc
+      return this.$store.state.zc
     },
     harmonic() {
       return this.$store.getters.harmonic
@@ -26,7 +26,7 @@ export default {
       return this.$store.getters.swellsag
     },
     swellsagV() {
-      return this.$store.state.live.swellsagV
+      return this.$store.state.swellsagV
     },
   },
 }

@@ -100,15 +100,15 @@ export default {
       ],
     })
 
-    this.watch = this.$store.watch(() => this.$store.state.live.timestamp, this.getchartinfo)
+    this.watch = this.$store.watch(() => this.$store.state.timestamp, this.getchartinfo)
   },
   beforeDestroy() {
     this.watch()
   },
   methods: {
     getchartinfo() {
-      this.pushData(this.$store.state.live.power, 'power')
-      this.pushData(this.$store.state.live.powerRMS, 'powerrms')
+      this.pushData(this.$store.state.power, 'power')
+      this.pushData(this.$store.state.powerRMS, 'powerrms')
     },
     nullArray(num) {
       return Array.apply(null, new Array(num)).map(Number.prototype.valueOf, 0)

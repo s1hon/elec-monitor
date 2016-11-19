@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="fail" v-if="!this.$store.state.live.sitename">
+    <div class="cal" v-if="!this.$store.state.sitename">
       請先選擇站點
     </div>
     <div class="exist" v-if="this.$store.state.live.sitename">

@@ -10,10 +10,10 @@
 export default {
   computed: {
     day() {
-      return this.$store.state.live.day
+      return this.$store.state.day
     },
     time() {
-      return this.$store.state.live.time
+      return this.$store.state.time
     },
   },
 }

@@ -77,7 +77,7 @@ export default {
       }],
     })
 
-    this.watch = this.$store.watch(() => this.$store.state.live.timestamp, this.getchartinfo)
+    this.watch = this.$store.watch(() => this.$store.state.timestamp, this.getchartinfo)
   },
   beforeDestroy() {
     this.watch()
