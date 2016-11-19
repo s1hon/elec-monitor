@@ -1,6 +1,7 @@
 const express = require('express')
 const MongoClient = require('mongodb').MongoClient
 const dbLib = require('../../mongodbLib')
+const apiLib = require('./v1Lib')
 
 const router = express.Router()
 
@@ -21,8 +22,7 @@ router.get('/list', async (req, res) => {
       data: dbs,
     })
   } catch (e) {
-    res.json({
-      status: '400',
+    res.status(400).json({
       msg: e,
     })
   }
@@ -35,31 +35,13 @@ router.get('/list', async (req, res) => {
  */
 router.get('/info/:dbname', async (req, res) => {
   // Check dbname if exist.
-  try {
-    const dbs = await dbLib.getdbLists()
-    if (dbs.indexOf(req.params.dbname) === -1) {
-      res.json({
-        status: '400',
-        msg: {
-          name: 'MongoError',
-          message: `Couldn't find database ${req.params.dbname}. Please try again.`,
-        },
-      })
-      return
-    }
-  } catch (e) {
-    res.json({
-      status: '400',
-      msg: e,
-    })
-  }
+  apiLib.CHECKDBEXIST(req, res)
 
   // If exist, get datas.
   const url = `mongodb://120.108.111.174:27017/${req.params.dbname}`
   MongoClient.connect(url, async (err, db) => {
     if (err) {
-      res.json({
-        status: '400',
+      res.status(400).json({
         msg: err,
       })
       return
