@@ -27,7 +27,7 @@
 
 <script>
 import moment from 'moment'
-import calendar from '../modules/Calendar.vue'
+import calendar from './modules/Calendar.vue'
 
 export default {
   components: {
