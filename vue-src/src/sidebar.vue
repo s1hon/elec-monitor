@@ -51,6 +51,8 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
   // Used datas
   data: () => ({
@@ -63,22 +65,13 @@ export default {
   // When created
   created() {
     this.fetchData()
-    this.$store.watch(() => this.$route.path, () => {
-      this.$store.commit('RESETDATA')
-    })
   },
   mounted() {
-    this.getdbChart({
-      target: {
-        id: 'site002',
-      },
-    })
+    // Default site
     this.$store.watch(() => this.$route.path, () => {
-      this.getdbChart({
-        target: {
-          id: 'site002',
-        },
-      })
+      setTimeout(() => {
+        this.$store.state.live.sitename = 'site002'
+      }, 3000)
     })
   },
   methods: {
@@ -98,26 +91,6 @@ export default {
     },
     getdbChart(e) {
       this.$store.state.live.sitename = e.target.id
-      if (this.$route.path === '/live') {
-        this.request(e)
-        clearInterval(this.$store.state.live.timer.sidebar)
-        this.$store.state.live.timer.sidebar = setInterval(() => {
-          this.request(e)
-        }, 15000)
-      }
-      if (this.$route.path === '/search') {
-        // null
-      }
-    },
-    request(e) {
-      const xhr = new XMLHttpRequest()
-      const self = this
-      xhr.open('GET', `/api/v1/info/${e.target.id}`)
-      xhr.onload = () => {
-        const res = JSON.parse(xhr.responseText)
-        this.$store.commit('REQUEST', { path: this.$route.path, res })
-      }
-      xhr.send()
     },
   },
 }

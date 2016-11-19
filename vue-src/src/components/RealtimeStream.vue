@@ -16,6 +16,35 @@ export default {
     chart,
     info,
   },
+  data() {
+    return {
+    }
+  },
+  mounted() {
+    this.$store.commit('RESETDATA')
+    this.$store.state.live.sitename = 'site002'
+  },
+  watch: {
+    '$store.state.live.sitename': function (sitename) {
+      this.request(sitename)
+      clearInterval(this.$store.state.live.timer.sidebar)
+      this.$store.state.live.timer.sidebar = setInterval(() => {
+        this.request(sitename)
+      }, 15000)
+    },
+  },
+  methods: {
+    request(sitename) {
+      const xhr = new XMLHttpRequest()
+      const self = this
+      xhr.open('GET', `/api/v1/info/${sitename}`)
+      xhr.onload = () => {
+        const res = JSON.parse(xhr.responseText)
+        this.$store.commit('REQUEST', { path: this.$route.path, res })
+      }
+      xhr.send()
+    },
+  },
 }
 </script>
 
