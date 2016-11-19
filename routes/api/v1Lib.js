@@ -43,7 +43,9 @@ const FINDTIMEBEGIN = (condition) => {
     condition.find({ time: { $exists: 1 } }).sort({ time: 1 })
       .limit(1).toArray((error, raw) => {
         if (error) reject(error)
-        resolve(raw[0].time)
+        if (raw[0]) {
+          resolve(raw[0].time)
+        }
       })
   })
 }
@@ -54,7 +56,9 @@ const FINDTIMEEND = (condition) => {
     condition.find({ time: { $exists: 1 } }).sort({ time: -1 })
       .limit(1).toArray((error, raw) => {
         if (error) reject(error)
-        resolve(raw[0].time)
+        if (raw[0]) {
+          resolve(raw[0].time)
+        }
       })
   })
 }
