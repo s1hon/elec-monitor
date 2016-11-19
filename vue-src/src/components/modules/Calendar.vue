@@ -263,18 +263,6 @@ export default {
       type: String,
       default: ""
     },
-    weeks: {
-      type: Array,
-      default:function(){
-        return ['日', '一', '二', '三', '四', '五', '六']
-      }
-    },
-    months:{
-      type: Array,
-      default:function(){
-        return ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
-      }
-    }
   },
   data() {
     return {
@@ -288,6 +276,8 @@ export default {
       today: [],
       currentMonth: Number,
       monthString:"",
+      months: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+      weeks: ['日', '一', '二', '三', '四', '五', '六'],
     }
   },
   created() {
