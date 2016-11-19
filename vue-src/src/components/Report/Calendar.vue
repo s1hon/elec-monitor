@@ -18,10 +18,6 @@
     >
 
     </calendar>
-
-    <div>
-      {{ msg }} <br>
-    </div>
   </div>
 </template>
 
@@ -32,11 +28,6 @@ import calendar from './modules/Calendar.vue'
 export default {
   components: {
     calendar,
-  },
-  computed: {
-    msg() {
-      return this.$store.state.report.msg
-    },
   },
   mounted() {
     // this.$store.state.calendar.begin = '2016/11/17'

@@ -8,6 +8,9 @@
         {{ this.$store.state.sitename }} 報告總覽
       </div>
       <calendar></calendar>
+      <div>
+        {{ this.$store.state.report.msg }} <br>
+      </div>
     </div>
   </div>
 </template>
