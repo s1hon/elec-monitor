@@ -21,7 +21,7 @@ export default {
     }
   },
   mounted() {
-    this.$store.commit('RESETDATA')
+    this.$store.commit('RESETDATA', this.$route.path)
     this.$store.state.sitename = 'site002'
   },
   watch: {
@@ -35,14 +35,16 @@ export default {
   },
   methods: {
     request(sitename) {
-      const xhr = new XMLHttpRequest()
-      const self = this
-      xhr.open('GET', `/api/v1/info/${sitename}`)
-      xhr.onload = () => {
-        const res = JSON.parse(xhr.responseText)
-        this.$store.commit('REQUEST', { path: this.$route.path, res })
+      if (sitename) {
+        this.$store.state.live.xhr = new XMLHttpRequest()
+        const self = this
+        this.$store.state.live.xhr.open('GET', `/api/v1/info/${sitename}`)
+        this.$store.state.live.xhr.onload = () => {
+          const res = JSON.parse(this.$store.state.live.xhr.responseText)
+          this.$store.commit('REQUEST', { path: this.$route.path, res })
+        }
+        this.$store.state.live.xhr.send()
       }
-      xhr.send()
     },
   },
 }

@@ -26,28 +26,34 @@ export default {
     }
   },
   mounted() {
-    this.$store.commit('RESETDATA')
+    this.$store.commit('RESETDATA', this.$route.path)
     this.$store.state.sitename = 'site002'
   },
   watch: {
     '$store.state.sitename': function (sitename) {
+      if (this.$store.state.calendar.xhr) {
+        this.$store.state.calendar.xhr.abort()
+      }
+      this.$store.state.report.msg = ''
       this.setTimeRange(sitename)
     },
   },
   methods: {
     setTimeRange(sitename) {
-      this.$store.state.calendar.items.fromDate.value = ''
-      this.$store.state.calendar.items.toDate.value = ''
-      const xhr = new XMLHttpRequest()
-      const self = this
-      xhr.open('GET', `/api/v1/time/${sitename}`)
-      xhr.onload = () => {
-        const res = JSON.parse(xhr.responseText)
-        // 2016/11/28 15:56:27
-        this.$store.state.calendar.begin = moment(res.begin).format('YYYY/M/D h:m:s')
-        this.$store.state.calendar.end = moment(res.end).format('YYYY/M/D h:m:s')
+      if (sitename) {
+        this.$store.state.calendar.items.fromDate.value = ''
+        this.$store.state.calendar.items.toDate.value = ''
+        const xhr = new XMLHttpRequest()
+        const self = this
+        xhr.open('GET', `/api/v1/time/${sitename}`)
+        xhr.onload = () => {
+          const res = JSON.parse(xhr.responseText)
+          // 2016/11/28 15:56:27
+          this.$store.state.calendar.begin = moment(res.begin).format('YYYY/M/D h:m:s')
+          this.$store.state.calendar.end = moment(res.end).format('YYYY/M/D h:m:s')
+        }
+        xhr.send()
       }
-      xhr.send()
     },
   },
 }

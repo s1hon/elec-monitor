@@ -20,7 +20,7 @@
     </calendar>
 
     <div>
-      {{ this.$store.state.history.msg }} <br>
+      {{ msg }} <br>
     </div>
   </div>
 </template>
@@ -32,6 +32,11 @@ import calendar from './modules/Calendar.vue'
 export default {
   components: {
     calendar,
+  },
+  computed: {
+    msg() {
+      return this.$store.state.report.msg
+    },
   },
   mounted() {
     // this.$store.state.calendar.begin = '2016/11/17'
@@ -88,7 +93,8 @@ export default {
       this.$store.state.calendar.y = e.target.offsetTop + e.target.offsetHeight + 8
     },
     request(start, end) {
-      this.$store.state.history.msg = `Searching...${moment(start).format()}~${moment(end).format()}`
+      // 2016/11/08 05:00:38
+      this.$store.state.report.msg = `Searching...${moment(start).format()}~${moment(end).format()}`
       if (this.$store.state.calendar.xhr) {
         this.$store.state.calendar.xhr.abort()
       }
@@ -98,7 +104,7 @@ export default {
       this.$store.state.calendar.xhr.onload = () => {
         const res = JSON.parse(this.$store.state.calendar.xhr.responseText)
         // this.$store.commit('REQUEST', { path: this.$route.path, res })
-        this.$store.state.history.msg = res
+        this.$store.state.report.msg = res
       }
       this.$store.state.calendar.xhr.send()
     },

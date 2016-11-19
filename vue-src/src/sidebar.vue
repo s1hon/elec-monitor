@@ -67,7 +67,7 @@ export default {
   mounted() {
     // Default site
     this.$store.watch(() => this.$route.path, () => {
-      this.$store.commit('RESETDATA')
+      this.$store.commit('RESETDATA', 'all')
       setTimeout(() => {
         this.$store.state.sitename = 'site002'
       }, 500)

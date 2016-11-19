@@ -49,9 +49,11 @@ export default new Vuex.Store({
       swellsag: null,
       swellsagV: null,
       thd: null,
+
+      xhr: null,
     },
 
-    history: {
+    report: {
       msg: null,
     },
 
@@ -129,52 +131,65 @@ export default new Vuex.Store({
         state.live.thd = res.data.thd
       }
     },
-    RESETDATA(state) {
-      clearInterval(state.live.timer.chart)
-      clearInterval(state.live.timer.sidebar)
-
-      // timestamp
-      state.live.timestamp = null
-
-      // res
-      state.live.status = null
-      state.live.msg = null
-
-      // res.data
+    RESETDATA(state, path) {
       state.sitename = null
-      state.live.count = null
-      state.live.zc = null
-      state.live.powersignal = null
-      state.live.powersignalRMS = null
-      state.live.powersignalAVG = null
-      state.live.fundamental = null
-      state.live.fundamentalRMS = null
-      state.live.fundamentalAVG = null
-      state.live.power = null
-      state.live.powerRMS = null
-      state.live.powerAVG = null
-      state.live.fft = null
 
-      // res.data.condition
-      state.live.day = null
-      state.live.time = null
-      state.live.temp = null
-      state.live.hum = null
-      state.live.lon = null
-      state.live.lat = null
+      if (path === '/live' || path === 'all') {
+        if (state.calendar.xhr) {
+          state.calendar.xhr.abort()
+        }
 
-      // res.data.event
-      state.live.harmonic = null
-      state.live.swellsag = null
-      state.live.swellsagV = null
-      state.live.thd = null
+        clearInterval(state.live.timer.chart)
+        clearInterval(state.live.timer.sidebar)
 
-      // calendar
-      state.calendar.items.fromDate.value = null
-      state.calendar.items.toDate.value = null
+        // timestamp
+        state.live.timestamp = null
 
-      // history
-      state.history.msg = null
+        // res
+        state.live.status = null
+        state.live.msg = null
+
+        // res.data
+        state.live.count = null
+        state.live.zc = null
+        state.live.powersignal = null
+        state.live.powersignalRMS = null
+        state.live.powersignalAVG = null
+        state.live.fundamental = null
+        state.live.fundamentalRMS = null
+        state.live.fundamentalAVG = null
+        state.live.power = null
+        state.live.powerRMS = null
+        state.live.powerAVG = null
+        state.live.fft = null
+
+        // res.data.condition
+        state.live.day = null
+        state.live.time = null
+        state.live.temp = null
+        state.live.hum = null
+        state.live.lon = null
+        state.live.lat = null
+
+        // res.data.event
+        state.live.harmonic = null
+        state.live.swellsag = null
+        state.live.swellsagV = null
+        state.live.thd = null
+      }
+
+      if (path === '/report' || path === 'all') {
+        if (state.calendar.xhr) {
+          state.calendar.xhr.abort()
+        }
+
+        // calendar
+        state.calendar.items.fromDate.value = null
+        state.calendar.items.toDate.value = null
+
+        // history
+        state.report.msg = ''
+      }
     },
   },
   getters: {
