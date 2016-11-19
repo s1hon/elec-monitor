@@ -22,7 +22,7 @@ export default new VueRouter({
           component: realtimestream,
         },
         {
-          path: 'history',
+          path: 'report',
           component: report,
         },
       ],

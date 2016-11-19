@@ -18,7 +18,7 @@
         </div>
       </router-link>
 
-      <router-link to="/history">
+      <router-link to="/report">
         <div class="svgicon">
           <svg width="80%" viewBox="36 219 192 49" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <g id="Group-3" stroke="none" stroke-width="1" fill-rule="evenodd" transform="translate(37.000000, 219.000000)">
