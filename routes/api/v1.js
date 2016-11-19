@@ -157,4 +157,24 @@ router.get('/search/:dbname', async (req, res) => {
   })
 })
 
+router.get('/time/:dbname', async (req, res) => {
+  await apiLib.CHECKDBEXIST(req, res)
+  const url = `mongodb://120.108.111.174:27017/${req.params.dbname}`
+  MongoClient.connect(url, async (err, db) => {
+    if (err) {
+      res.status(400).json({
+        msg: err,
+      })
+      return
+    }
+
+    console.log(`[mongodb] Connect Success: ${req.params.dbname}`)
+    const { begin, end } = await apiLib.FINDTIMERANGE(db)
+    res.json({
+      begin,
+      end,
+    })
+  })
+})
+
 module.exports = router
