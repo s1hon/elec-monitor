@@ -30,7 +30,7 @@ export default {
     watch2: null,
   }),
   mounted() {
-    this.watch1 = this.$store.watch(() => this.$store.state.timestamp, this.CHECKONLIVEROUTE)
+    this.watch1 = this.$store.watch(() => this.$store.state.live.timestamp, this.CHECKONLIVEROUTE)
     this.watch2 = this.$store.watch(() => this.$route, this.RESET)
 
     const ctx = document.getElementById('myChart')
@@ -44,7 +44,7 @@ export default {
   },
   methods: {
     CHECKONLIVEROUTE() {
-      if (this.$route.path === '/live' && this.$store.state.sitename) {
+      if (this.$route.path === '/live' && this.$store.state.live.sitename) {
         this.drawdbchart()
       }
     },
@@ -150,10 +150,10 @@ export default {
     drawdbchart() {
       // Reset Chart
       this.dberr = 0
-      clearInterval(this.$store.state.timer.chart)
+      clearInterval(this.$store.state.live.timer.chart)
 
-      if (this.$store.state.status === '400') {
-        this.dberr = JSON.stringify(this.$store.state.msg, 0, 2)
+      if (this.$store.state.live.status === '400') {
+        this.dberr = JSON.stringify(this.$store.state.live.msg, 0, 2)
         return
       }
 
@@ -179,13 +179,13 @@ export default {
         }],
       })
 
-      const powersignal = this.$store.state.powersignal
-      const powersignalRMS = this.$store.state.powersignalRMS
-      const fundamental = this.$store.state.fundamental
-      const fundamentalRMS = this.$store.state.fundamentalRMS
-      const zc = this.$store.state.zc
+      const powersignal = this.$store.state.live.powersignal
+      const powersignalRMS = this.$store.state.live.powersignalRMS
+      const fundamental = this.$store.state.live.fundamental
+      const fundamentalRMS = this.$store.state.live.fundamentalRMS
+      const zc = this.$store.state.live.zc
 
-      this.$store.state.timer.chart = setInterval(() => {
+      this.$store.state.live.timer.chart = setInterval(() => {
         this.pushDataToChart([
           {
             name: 'Power Signal',

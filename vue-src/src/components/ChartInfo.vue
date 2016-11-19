@@ -45,10 +45,10 @@ export default {
   },
   computed: {
     sitename() {
-      return this.$store.state.sitename
+      return this.$store.state.live.sitename
     },
     count() {
-      return this.$store.state.count
+      return this.$store.state.live.count
     },
   },
 }

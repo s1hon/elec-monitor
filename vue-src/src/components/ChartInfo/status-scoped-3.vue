@@ -10,13 +10,13 @@
 export default {
   computed: {
     powersignalAVG() {
-      return this.$store.state.powersignalAVG
+      return this.$store.state.live.powersignalAVG
     },
     fundamentalAVG() {
-      return this.$store.state.fundamentalAVG
+      return this.$store.state.live.fundamentalAVG
     },
     powerAVG() {
-      return this.$store.state.powerAVG
+      return this.$store.state.live.powerAVG
     },
   },
 }
