@@ -29,7 +29,7 @@ export default {
     }
   },
   mounted() {
-    this.$store.commit('RESETDATA', this.$route.path)
+    this.$store.dispatch('RESETDATA', this.$route.path)
     this.$store.state.sitename = 'site002'
   },
   watch: {

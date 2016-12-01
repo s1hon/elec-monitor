@@ -54,7 +54,7 @@ export default {
       if (calItems.fromDate.value !== '' && calItems.toDate.value !== '') {
         this.start = moment(calItems.fromDate.value).valueOf()
         this.end = moment(calItems.toDate.value).valueOf()
-        this.request(this.start, this.end)
+        this.$store.dispatch('CALENDAR_REQUEST', { start: this.start, end: this.end })
       }
     },
   },
@@ -82,22 +82,6 @@ export default {
       this.$store.state.calendar.show = true
       this.$store.state.calendar.x = e.target.offsetLeft
       this.$store.state.calendar.y = e.target.offsetTop + e.target.offsetHeight + 8
-    },
-    request(start, end) {
-      // 2016/11/08 05:00:38
-      this.$store.state.report.msg = `Searching...${moment(start).format()}~${moment(end).format()}`
-      if (this.$store.state.calendar.xhr) {
-        this.$store.state.calendar.xhr.abort()
-      }
-      this.$store.state.calendar.xhr = new XMLHttpRequest()
-      const self = this
-      this.$store.state.calendar.xhr.open('GET', `/api/v1/search/${this.$store.state.sitename}?g=harmonic,thd&start=${this.start}&end=${this.end}`)
-      this.$store.state.calendar.xhr.onload = () => {
-        const res = JSON.parse(this.$store.state.calendar.xhr.responseText)
-        // this.$store.commit('REQUEST', { path: this.$route.path, res })
-        this.$store.state.report.msg = res
-      }
-      this.$store.state.calendar.xhr.send()
     },
   },
 }

@@ -21,31 +21,19 @@ export default {
     }
   },
   mounted() {
-    this.$store.commit('RESETDATA', this.$route.path)
+    this.$store.dispatch('RESETDATA', this.$route.path)
     this.$store.state.sitename = 'site002'
   },
   watch: {
     '$store.state.sitename': function (sitename) {
-      this.request(sitename)
+      this.$store.dispatch('LIVE_REQUEST', sitename)
       clearInterval(this.$store.state.live.timer.sidebar)
       this.$store.state.live.timer.sidebar = setInterval(() => {
-        this.request(sitename)
+        this.$store.dispatch('LIVE_REQUEST', sitename)
       }, 15000)
     },
   },
   methods: {
-    request(sitename) {
-      if (sitename) {
-        this.$store.state.live.xhr = new XMLHttpRequest()
-        const self = this
-        this.$store.state.live.xhr.open('GET', `/api/v1/info/${sitename}`)
-        this.$store.state.live.xhr.onload = () => {
-          const res = JSON.parse(this.$store.state.live.xhr.responseText)
-          this.$store.commit('REQUEST', { path: this.$route.path, res })
-        }
-        this.$store.state.live.xhr.send()
-      }
-    },
   },
 }
 </script>

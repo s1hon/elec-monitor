@@ -17,13 +17,13 @@ export default {
       return this.$store.state.live.zc
     },
     harmonic() {
-      return this.$store.getters.harmonic
+      return this.$store.getters.live_harmonic
     },
     thd() {
-      return this.$store.getters.thd
+      return this.$store.getters.live_thd
     },
     swellsag() {
-      return this.$store.getters.swellsag
+      return this.$store.getters.live_swellsag
     },
     swellsagV() {
       return this.$store.state.live.swellsagV

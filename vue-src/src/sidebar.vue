@@ -57,7 +57,7 @@ export default {
   }),
   computed: {
     dblist() {
-      return this.$store.state.live.dblist
+      return this.$store.state.dblist
     },
   },
   // When created
@@ -67,7 +67,7 @@ export default {
   mounted() {
     // Default site
     this.$store.watch(() => this.$route.path, () => {
-      this.$store.commit('RESETDATA', 'all')
+      this.$store.dispatch('RESETDATA', 'all')
       setTimeout(() => {
         this.$store.state.sitename = 'site002'
       }, 500)

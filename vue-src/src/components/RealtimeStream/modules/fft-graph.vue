@@ -84,7 +84,7 @@ export default {
   },
   methods: {
     getchartinfo() {
-      this.pushfft(this.$store.getters.fftgraph)
+      this.pushfft(this.$store.getters.live_fftgraph)
     },
     nullArray(num) {
       return Array.apply(null, new Array(num)).map(Number.prototype.valueOf, 0)
