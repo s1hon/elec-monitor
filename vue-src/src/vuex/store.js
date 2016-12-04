@@ -3,7 +3,6 @@ import Vuex from 'vuex'
 import moment from 'moment'
 // modules
 import live from './modules/live'
-import calendar from './modules/calendar'
 import report from './modules/report'
 
 Vue.use(Vuex)
@@ -34,7 +33,6 @@ export default new Vuex.Store({
   },
   modules: {
     live,
-    calendar,
     report,
   },
 })
