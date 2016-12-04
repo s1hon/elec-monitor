@@ -32,7 +32,16 @@ const FINDTIMECOUNTID = (db, start, end) => {
     })
     command.toArray((error, raw) => {
       if (error) reject('countID', error)
-      resolve(raw.length)
+      try {
+        resolve({
+          startCOUNTID: raw[0].count,
+          endCOUNTID: raw[raw.length - 1].count,
+        })
+      } catch (e) {
+        resolve({
+          raw,
+        })
+      }
     })
   })
 }
@@ -82,8 +91,29 @@ const FINDTIMERANGE = (db) => {
   })
 }
 
+const FINDDATAWITHRANGE = (collection, startCOUNTID, endCOUNTID) => {
+  return new Promise((resolve, reject) => {
+    // $gt means >, $lt means <
+    const command = collection
+    .find(
+      {
+        count: {
+          $gt: parseInt(startCOUNTID, 10),
+          $lt: parseInt(endCOUNTID, 10),
+        },
+      }, { _id: 0 }
+    )
+    .sort({ count: 1 })
+    command.toArray((error, raw) => {
+      if (error) reject('countID', error)
+      resolve(raw)
+    })
+  })
+}
+
 module.exports = {
   CHECKDBEXIST,
   FINDTIMECOUNTID,
   FINDTIMERANGE,
+  FINDDATAWITHRANGE,
 }

@@ -122,10 +122,10 @@ router.get('/info/:dbname', async (req, res) => {
  */
 router.get('/search/:dbname', async (req, res) => {
   const dbname = req.params.dbname
-  const { g, start, end } = req.query
+  const { start, end } = req.query
 
   // If there are any params undefined.
-  if (!(dbname && g && start && end)) {
+  if (!(dbname && start && end)) {
     res.status(400).json({
       msg: {
         name: 'Params error',
@@ -139,9 +139,36 @@ router.get('/search/:dbname', async (req, res) => {
 
   dbLib.connect({ res, req, dbname: req.params.dbname }, async (db) => {
     console.log(`[mongodb] Connect Success: ${req.params.dbname}`)
-    const length = await apiLib.FINDTIMECOUNTID(db, start, end)
+    // const events = await apiLib.FINDTIMECOUNTID(db, start, end)
+    const { raw, startCOUNTID, endCOUNTID } = await apiLib.FINDTIMECOUNTID(db, start, end)
+    const events = await apiLib.FINDDATAWITHRANGE(db.collection('event'), startCOUNTID, endCOUNTID)
+
+    const thd = []
+    const swellsagV = []
+    // const count = []
+    events.map((obj) => {
+      // {
+      //   "harmonic": [
+      //     60.05859375,
+      //     1,
+      //     420.41015625,
+      //     0.1738153720203931
+      //   ],
+      //   "swellsag": "non",
+      //   "swellsagV": null,
+      //   "thd": 17.38153720203931,
+      //   "count": 7776
+      // },
+      thd.push(obj.thd)
+      swellsagV.push(obj.swellsagV)
+      // count.push(obj.count)
+    })
     res.json({
-      length,
+      thd,
+      swellsagV,
+      raw,
+      // count,
+      // events,
     })
   })
 })
