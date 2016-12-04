@@ -3,15 +3,19 @@ import moment from 'moment'
 const state = {
   timestamp: null,
   msg: null,
-  harmonic: {
-    title: 'harmonic',
-    rawdata: [],
-    xhr: null,
-  },
   thd: {
+    type: 'bar',
     title: 'thd',
     rawdata: [],
     xhr: null,
+  },
+  swellsagV: {
+    type: 'bar',
+    title: 'swellsagV',
+    rawdata: [],
+    xhr: null,
+    min: 'dataMin',
+    max: 'dataMax',
   },
 
   // CALENDAR
@@ -79,8 +83,15 @@ const actions = {
     state.xhr.open('GET', `/api/v1/search/${rootState.sitename}?g=harmonic,thd&start=${start}&end=${end}`)
     state.xhr.onload = () => {
       const res = JSON.parse(state.xhr.responseText)
+      state.msg = ''
       // commit('REQUEST', { path: this.$route.path, res })
-      state.msg = res
+      // state.msg = res
+
+      // PUT DATA TO VARS
+      state.thd.rawdata = res.thd
+      state.swellsagV.rawdata = res.swellsagV
+
+
       state.timestamp = Date.now()
     }
     state.xhr.send()

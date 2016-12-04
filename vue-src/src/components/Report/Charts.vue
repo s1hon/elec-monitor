@@ -1,8 +1,16 @@
 <template>
   <div>
     <chart
-      :title="$store.state.report.harmonic.title"
-      :rawdata.sync="$store.state.report.harmonic.rawdata"
+      :type="$store.state.report.thd.type"
+      :title="$store.state.report.thd.title"
+      :rawdata.sync="$store.state.report.thd.rawdata"
+    ></chart>
+    <chart
+      :min="$store.state.report.swellsagV.min"
+      :max="$store.state.report.swellsagV.max"
+      :type="$store.state.report.swellsagV.type"
+      :title="$store.state.report.swellsagV.title"
+      :rawdata.sync="$store.state.report.swellsagV.rawdata"
     ></chart>
   </div>
 </template>

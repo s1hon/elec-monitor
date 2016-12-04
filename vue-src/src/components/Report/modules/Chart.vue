@@ -1,7 +1,7 @@
 <template>
   <div>
     {{ title }}
-    <div id="data" class="realtimegraph"></div>
+    <div :id="title" class="realtimegraph"></div>
   </div>
 </template>
 
@@ -15,6 +15,18 @@ export default {
     },
     rawdata: {
       type: Array,
+      default: [],
+    },
+    type: {
+      type: String,
+    },
+    min: {
+      type: String,
+      default: 'auto',
+    },
+    max: {
+      type: String,
+      default: 'auto',
     },
   },
   data: () => ({
@@ -22,7 +34,7 @@ export default {
     chart: null,
   }),
   mounted() {
-    const ctx = document.getElementById('data')
+    const ctx = document.getElementById(this.title)
     this.chart = echarts.init(ctx)
 
     // Draw Chart
@@ -48,10 +60,12 @@ export default {
           show: false,
         },
         axisLabel: {
-          show: true,
+          show: false,
         },
       },
       yAxis: {
+        min: this.min,
+        max: this.max,
         axisLine: {
           lineStyle: {
             color: '#5B6378',
@@ -67,19 +81,23 @@ export default {
         name: 'datas',
         itemStyle: { normal: { color: '#9FA5B3' } },
         showSymbol: false,
-        type: 'line',
+        type: this.type,
         data: this.nullArray(200),
       }],
     })
+
+    setTimeout(() => {
+      this.pushdata(this.rawdata)
+    }, 500)
   },
   beforeDestroy() {
 
   },
   watch: {
     rawdata() {
-      if (this.rawdata.length > 10) {
-        this.pushdata(this.rawdata)
-      }
+      // if (this.rawdata.length > 10) {
+      this.pushdata(this.rawdata)
+      // }
     },
   },
   methods: {
