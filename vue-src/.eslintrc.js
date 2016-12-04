@@ -27,6 +27,7 @@ module.exports = {
     // 'arrow-body-style': ["error", "as-needed"],
     'arrow-body-style': 0,
     'quote-props': 0,
+    'max-len': 0,
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
   }

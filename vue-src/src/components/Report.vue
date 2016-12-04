@@ -8,8 +8,12 @@
         {{ this.$store.state.sitename }} 報告總覽
       </div>
       <calendar></calendar>
-      <div>
-        {{ this.$store.state.report.msg }} <br>
+
+      <div v-if="this.$store.state.report.timestamp">
+        <div>
+          {{ this.$store.state.report.msg }} <br>
+        </div>
+        <charts></charts>
       </div>
     </div>
   </div>
@@ -18,10 +22,12 @@
 <script>
 import moment from 'moment'
 import calendar from './Report/Calendar.vue'
+import charts from './Report/Charts.vue'
 
 export default {
   components: {
     calendar,
+    charts,
   },
   data() {
     return {

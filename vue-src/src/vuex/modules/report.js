@@ -1,7 +1,20 @@
 import moment from 'moment'
 
 const state = {
+  timestamp: null,
   msg: null,
+  harmonic: {
+    title: 'harmonic',
+    rawdata: [],
+    xhr: null,
+  },
+  thd: {
+    title: 'thd',
+    rawdata: [],
+    xhr: null,
+  },
+
+  // CALENDAR
   calendar: {
     show: false,
     x: 0,
