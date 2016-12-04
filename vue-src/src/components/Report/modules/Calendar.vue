@@ -344,9 +344,16 @@ export default {
         }
       } else {
         if(this.sep=="")this.sep = "/"
-        this.year = now.getFullYear()
-        this.month = now.getMonth()
-        this.day = now.getDate()
+        // this.year = now.getFullYear()
+        // this.month = now.getMonth()
+        // this.day = now.getDate()
+
+        var split = this.$store.state.report.calendar.end.split(this.sep)
+        this.year = parseInt(split[0])
+        this.month = parseInt(split[1]) - 1
+        this.day = parseInt(split[2])
+        this.$store.state.report.calendar.value = this.$store.state.report.calendar.end
+
         this.hour = this.zero(now.getHours())
         this.minute = this.zero(now.getMinutes())
         this.second = this.zero(now.getSeconds())
