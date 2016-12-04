@@ -38,15 +38,7 @@ router.get('/info/:dbname', async (req, res) => {
   apiLib.CHECKDBEXIST(req, res)
 
   // If exist, get datas.
-  const url = `mongodb://120.108.111.174:27017/${req.params.dbname}`
-  MongoClient.connect(url, async (err, db) => {
-    if (err) {
-      res.status(400).json({
-        msg: err,
-      })
-      return
-    }
-
+  dbLib.connect({ res, req, dbname: req.params.dbname }, async (db) => {
     console.log(`[mongodb] Connect Success: ${req.params.dbname}`)
     const condition = db.collection('condition')
     const powersignal = db.collection('powersignal')
@@ -123,6 +115,11 @@ router.get('/info/:dbname', async (req, res) => {
   })
 })
 
+
+/**
+ * [Route] Search db with report page
+ * @type {String} dbname
+ */
 router.get('/search/:dbname', async (req, res) => {
   const dbname = req.params.dbname
   const { g, start, end } = req.query
@@ -140,15 +137,7 @@ router.get('/search/:dbname', async (req, res) => {
 
   await apiLib.CHECKDBEXIST(req, res)
 
-  const url = `mongodb://120.108.111.174:27017/${req.params.dbname}`
-  MongoClient.connect(url, async (err, db) => {
-    if (err) {
-      res.status(400).json({
-        msg: err,
-      })
-      return
-    }
-
+  dbLib.connect({ res, req, dbname: req.params.dbname }, async (db) => {
     console.log(`[mongodb] Connect Success: ${req.params.dbname}`)
     const length = await apiLib.FINDTIMECOUNTID(db, start, end)
     res.json({
@@ -157,17 +146,14 @@ router.get('/search/:dbname', async (req, res) => {
   })
 })
 
+
+/**
+ * [Route] Get dbname time range
+ * @type {String} dbname
+ */
 router.get('/time/:dbname', async (req, res) => {
   await apiLib.CHECKDBEXIST(req, res)
-  const url = `mongodb://120.108.111.174:27017/${req.params.dbname}`
-  MongoClient.connect(url, async (err, db) => {
-    if (err) {
-      res.status(400).json({
-        msg: err,
-      })
-      return
-    }
-
+  dbLib.connect({ res, req, dbname: req.params.dbname }, async (db) => {
     console.log(`[mongodb] Connect Success: ${req.params.dbname}`)
     const { begin, end } = await apiLib.FINDTIMERANGE(db)
     res.json({

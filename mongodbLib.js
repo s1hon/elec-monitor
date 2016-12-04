@@ -2,6 +2,18 @@ const MongoClient = require('mongodb').MongoClient
 
 const url = 'mongodb://120.108.111.174:27017/'
 
+const connect = ({ res, req, dbname = '' }, callback) => {
+  MongoClient.connect(url + dbname, async (err, db) => {
+    if (err) {
+      res.status(400).json({
+        msg: err,
+      })
+      return
+    }
+
+    callback(db)
+  })
+}
 
 /**
  * Get db lists
@@ -93,6 +105,7 @@ const getAverage = (data) => {
 }
 
 module.exports = {
+  connect,
   getdbLists,
   getConditionData,
   getRawdataRecord,
