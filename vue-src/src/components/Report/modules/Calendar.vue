@@ -1,5 +1,6 @@
 <style scoped>
 .calendar {
+  z-index: 1;
   width: 300px;
   padding: 10px;
   background: #fff;
@@ -310,17 +311,17 @@ export default {
     // 初始化一些东西
     beforeCreate(){
       var now = new Date();
-      if (this.$store.state.calendar.value != "") {
-        if (this.$store.state.calendar.value.indexOf("-") != -1) this.sep = "-"
-        if (this.$store.state.calendar.value.indexOf(".") != -1) this.sep = "."
-        if (this.$store.state.calendar.value.indexOf("/") != -1) this.sep = "/"
+      if (this.$store.state.report.calendar.value != "") {
+        if (this.$store.state.report.calendar.value.indexOf("-") != -1) this.sep = "-"
+        if (this.$store.state.report.calendar.value.indexOf(".") != -1) this.sep = "."
+        if (this.$store.state.report.calendar.value.indexOf("/") != -1) this.sep = "/"
         if (this.type == "date") {
-          var split = this.$store.state.calendar.value.split(this.sep)
+          var split = this.$store.state.report.calendar.value.split(this.sep)
           this.year = parseInt(split[0])
           this.month = parseInt(split[1]) - 1
           this.day = parseInt(split[2])
         } else if (this.type == "datetime") {
-          var split = this.$store.state.calendar.value.split(" ")
+          var split = this.$store.state.report.calendar.value.split(" ")
           var splitDate = split[0].split(this.sep)
           this.year = parseInt(splitDate[0])
           this.month = parseInt(splitDate[1]) - 1
@@ -333,12 +334,12 @@ export default {
           }
         }
         if (this.range) {
-          var split = this.$store.state.calendar.value.split(" ~ ")
+          var split = this.$store.state.report.calendar.value.split(" ~ ")
           if (split.length > 1) {
             var beginSplit = split[0].split(this.sep)
             var endSplit = split[1].split(this.sep)
-            this.$store.state.calendar.rangeBegin = [parseInt(beginSplit[0]), parseInt(beginSplit[1] - 1), parseInt(beginSplit[2])]
-            this.$store.state.calendar.rangeEnd = [parseInt(endSplit[0]), parseInt(endSplit[1] - 1), parseInt(endSplit[2])]
+            this.$store.state.report.calendar.rangeBegin = [parseInt(beginSplit[0]), parseInt(beginSplit[1] - 1), parseInt(beginSplit[2])]
+            this.$store.state.report.calendar.rangeEnd = [parseInt(endSplit[0]), parseInt(endSplit[1] - 1), parseInt(endSplit[2])]
           }
         }
       } else {
@@ -350,8 +351,8 @@ export default {
         this.minute = this.zero(now.getMinutes())
         this.second = this.zero(now.getSeconds())
         if (this.range) {
-          this.$store.state.calendar.rangeBegin = Array
-          this.$store.state.calendar.rangeEnd = Array
+          this.$store.state.report.calendar.rangeBegin = Array
+          this.$store.state.report.calendar.rangeEnd = Array
         }
       }
       this.monthString=this.months[this.month]
@@ -360,15 +361,15 @@ export default {
     // 渲染日期
     render(y, m) {
       if (!this.range) {
-        this.$store.state.calendar.rangeBegin = []
-        this.$store.state.calendar.rangeEnd = []
+        this.$store.state.report.calendar.rangeBegin = []
+        this.$store.state.report.calendar.rangeEnd = []
       }
       var firstDayOfMonth = new Date(y, m, 1).getDay()     //当月第一天
       var lastDateOfMonth = new Date(y, m + 1, 0).getDate()  //当月最后一天
       var lastDayOfLastMonth = new Date(y, m, 0).getDate()   //最后一月的最后一天
       this.year = y
       this.currentMonth = this.months[m]
-      var seletSplit = this.$store.state.calendar.value.split(" ")[0].split(this.sep)
+      var seletSplit = this.$store.state.report.calendar.value.split(" ")[0].split(this.sep)
 
       var i, line = 0,temp = []
       for (i = 1; i <= lastDateOfMonth; i++) {
@@ -393,9 +394,9 @@ export default {
           var options = {
             day: i
           }
-          if (this.$store.state.calendar.rangeBegin.length > 0) {
-            var beginTime = Number(new Date(this.$store.state.calendar.rangeBegin[0], this.$store.state.calendar.rangeBegin[1], this.$store.state.calendar.rangeBegin[2]))
-            var endTime = Number(new Date(this.$store.state.calendar.rangeEnd[0], this.$store.state.calendar.rangeEnd[1], this.$store.state.calendar.rangeEnd[2]))
+          if (this.$store.state.report.calendar.rangeBegin.length > 0) {
+            var beginTime = Number(new Date(this.$store.state.report.calendar.rangeBegin[0], this.$store.state.report.calendar.rangeBegin[1], this.$store.state.report.calendar.rangeBegin[2]))
+            var endTime = Number(new Date(this.$store.state.report.calendar.rangeEnd[0], this.$store.state.report.calendar.rangeEnd[1], this.$store.state.report.calendar.rangeEnd[2]))
             var thisTime = Number(new Date(this.year, this.month, i))
             if (beginTime <= thisTime && endTime >= thisTime) {
               options.selected = true
@@ -420,7 +421,7 @@ export default {
           }
 
            // 没有默认值的时候显示选中今天日期
-          else if (chkY == this.year && chkM == this.month && i == this.day && this.$store.state.calendar.value == "") {
+          else if (chkY == this.year && chkM == this.month && i == this.day && this.$store.state.report.calendar.value == "") {
             temp[line].push({
               day: i,
               selected: true
@@ -502,18 +503,18 @@ export default {
       if (e != undefined) e.stopPropagation()
         // 日期范围
       if (this.range) {
-        if (this.$store.state.calendar.rangeBegin.length == 0 || this.$store.state.calendar.rangeEndTemp != 0) {
-          this.$store.state.calendar.rangeBegin = [this.year, this.month, this.days[k1][k2].day, this.hour, this.minute, this.second]
-          this.$store.state.calendar.rangeBeginTemp = this.$store.state.calendar.rangeBegin
-          this.$store.state.calendar.rangeEnd = [this.year, this.month, this.days[k1][k2].day, this.hour, this.minute, this.second]
-          this.$store.state.calendar.rangeEndTemp = 0
+        if (this.$store.state.report.calendar.rangeBegin.length == 0 || this.$store.state.report.calendar.rangeEndTemp != 0) {
+          this.$store.state.report.calendar.rangeBegin = [this.year, this.month, this.days[k1][k2].day, this.hour, this.minute, this.second]
+          this.$store.state.report.calendar.rangeBeginTemp = this.$store.state.report.calendar.rangeBegin
+          this.$store.state.report.calendar.rangeEnd = [this.year, this.month, this.days[k1][k2].day, this.hour, this.minute, this.second]
+          this.$store.state.report.calendar.rangeEndTemp = 0
         } else {
-          this.$store.state.calendar.rangeEnd = [this.year, this.month, this.days[k1][k2].day, this.hour, this.minute, this.second]
-          this.$store.state.calendar.rangeEndTemp = 1
+          this.$store.state.report.calendar.rangeEnd = [this.year, this.month, this.days[k1][k2].day, this.hour, this.minute, this.second]
+          this.$store.state.report.calendar.rangeEndTemp = 1
             // 判断结束日期小于开始日期则自动颠倒过来
-          if (+new Date(this.$store.state.calendar.rangeEnd[0], this.$store.state.calendar.rangeEnd[1], this.$store.state.calendar.rangeEnd[2]) < +new Date(this.$store.state.calendar.rangeBegin[0], this.$store.state.calendar.rangeBegin[1], this.$store.state.calendar.rangeBegin[2])) {
-            this.$store.state.calendar.rangeBegin = this.$store.state.calendar.rangeEnd
-            this.$store.state.calendar.rangeEnd = this.$store.state.calendar.rangeBeginTemp
+          if (+new Date(this.$store.state.report.calendar.rangeEnd[0], this.$store.state.report.calendar.rangeEnd[1], this.$store.state.report.calendar.rangeEnd[2]) < +new Date(this.$store.state.report.calendar.rangeBegin[0], this.$store.state.report.calendar.rangeBegin[1], this.$store.state.report.calendar.rangeBegin[2])) {
+            this.$store.state.report.calendar.rangeBegin = this.$store.state.report.calendar.rangeEnd
+            this.$store.state.report.calendar.rangeEnd = this.$store.state.report.calendar.rangeBeginTemp
           }
         }
         this.render(this.year, this.month)
@@ -527,8 +528,8 @@ export default {
         this.day = this.days[k1][k2].day
         this.today = [k1, k2]
         if (this.type == 'date') {
-          this.$store.state.calendar.value = this.year + this.sep + this.zero(this.month + 1) + this.sep + this.zero(this.days[k1][k2].day)
-          this.$store.state.calendar.show = false
+          this.$store.state.report.calendar.value = this.year + this.sep + this.zero(this.month + 1) + this.sep + this.zero(this.days[k1][k2].day)
+          this.$store.state.report.calendar.show = false
         }
       }
 
@@ -549,9 +550,9 @@ export default {
       }
 
       if (this.range) {
-        this.$store.state.calendar.value = this.output(this.$store.state.calendar.rangeBegin) + " ~ " + this.output(this.$store.state.calendar.rangeEnd)
+        this.$store.state.report.calendar.value = this.output(this.$store.state.report.calendar.rangeBegin) + " ~ " + this.output(this.$store.state.report.calendar.rangeEnd)
       } else {
-        this.$store.state.calendar.value = this.output([
+        this.$store.state.report.calendar.value = this.output([
           this.year,
           this.month,
           this.day,
@@ -560,11 +561,11 @@ export default {
           parseInt(this.second)
         ])
       }
-      this.$store.state.calendar.show = false
+      this.$store.state.report.calendar.show = false
     },
     // 隐藏控件
     cancel() {
-      this.$store.state.calendar.show = false
+      this.$store.state.report.calendar.show = false
     },
     // 格式化输出
     output(args) {
