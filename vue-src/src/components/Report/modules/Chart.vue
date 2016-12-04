@@ -1,7 +1,6 @@
 <template>
   <div>
     {{ title }}
-    {{ rawdata }}
     <div id="data" class="realtimegraph"></div>
   </div>
 </template>
