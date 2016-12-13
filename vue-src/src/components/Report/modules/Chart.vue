@@ -52,8 +52,8 @@ export default {
       grid: {
         show: true,
         borderColor: '#5B6378',
-        left: 30,
-        right: 15,
+        left: 40,
+        right: 30,
         top: 10,
         bottom: 20,
       },
