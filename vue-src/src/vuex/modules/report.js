@@ -73,6 +73,9 @@ const actions = {
     state.msg = ''
   },
   CALENDAR_REQUEST({ commit, state, rootState }, { start, end }) {
+    // NEW REQUEST
+    state.timestamp = Date.now()
+
     // 2016/11/08 05:00:38
     state.msg = `Searching...${moment(start).format()}~${moment(end).format()}`
     if (state.xhr) {
@@ -90,9 +93,6 @@ const actions = {
       // PUT DATA TO VARS
       state.thd.rawdata = res.thd
       state.swellsagV.rawdata = res.swellsagV
-
-
-      state.timestamp = Date.now()
     }
     state.xhr.send()
   },

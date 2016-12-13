@@ -36,6 +36,7 @@ export default {
   mounted() {
     const ctx = document.getElementById(this.title)
     this.chart = echarts.init(ctx)
+    this.chart.showLoading()
 
     // Draw Chart
     this.chart.setOption({
@@ -99,6 +100,9 @@ export default {
       this.pushdata(this.rawdata)
       // }
     },
+    '$store.state.report.timestamp': function () {
+      this.chart.showLoading()
+    },
   },
   methods: {
     nullArray(num) {
@@ -116,6 +120,9 @@ export default {
           data: datas,
         }],
       })
+      setTimeout(() => {
+        this.chart.hideLoading()
+      }, 1000)
     },
   },
 }
