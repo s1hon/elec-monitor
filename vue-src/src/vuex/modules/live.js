@@ -35,7 +35,12 @@ const state = {
   lat: null,
 
   // res.data.event
+  // harmonic
   harmonic: null,
+  baseband: null,
+  harmonics: null,
+
+  // res.data.event
   swellsag: null,
   swellsagV: null,
   thd: null,
@@ -63,30 +68,14 @@ const getters = {
     }
     return swellsagSTRING
   },
-  live_harmonic: (state) => { // 基頻, 諧波
-    if (state.harmonic) {
-      const [baseband,, ...harmonics] = state.harmonic
-
-      let harmonicTMP = []
-      const harmonic = []
-
-      for (let i = 0; i < harmonics.length; i += 1) {
-        harmonicTMP.push(harmonics[i])
-        if (i % 2 === 1 && i > 0) {
-          harmonic.push(`( ${harmonicTMP[0].toFixed(2)}, ${(harmonicTMP[1].toFixed(2) * 100).toFixed(2)}% )`)
-          harmonicTMP = []
-        }
-      }
-
-      return {
-        baseband: baseband.toFixed(2),
-        harmonic,
-      }
-    }
-    return null
+  live_baseband: (state) => {
+    return state.baseband
+  },
+  live_harmonics: (state) => {
+    return state.harmonics
   },
   live_thd: (state) => {
-    return state.thd.toFixed(2)
+    return state.thd
   },
   live_fftgraph: (state) => {
     const halfLength = Math.ceil(state.fft.length / 2)
@@ -130,8 +119,25 @@ const mutations = {
     } else {
       state.swellsagV = res.data.swellsagV // 驟升降
     }
+
+    // state.harmonic Function
     state.harmonic = res.data.harmonic // 基頻, 諧波
-    state.thd = res.data.thd
+    const [baseband,, ...harmonics] = state.harmonic
+
+    let harmonicTMP = []
+    const harmonic = []
+
+    for (let i = 0; i < harmonics.length; i += 1) {
+      harmonicTMP.push(harmonics[i])
+      if (i % 2 === 1 && i > 0) {
+        harmonic.push(`( ${harmonicTMP[0].toFixed(2)}, ${(harmonicTMP[1].toFixed(2) * 100).toFixed(2)}% )`)
+        harmonicTMP = []
+      }
+    }
+    state.baseband = baseband.toFixed(2)
+    state.harmonics = harmonic
+
+    state.thd = res.data.thd.toFixed(2)
   },
 }
 
@@ -185,6 +191,8 @@ const actions = {
 
     // res.data.event
     state.harmonic = null
+    state.harmonics = null
+    state.baseband = null
     state.swellsag = null
     state.swellsagV = null
     state.thd = null

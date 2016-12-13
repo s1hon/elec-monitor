@@ -87,7 +87,7 @@ export default {
   }
 
   .status {
-    float: left;
+    // float: left;
     min-height: 100px;
     min-width: 300px;
     margin-top: 10px;

@@ -1,10 +1,10 @@
 <template>
   <div class="status">
-    <div class="tmp"><span>基頻</span>{{ harmonic.baseband }} Hz</div>
+    <div class="tmp"><span>基頻</span>{{ baseband }} Hz</div>
     <div class="tmp"><span>基頻(ZC)</span>{{ zc }} Hz</div>
     <div class="tmp"><span>電壓變異</span>{{ swellsagV }}%</div>
     <div class="lonlot"><span>THD</span>{{ thd }}%</div>
-    <div class="hum" v-for="(item, index) in harmonic.harmonic">
+    <div class="hum" v-for="(item, index) in harmonics">
       <span>諧波({{ index + 1 }})</span>{{ item }}
     </div>
   </div>
@@ -16,8 +16,11 @@ export default {
     zc() {
       return this.$store.state.live.zc
     },
-    harmonic() {
-      return this.$store.getters.live_harmonic
+    harmonics() {
+      return this.$store.getters.live_harmonics
+    },
+    baseband() {
+      return this.$store.getters.live_baseband
     },
     thd() {
       return this.$store.getters.live_thd
