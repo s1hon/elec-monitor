@@ -32,11 +32,18 @@ export default {
   data: () => ({
     // Chart Setting
     chart: null,
+    loadingMessage: {
+      text: '讀取中',
+      color: '#FE6B6B',
+      textColor: '#FFF',
+      maskColor: 'rgba(57, 63, 79, 0.8)',
+      zlevel: 0,
+    },
   }),
   mounted() {
     const ctx = document.getElementById(this.title)
     this.chart = echarts.init(ctx)
-    this.chart.showLoading()
+    this.chart.showLoading('default', this.loadingMessage)
 
     // Draw Chart
     this.chart.setOption({
@@ -101,7 +108,7 @@ export default {
       // }
     },
     '$store.state.report.timestamp': function () {
-      this.chart.showLoading()
+      this.chart.showLoading('default', this.loadingMessage)
     },
   },
   methods: {
