@@ -58,8 +58,19 @@ export default {
         xhr.onload = () => {
           const res = JSON.parse(xhr.responseText)
           // 2016/11/28 15:56:27
-          this.$store.state.report.calendar.begin = moment(res.begin).format('YYYY/M/D h:m:s')
-          this.$store.state.report.calendar.end = moment(res.end).format('YYYY/M/D h:m:s')
+          this.$store.state.report.calendar.begin = moment(res.begin).format('YYYY/M/D H:m:s')
+          this.$store.state.report.calendar.end = moment(res.end).format('YYYY/M/D H:m:s')
+
+          // Set default time range
+          const ENDTIME = moment(res.end)
+          const cal = this.$store.state.report.calendar
+
+          cal.items.toDate.value = ENDTIME.format('YYYY/M/D H:m:s')
+          cal.items.fromDate.value = ENDTIME.set('hour', ENDTIME.get('hour') - 1).format('YYYY/M/D H:m:s')
+
+          const start = moment(cal.items.fromDate.value).valueOf()
+          const end = moment(cal.items.toDate.value).valueOf()
+          this.$store.dispatch('CALENDAR_REQUEST', { start, end })
         }
         xhr.send()
       }
