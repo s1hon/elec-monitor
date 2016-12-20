@@ -1,6 +1,6 @@
 <template>
-  <div>
-    {{ title }}
+  <div class="graph">
+    <p>{{ title }}</p>
     <div :id="title" class="realtimegraph"></div>
   </div>
 </template>
@@ -76,12 +76,14 @@ export default {
         max: this.max,
         axisLine: {
           lineStyle: {
-            color: '#5B6378',
+            // Text Color (yAxis)
+            color: '#99A4C1',
           },
         },
         splitLine: {
           lineStyle: {
-            color: '#5B6378',
+            // Line Color (yAxis)
+            color: '#71819C',
           },
         },
       },
@@ -141,13 +143,22 @@ export default {
 }
 
 
-.realtimegraph {
-  // margin-top: 15px;
-  // margin-bottom: 30px;
-  height: 13vh;
-  width: 80vw;
-  @media screen and (max-width: 1200px) {
-    width: 90vw;
+.graph {
+  p {
+    text-transform: capitalize;
+    font-weight: 900;
+    font-size: 30px;
+    color: #C6CBD9;
+  }
+
+  .realtimegraph {
+    // margin-top: 15px;
+    // margin-bottom: 30px;
+    height: 18vh;
+    width: 80vw;
+    @media screen and (max-width: 1200px) {
+      width: 90vw;
+    }
   }
 }
 </style>
