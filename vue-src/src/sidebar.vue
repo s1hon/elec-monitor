@@ -89,7 +89,8 @@ export default {
       xhr.send()
     },
     getdbChart(e) {
-      this.$store.state.sitename = e.target.id
+      this.$store.commit('SITENAME', e.target.id)
+      // this.$store.state.sitename = e.target.id
     },
   },
 }

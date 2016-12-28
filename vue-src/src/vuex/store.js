@@ -17,6 +17,9 @@ export default new Vuex.Store({
     DBLIST(state, dblist) {
       state.dblist = dblist
     },
+    SITENAME(state, sitename) {
+      state.sitename = sitename
+    },
   },
   actions: {
     RESETDATA({ dispatch, commit, state }, path) {
