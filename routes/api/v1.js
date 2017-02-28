@@ -142,9 +142,11 @@ router.get('/search/:dbname', async (req, res) => {
     // const events = await apiLib.FINDTIMECOUNTID(db, start, end)
     const { raw, startCOUNTID, endCOUNTID } = await apiLib.FINDTIMECOUNTID(db, start, end)
     const events = await apiLib.FINDDATAWITHRANGE(db.collection('event'), startCOUNTID, endCOUNTID)
+    const kwhs = await apiLib.FINDDATAWITHRANGE(db.collection('kwh'), start, end)
 
     const thd = []
     const swellsagV = []
+    const kwh = []
     // const count = []
     events.map((obj) => {
       // {
@@ -163,10 +165,14 @@ router.get('/search/:dbname', async (req, res) => {
       swellsagV.push(obj.swellsagV)
       // count.push(obj.count)
     })
+    kwhs.map((obj) => {
+      kwh.push(obj.data)
+    })
     res.json({
       thd,
       swellsagV,
       raw,
+      kwh,
       // count,
       // events,
     })
