@@ -12,6 +12,13 @@
       :title="$store.state.report.swellsagV.title"
       :rawdata.sync="$store.state.report.swellsagV.rawdata"
     ></chart>
+    <chart
+      :min="$store.state.report.kwh.min"
+      :max="$store.state.report.kwh.max"
+      :type="$store.state.report.kwh.type"
+      :title="$store.state.report.kwh.title"
+      :rawdata.sync="$store.state.report.kwh.rawdata"
+    ></chart>
   </div>
 </template>
 

@@ -17,6 +17,14 @@ const state = {
     min: 'dataMin',
     max: 'dataMax',
   },
+  kwh: {
+    type: 'bar',
+    title: 'kwh',
+    rawdata: [],
+    xhr: null,
+    min: 'dataMin',
+    max: 'dataMax',
+  },
 
   // CALENDAR
   calendar: {
@@ -93,6 +101,7 @@ const actions = {
       // PUT DATA TO VARS
       state.thd.rawdata = res.thd
       state.swellsagV.rawdata = res.swellsagV
+      state.kwh.rawdata = res.kwh
     }
     state.xhr.send()
   },
